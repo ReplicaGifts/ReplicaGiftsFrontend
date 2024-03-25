@@ -1,0 +1,421 @@
+<!-- <div class="container">
+  <h1>Name: {{ user.username }}</h1>
+  <p>Email : {{ user.email }}</p>
+
+  <p>Address:</p>
+
+  <div class="row" *ngIf="!user?.billingDetails || edit">
+    <div class="col-md-6">
+      <label for="namee" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+
+        [(ngModel)]="billingDetails.name"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        [(ngModel)]="billingDetails.email"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="city" class="form-label">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        [(ngModel)]="billingDetails.city"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="state" class="form-label">State</label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        [(ngModel)]="billingDetails.state"
+      />
+    </div>
+    <div class="col-md-12">
+      <label for="country" class="form-label">Country</label>
+      <input
+        type="country"
+        class="form-control"
+        id="country"
+        [(ngModel)]="billingDetails.country"
+      />
+    </div>
+    <div class="col-md-12">
+      <label for="country" class="form-label">Address</label>
+      <input
+        type="address"
+        class="form-control"
+        id="address"
+        [(ngModel)]="billingDetails.address"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="city" class="form-label">Postcode</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postcode"
+        [(ngModel)]="billingDetails.postcode"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="country" class="form-label">Phone</label>
+      <input
+        type="phone"
+        class="form-control"
+        id="phone"
+        [(ngModel)]="billingDetails.phone"
+      />
+    </div>
+
+    <button class="btn btn-primary" (click)="addAddress()">Add adress</button>
+  </div>
+
+  <ng-container *ngIf="user?.billingDetails?.address && !edit">
+    <table>
+      <tr>
+        <th>name</th>
+        <td>{{ user.billingDetails.name }}</td>
+      </tr>
+      <tr>
+        <th>email</th>
+        <td>{{ user.billingDetails.email }}</td>
+      </tr>
+      <tr>
+        <th>address</th>
+        <td>{{ user.billingDetails.address }}</td>
+      </tr>
+      <tr>
+        <th>city</th>
+        <td>{{ user.billingDetails.city }}</td>
+      </tr>
+      <tr>
+        <th>state</th>
+        <td>{{ user.billingDetails.state }}</td>
+      </tr>
+      <tr>
+        <th>country</th>
+        <td>{{ user.billingDetails.country }}</td>
+      </tr>
+      <tr>
+        <th>postcode</th>
+        <td>{{ user.billingDetails.postcode }}</td>
+      </tr>
+      <tr>
+        <th>phone</th>
+        <td>{{ user.billingDetails.phone }}</td>
+      </tr>
+    </table>
+
+    <button
+      class="btn btn-link"
+      (click)="edit = true; billingDetails = user.billingDetails"
+    >
+      Edit
+    </button>
+  </ng-container>
+
+  <h1>Order</h1>
+  <table>
+    <thead>
+      <th colspan="2">PRODUCT</th>
+      <th>DATE</th>
+      <th>ORDER ID</th>
+      <th>PAYMENT STATUS</th>
+      <th>DELIVERY STATUS</th>
+      <th>ACTION</th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let order of orders">
+        <td>
+          <img [src]="order.product.image" alt="" width="100" height="100" />
+        </td>
+        <td>{{ order.product.title }}</td>
+        <td>{{ order.chreatedAt | date }}</td>
+        <td>{{ order.orderId ?? "-" }}</td>
+        <td>{{ order.status }}</td>
+        <td>{{ order.deliveryStatus ?? "-" }}</td>
+      </tr>
+    </tbody>
+  </table>
+</div> -->
+
+<!-- <button class="btn btn-danger" (click)="logout()">Logout</button> -->
+
+<div
+  class="headertop"
+  style="background-color: rgb(41, 41, 41); padding-bottom: 120px"
+>
+  <div
+    style="
+      padding-top: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 50px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    "
+  >
+    My Account
+  </div>
+</div>
+
+<!--=============== MAIN ===============-->
+<main class="main">
+  <!--=============== BREADCRUMB ===============-->
+  <section class="breadcrumb">
+    <ul class="breadcrumb__list flex container">
+      <li><a (click)="home()" class="breadcrumb__link">Home</a></li>
+      <li><span class="breadcrumb__link">></span></li>
+      <li><span class="breadcrumb__link">Account</span></li>
+    </ul>
+  </section>
+
+  <!--=============== ACCOUNTS ===============-->
+  <section class="accounts section--lg">
+    <div class="accounts__container container grid">
+      <div class="account__tabs">
+        <p
+          class="account__tab {{ display === 'dashboard' ? 'active-tab' : '' }}"
+          (click)="changeDisplay('dashboard')"
+          data-target="#dashboard"
+        >
+          <i class="fi fi-rs-settings-sliders"></i> Dashboard
+        </p>
+        <p
+          (click)="changeDisplay('order')"
+          class="account__tab {{ display === 'order' ? 'active-tab' : '' }}"
+          data-target="#orders"
+        >
+          <i class="fi fi-rs-shopping-bag"></i> Orders
+        </p>
+        <p
+          (click)="changeDisplay('address')"
+          class="account__tab {{ display === 'address' ? 'active-tab' : '' }}"
+          data-target="#address"
+        >
+          <i class="fi fi-rs-marker"></i> My Address
+        </p>
+        <!-- <p class="account__tab" data-target="#change-password">
+            <i class="fi fi-rs-settings-sliders"></i> Change Password
+          </p> -->
+        <p (click)="logout()" class="account__tab"><i class="fi fi-rs-exit"></i> Logout</p>
+      </div>
+      <div class="tabs__content">
+        <div
+          class="tab__content {{ display === 'dashboard' ? 'active-tab' : '' }}"
+          content
+          id="dashboard"
+        >
+          <h3 class="tab__header">Hello {{ user.username }}</h3>
+          <div class="tab__body">
+            <p class="tab__description">
+              From your account dashboard. you can easily check & view your
+              recent order, manage your shipping and billing addresses and edit
+              your password and account details
+            </p>
+          </div>
+        </div>
+        <div
+          class="tab__content {{ display === 'order' ? 'active-tab' : '' }}"
+          content
+          id="orders"
+        >
+          <h3 class="tab__header">Your Orders</h3>
+          <div class="tab__body">
+            <table class="placed__order-table">
+              <thead>
+                <tr>
+                  <th>Orders</th>
+                  <th>Date</th>
+                  <th>Status</th>
+                  <th>Totals</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let order of orders">
+                  <td>{{ order.product._id }}</td>
+                  <td>{{ order.chreatedAt | date }}</td>
+                  <td>Processing</td>
+                  <td>${{ order.totalAmount }}</td>
+                  <td><a href="#" class="view__order">View</a></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <div
+          class="tab__content {{ display === 'address' ? 'active-tab' : '' }}"
+          content
+          id="address"
+        >
+          <h3 class="tab__header">Shipping Address</h3>
+          <div class="tab__body">
+            <table class="placed__order-table">
+              <thead>
+                <!-- <tr>
+             
+                  <th>Address Details</th>
+
+                </tr> -->
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Name</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.name }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.name"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.email }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.email"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Email</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.city }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.city"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Address</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.address }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.address"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>State</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.state }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.state"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Country</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.country }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.country"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Pincode</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.postcode }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.postcode"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td>Phone</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.phone }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.phone"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <a class="btns"
+              *ngIf="!edit"
+              (click)="edit = true; billingDetails = user.billingDetails"
+              >Edit</a
+            >
+            <a class="btns" *ngIf="edit" (click)="edit = false; addAddress()">Save</a>
+          </div>
+        </div>
+
+        <div class="tab__content" content id="change-password">
+          <h3 class="tab__header">Change Password</h3>
+          <div class="tab__body">
+            <form class="form grid">
+              <input
+                type="password"
+                placeholder="Current Password"
+                class="form__input"
+              />
+              <input
+                type="password"
+                placeholder="New Password"
+                class="form__input"
+              />
+              <input
+                type="password"
+                placeholder="Confirm Password"
+                class="form__input"
+              />
+              <div class="form__btn">
+                <button class="btn btn--md">Save</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

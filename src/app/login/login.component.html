@@ -1,0 +1,192 @@
+<!-- <div class="main-container">
+  <div class="container {{ show ? 'right-panel-active' : '' }}" id="container">
+    <div class="form-container sign-up-container">
+      <div *ngIf="show">
+        <h1>Create Account</h1>
+        <input
+          [(ngModel)]="log.username"
+          name="username"
+          type="text"
+          placeholder="Name"
+        />
+        <input
+          [(ngModel)]="log.email"
+          name="email"
+          type="email"
+          placeholder="Email"
+        />
+        <input
+          [(ngModel)]="log.password"
+          name="password"
+          type="password"
+          placeholder="Password"
+        />
+        <button (click)="register()">Sign Up</button>
+      </div>
+    </div>
+    <div class="form-container sign-in-container">
+      <div class="" *ngIf="!show">
+        <h1>Sign in</h1>
+        <input
+          type="email"
+          name="email"
+          [(ngModel)]="log.email"
+          placeholder="Email"
+        />
+        <input
+          type="password"
+          name="password"
+          [(ngModel)]="log.password"
+          placeholder="Password"
+        />
+        <a href="#">Forgot your password?</a>
+        <button (click)="login()">Sign In</button>
+      </div>
+    </div>
+    <div class="overlay-container">
+      <div class="overlay">
+        <div class="overlay-panel overlay-left">
+          <h1>Welcome Back!</h1>
+          <p>To keep connected with us please login with your personal info</p>
+          <button class="ghost" id="signIn" (click)="show = false">
+            Sign In
+          </button>
+        </div>
+        <div class="overlay-panel overlay-right">
+          <h1>Hello, Friend!</h1>
+          <p>Enter your personal details and start journey with us</p>
+          <button class="ghost" id="signUp" (click)="show = true">
+            Sign Up
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div
+  class="headertop"
+  style="background-color: rgb(41, 41, 41); padding-bottom: 120px"
+>
+  <div
+    style="
+      padding-top: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 50px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    "
+  >
+    Login
+  </div>
+</div>
+
+<!--=============== MAIN ===============-->
+<main class="main">
+  <!--=============== BREADCRUMB ===============-->
+  <section class="breadcrumb">
+    <ul class="breadcrumb__list flex container">
+      <li><a class="breadcrumb__link">Home</a></li>
+      <li><span class="breadcrumb__link">></span></li>
+      <li><span class="breadcrumb__link">Login</span></li>
+    </ul>
+  </section>
+
+  <section class="logpad h-100">
+    <div class="container h-100">
+      <div class="row justify-content-sm-center h-100">
+        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+          <div class="card logfull">
+            <div class="card-body p-5">
+              <h1 class="fs-4 card-title fw-bold mb-4">Login</h1>
+              <form
+                [formGroup]="myForm"
+                (ngSubmit)="login()"
+                class="needs-validation"
+                novalidate=""
+                autocomplete="off"
+              >
+                <div class="mb-3">
+                  <label class="mb-2 text-muted" for="email"
+                    >Email Address</label
+                  >
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    formControlName="email"
+                    [attr.required]="true"
+                    autofocus
+                  />
+                  <div
+                    *ngIf="
+                      myForm.get('email')?.invalid &&
+                      (myForm.get('email')?.dirty ||
+                        myForm.get('email')?.touched)
+                    "
+                    style="color: red"
+                  >
+                    Enter is Valid Email Format
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <div class="mb-2 w-100">
+                    <label class="text-muted" for="password">Password</label>
+                    <a class="float-end"> Forgot Password? </a>
+                  </div>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    formControlName="password"
+                    [attr.required]="true"
+                  />
+                  <div
+                    *ngIf="
+                      myForm.get('password')?.invalid &&
+                      (myForm.get('password')?.dirty ||
+                        myForm.get('password')?.touched)
+                    "
+                    style="color: red"
+                  >
+                    Password is required
+                  </div>
+                </div>
+                <div class="d-flex align-items-center">
+                  <div class="form-check">
+                    <input
+                      type="checkbox"
+                      name="remember"
+                      id="remember"
+                      class="form-check-input"
+                    />
+                    <label for="remember" class="form-check-label"
+                      >Remember Me</label
+                    >
+                  </div>
+                  <button type="submit" class="btns ms-auto">Login</button>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer py-3 border-0">
+              <div class="text-center">
+                Don't have an account?
+                <a [routerLink]="['/register']" class="text-dark"
+                  >Create Account</a
+                >
+              </div>
+            </div>
+          </div>
+          <!-- <div class="text-center mt-5 text-muted">
+            Copyright &copy; 2017-2021 &mdash; Your Company
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

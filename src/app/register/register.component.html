@@ -1,0 +1,113 @@
+<div
+  class="headertop"
+  style="background-color: rgb(41, 41, 41); padding-bottom: 120px"
+>
+  <div
+    style="
+      padding-top: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 50px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    "
+  >
+    Register
+  </div>
+</div>
+
+<!--=============== MAIN ===============-->
+<main class="main">
+  <!--=============== BREADCRUMB ===============-->
+  <section class="breadcrumb">
+    <ul class="breadcrumb__list flex container">
+      <li><a href="index.html" class="breadcrumb__link">Home</a></li>
+      <li><span class="breadcrumb__link">></span></li>
+      <li><span class="breadcrumb__link">Register</span></li>
+    </ul>
+  </section>
+
+  <section class="logpad h-100">
+    <div class="container h-100">
+      <div class="row justify-content-sm-center h-100">
+        <div class="col-xxl-4 col-xl-5 col-lg-5 col-md-7 col-sm-9">
+          <div class="card logfull">
+            <div class="card-body p-4">
+              <h1 class="fs-4 card-title fw-bold mb-4">Register</h1>
+              <form
+                [formGroup]="myForm"
+                (ngSubmit)="register()"
+                class="needs-validation"
+                novalidate=""
+                autocomplete="off"
+              >
+                <div class="mb-3">
+                  <label class="mb-2 text-muted" for="name">Name</label>
+                  <input
+                    id="name"
+                    type="text"
+                    class="form-control"
+                    name="name"
+                    value=""
+                    required
+                    autofocus
+                    formControlName="username"
+                  />
+                  <div class="invalid-feedback">Name is required</div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="mb-2 text-muted" for="email"
+                    >Email Address</label
+                  >
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    value=""
+                    required
+                    formControlName="email"
+                  />
+                  <div class="invalid-feedback">Email is invalid</div>
+                </div>
+
+                <div class="mb-3">
+                  <label class="mb-2 text-muted" for="password">Password</label>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    formControlName="password"
+                    required
+                  />
+                  <div class="invalid-feedback">Password is required</div>
+                </div>
+
+                <!-- <p class="form-text text-muted mb-3">
+									By registering you agree with our terms and condition.
+								</p> -->
+
+                <div class="align-items-center d-flex">
+                  <button type="submit" class="btns ms-auto">Register</button>
+                </div>
+              </form>
+            </div>
+            <div class="card-footer py-3 border-0">
+              <div class="text-center">
+                Already have an account?
+                <a [routerLink]="['/login']" class="text-dark">Login</a>
+              </div>
+            </div>
+          </div>
+          <!-- <div class="text-center mt-5 text-muted">
+						Copyright &copy; 2017-2021 &mdash; Your Company 
+					</div> -->
+        </div>
+      </div>
+    </div>
+  </section>
+</main>

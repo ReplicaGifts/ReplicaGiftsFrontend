@@ -1,0 +1,415 @@
+<!-- <div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <label for="namee" class="form-label">Name</label>
+      <input
+        type="text"
+        class="form-control"
+        id="namee"
+        [(ngModel)]="billingDetails.name"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="email" class="form-label">Email</label>
+      <input
+        type="email"
+        class="form-control"
+        id="email"
+        [(ngModel)]="billingDetails.email"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="city" class="form-label">City</label>
+      <input
+        type="text"
+        class="form-control"
+        id="city"
+        [(ngModel)]="billingDetails.city"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="state" class="form-label">State</label>
+      <input
+        type="text"
+        class="form-control"
+        id="state"
+        [(ngModel)]="billingDetails.state"
+      />
+    </div>
+    <div class="col-md-12">
+      <label for="country" class="form-label">Country</label>
+      <input
+        type="country"
+        class="form-control"
+        id="country"
+        [(ngModel)]="billingDetails.country"
+      />
+    </div>
+    <div class="col-md-12">
+      <label for="country" class="form-label">Address</label>
+      <input
+        type="address"
+        class="form-control"
+        id="address"
+        [(ngModel)]="billingDetails.address"
+      />
+    </div>
+
+    <div class="col-md-6">
+      <label for="city" class="form-label">Postcode</label>
+      <input
+        type="text"
+        class="form-control"
+        id="postcode"
+        [(ngModel)]="billingDetails.postcode"
+      />
+    </div>
+    <div class="col-md-6">
+      <label for="country" class="form-label">Phone</label>
+      <input
+        type="phone"
+        class="form-control"
+        id="phone"
+        [(ngModel)]="billingDetails.phone"
+      />
+    </div>
+  </div>
+
+  <table>
+    <thead>
+      <th colspan="2">PRODUCT</th>
+      <th>TOTAL</th>
+    </thead>
+    <tbody>
+      <tr *ngIf="product">
+        <td>
+          <img
+            [src]="product.image"
+            width="100"
+            height="100"
+            alt=""
+            srcset=""
+          />
+        </td>
+        <td>
+          {{ product.title }} x {{ quantity }} +
+          <ul class="list-unstyled">
+            <li *ngFor="let gif of gifts">
+              {{ gif.gift.name }} x {{ gif.quantity }}
+            </li>
+          </ul>
+        </td>
+        <td>{{ totalPrice }}</td>
+      </tr>
+      <ng-container *ngFor="let prod of shoppingCart">
+        <tr *ngIf="shoppingCart">
+          <td>
+            <img
+              [src]="prod.productId.image"
+              width="100"
+              height="100"
+              alt=""
+              srcset=""
+            />
+          </td>
+          <td>
+            {{ prod.productId.title }} x {{ prod.quantity }}
+            +
+            <ul class="list-unstyled">
+              <li *ngFor="let gif of prod.userWant.gifts">
+                {{ gif.gift.name }} x {{ gif.quantity }}
+              </li>
+            </ul>
+          </td>
+          <td>{{ prod.userWant.totalAmount }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+    <tfoot>
+      <th>TOTAL</th>
+      <td>
+        {{ totalPrice }}
+      </td>
+    </tfoot>
+  </table>
+  <button (click)="checkout()" class="btn btn-warning">Checkout</button>
+</div> -->
+
+<div
+  class="headertop"
+  style="background-color: rgb(41, 41, 41); padding-bottom: 120px"
+>
+  <div
+    style="
+      padding-top: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 50px;
+      font-weight: 800;
+      letter-spacing: 1px;
+    "
+  >
+    Checkout
+  </div>
+</div>
+
+<!--=============== MAIN ===============-->
+<main class="main">
+  <!--=============== BREADCRUMB ===============-->
+  <section class="breadcrumb">
+    <ul class="breadcrumb__list flex container">
+      <li><a class="breadcrumb__link">Home</a></li>
+      <li><span class="breadcrumb__link">></span></li>
+      <li><span class="breadcrumb__link">Shop</span></li>
+      <li><span class="breadcrumb__link">></span></li>
+      <li><span class="breadcrumb__link">Checkout</span></li>
+    </ul>
+  </section>
+
+  <!--=============== CHECKOUT ===============-->
+
+  <section class="checkout">
+    <div class="checkout__container container grid">
+      <div class="checkout__group">
+        <h3 class="section__title">Billing Details</h3>
+        <div class="row g-3">
+          <!-- <div class="col-md-6">
+            <label for="inputName" class="form-label form-group required" 
+            >Name</label>
+            <input type="text" class="form-control" id="inputName" placeholder="" required="required">
+          </div> -->
+
+          <div class="new required col-md-6">
+            <label class="control-label"> First name </label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.name"
+            />
+          </div>
+
+          <!-- <div class="new required col-md-6">
+            <label class='control-label'>
+              Last name
+            </label>
+            <input type="text" class="form-control" id="inputName" placeholder="" required="required">
+          </div> -->
+          <!-- <div class="new required col-md-6">
+            <label for="inputEmail" class="form-label">Email</label>
+            <input type="email" class="form-control" id="inputEmail" placeholder="">
+          </div> -->
+
+          <div class="new required col-md-6">
+            <label class="control-label"> Email </label>
+            <input
+              type="email"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.email"
+            />
+          </div>
+
+          <!-- <div class="new required col-md-6">
+            <label for="inputCity" class="form-label">City</label>
+            <input type="text" class="form-control" id="inputCity" placeholder="">
+          </div> -->
+
+          <div class="new required col-md-6">
+            <label class="control-label"> City </label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.city"
+            />
+          </div>
+
+          <!-- <div class="new required col-md-6">
+            <label for="inputCountry" class="form-label">Country</label>
+            <input type="text" class="form-control" id="inputCountry" placeholder="">
+          </div> -->
+
+          <!-- <div class="col-md-12">
+            <label for="inputAddress" class="form-label">Address</label>
+            <input type="text" class="form-control" id="inputAddress" placeholder="">
+          </div> -->
+
+          <div class="new required col-md-12">
+            <label class="control-label"> Street Address </label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.address"
+            />
+          </div>
+
+          <div class="new required col-md-12">
+            <label class="control-label"> State </label>
+            <input
+              class="form-control"
+              id="inputName"
+              required="required"
+              [(ngModel)]="billingDetails.state"
+            />
+            <!-- <option value="">Select a state</option>
+              <option value="Alabama">Alabama</option>
+              <option value="Alaska">Alaska</option> -->
+            <!-- Add more options for other states -->
+            <!-- </select> -->
+          </div>
+
+          <div class="new required col-md-12">
+            <label class="control-label"> Country </label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.country"
+            />
+          </div>
+          <!-- <div class="new required col-md-6">
+            <label for="inputPostcode" class="form-label">Postcode</label>
+            <input type="text" class="form-control" id="inputPostcode" placeholder="">
+          </div> -->
+
+          <div class="new required col-md-12">
+            <label class="control-label"> Postcode </label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.postcode"
+            />
+          </div>
+
+          <!-- <div class="new required col-md-6">
+            <label for="inputPhone" class="form-label">Phone</label>
+            <input type="text" class="form-control" id="inputPhone" placeholder="">
+          </div> -->
+
+          <div class="new required col-md-12">
+            <label class="control-label"> Phone </label>
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.phone"
+            />
+          </div>
+        </div>
+      </div>
+      <div class="checkout__group">
+        <h3 class="section__title">Cart Totals</h3>
+        <table class="order__table">
+          <thead>
+            <tr>
+              <th colspan="2">Products</th>
+              <th>Total</th>
+            </tr>
+          </thead>
+          <tbody>
+            <ng-container *ngFor="let prod of shoppingCart">
+              <tr *ngIf="shoppingCart">
+                <td>
+                  <img
+                    [src]="prod.productId.image"
+                    class="order__img"
+                    alt=""
+                    srcset=""
+                  />
+                </td>
+                <td>
+                  <h3 class="table__title">
+                    {{ prod.productId.title }} x {{ prod.quantity }}
+                    +
+                    <ul class="list-unstyled">
+                      <li *ngFor="let gif of prod.userWant.gifts">
+                        {{ gif.gift.name }} x {{ gif.quantity }}
+                      </li>
+                    </ul>
+                  </h3>
+                </td>
+                <td>
+                  <span class="table__price"
+                    >${{ prod.userWant.totalAmount }}</span
+                  >
+                </td>
+              </tr>
+            </ng-container>
+            <tr *ngIf="product">
+              <td>
+                <img [src]="product.image" alt="" class="order__img" />
+              </td>
+              <td>
+                <h3 class="table__title">
+                  {{ product.title }} x {{ quantity }} +
+                  <ul class="list-unstyled">
+                    <li *ngFor="let gif of gifts">
+                      {{ gif.gift.name }} x {{ gif.quantity }}
+                    </li>
+                  </ul>
+                </h3>
+                <p class="table__quantity"></p>
+              </td>
+              <td>
+                <span class="table__price">${{ totalPrice }}</span>
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <span class="order__grand-total"></span>
+              </td>
+              <td><span class="order__subtitle">Total</span></td>
+              <td>
+                <span class="order__grand-total">${{ totalPrice }}</span>
+              </td>
+            </tr>
+            <!-- <tr>
+              <td>
+                <img
+                  src="./assets/img/annapoorani2.jpg"
+                  alt=""
+                  class="order__img"
+                />
+              </td>
+              <td>
+                <h3 class="table__title">
+                  {{ product.title }} x {{ quantity }} +
+                  <ul class="list-unstyled">
+                    <li *ngFor="let gif of gifts">
+                      {{ gif.gift.name }} x {{ gif.quantity }}
+                    </li>
+                  </ul>
+                </h3>
+                <p class="table__quantity"></p>
+              </td>
+              <td>
+                <span class="table__price">${{ totalPrice }}</span>
+              </td>
+            </tr> -->
+          </tbody>
+        </table>
+        <div class="payment__methods"></div>
+        <button (click)="checkout()" class="btns btn--md">Place Order</button>
+      </div>
+    </div>
+  </section>
+</main>
