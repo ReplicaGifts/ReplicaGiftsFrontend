@@ -2032,6 +2032,7 @@ padding-top: 20px;
 .table__title,
 .table__stock {
   color: var(--text-color);
+  
 }
 
 .table__description {
@@ -2042,6 +2043,7 @@ padding-top: 20px;
 .table__trash {
   color: var(--text-color-light);
   cursor: pointer;
+  
 }
 
 .table__trash:hover {
