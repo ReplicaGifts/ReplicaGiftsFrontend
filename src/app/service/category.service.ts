@@ -23,26 +23,26 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.post("http://localhost:3000/api/category/add-category", formData, _options)
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/category/add-category", formData, _options)
 
 
   }
 
   getCategory() {
-    return this.http.get("http://localhost:3000/api/category/all")
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/category/all")
   }
 
   getCategoryOnly() {
-    return this.http.get("http://localhost:3000/api/category/category-only")
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/category/category-only")
 
   }
   getprintType() {
-    return this.http.get("http://localhost:3000/api/category/printType")
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/category/printType")
 
   }
 
   getcategoryById(category: any) {
-    return this.http.get("http://localhost:3000/api/products/category/" + category);
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/products/category/" + category);
   }
 
   addPrintType(data: any) {
@@ -56,7 +56,7 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.post("http://localhost:3000/api/category/printType", formData, _options)
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/category/printType", formData, _options)
   }
 
 
@@ -73,7 +73,7 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.put("http://localhost:3000/api/category/update/" + id, formData, _options)
+    return this.http.put("https://replicagiftsbackend.onrender.com/api/category/update/" + id, formData, _options)
   }
 
   delete(id: any) {
@@ -81,7 +81,7 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.delete("http://localhost:3000/api/category/delete/" + id, _options)
+    return this.http.delete("https://replicagiftsbackend.onrender.com/api/category/delete/" + id, _options)
   }
 
 }

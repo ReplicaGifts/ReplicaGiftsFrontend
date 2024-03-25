@@ -13,21 +13,21 @@ export class ProfileService {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.post("http://localhost:3000/api/profile/add-address", address, _options);
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/profile/add-address", address, _options);
   }
   getAddress() {
 
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.get("http://localhost:3000/api/profile/get-address", _options);
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/profile/get-address", _options);
   }
 
   getOrder() {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.get("http://localhost:3000/api/frame/user-orders", _options);
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/frame/user-orders", _options);
   }
 
 }

@@ -28,7 +28,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
 
-    return this.http.post("http://localhost:3000/api/carts/add-cart/" + id, { quantity, frameId }, _options)
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/carts/add-cart/" + id, { quantity, frameId }, _options)
 
   }
 
@@ -51,7 +51,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.post("http://localhost:3000/api/frame/add-frame", formData, _options)
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/frame/add-frame", formData, _options)
 
   }
 
@@ -60,14 +60,14 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>("http://localhost:3000/api/frame/get/" + id, _options)
+    return this.http.get<any>("https://replicagiftsbackend.onrender.com/api/frame/get/" + id, _options)
   }
   frameData(id: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>("http://localhost:3000/api/frame/get-frame/" + id, _options)
+    return this.http.get<any>("https://replicagiftsbackend.onrender.com/api/frame/get-frame/" + id, _options)
   }
 
   getAllFrames() {
@@ -75,7 +75,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>("http://localhost:3000/api/frame/orders", _options)
+    return this.http.get<any>("https://replicagiftsbackend.onrender.com/api/frame/orders", _options)
   }
 
   getCart() {
@@ -83,7 +83,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get("http://localhost:3000/api/carts/get-cart/", _options)
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/carts/get-cart/", _options)
   }
 
   remove(id: any) {
@@ -91,14 +91,14 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.delete("http://localhost:3000/api/carts/remove-item/" + id, _options)
+    return this.http.delete("https://replicagiftsbackend.onrender.com/api/carts/remove-item/" + id, _options)
   }
 
   editQuantity(id: any, quantity: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.post("http://localhost:3000/api/carts/edit-quantity/" + id, { quantity }, _options)
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/carts/edit-quantity/" + id, { quantity }, _options)
 
   }
 

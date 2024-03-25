@@ -24,13 +24,13 @@ export class GiftsService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${admin ? JSON.parse(admin).token : ""}` }) };
 
 
-    return this.http.post("http://localhost:3000/api/gifts", formData, _options)
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/gifts", formData, _options)
 
   }
 
   getGifts() {
 
-    return this.http.get("http://localhost:3000/api/gifts");
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/gifts");
 
   }
 
@@ -48,13 +48,13 @@ export class GiftsService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${admin ? JSON.parse(admin).token : ""}` }) };
 
 
-    return this.http.put("http://localhost:3000/api/gifts/update/" + id, formData, _options)
+    return this.http.put("https://replicagiftsbackend.onrender.com/api/gifts/update/" + id, formData, _options)
 
   }
 
 
   delete(id: string) {
-    return this.http.delete("http://localhost:3000/api/gifts/delete/" + id);
+    return this.http.delete("https://replicagiftsbackend.onrender.com/api/gifts/delete/" + id);
   }
 
 

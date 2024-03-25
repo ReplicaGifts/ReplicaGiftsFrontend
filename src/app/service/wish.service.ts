@@ -18,13 +18,13 @@ export class WishService {
   getWishList() {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
-    return this.http.get('http://localhost:3000/api/wishlist/wish', _options);
+    return this.http.get('https://replicagiftsbackend.onrender.com/api/wishlist/wish', _options);
   }
 
   removeWish(id: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
-    return this.http.delete('http://localhost:3000/api/wishlist/remove-wish/' + id, _options);
+    return this.http.delete('https://replicagiftsbackend.onrender.com/api/wishlist/remove-wish/' + id, _options);
 
   }
 
@@ -32,7 +32,7 @@ export class WishService {
     const token: string | null = localStorage.getItem('user');
     console.log(token)
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
-    return this.http.post('http://localhost:3000/api/wishlist/add-wish', { id }, _options);
+    return this.http.post('https://replicagiftsbackend.onrender.com/api/wishlist/add-wish', { id }, _options);
 
   }
 
