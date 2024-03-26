@@ -14,14 +14,14 @@
     </div> -->
 
   <nav class="nav container">
-    <a href="#"  (click)="nav()" class="nav__logo" data-aos="fade-right">
+    <a (click)="nav()" class="nav__logo" data-aos="fade-right">
       <!-- <img class="nav__logo-img" src="assets/img/Untitled_logo_2_free-file.jpg" alt="website logo" /> -->
       <p class="onetext">REPLICA</p>
       <p class="twotext">GIFTS</p>
     </a>
     <div class="nav__menu" id="nav-menu">
       <div class="nav__menu-top">
-        <a href="#"  (click)="nav()" class="nav__menu-logo">
+        <a (click)="nav()" class="nav__menu-logo">
           <!-- <img src="./assets/img/logo.svg" alt=""> -->
           <p class="onetext">REPLICA</p>
           <p class="twotext">GIFTS</p>
@@ -32,17 +32,23 @@
       </div>
       <ul class="nav__list" data-aos="fade-left">
         <li class="nav__item">
-          <a href="#"  (click)="nav()" class="nav__link active-link"
+          <a
+            (click)="nav()"
+            class="nav__link {{ display === '/' ? 'active-link' : '' }}"
             ><i class="bi bi-house"></i>Home</a
           >
         </li>
         <li class="nav__item">
-          <a (click)="navShop()" class="nav__link"
+          <a
+            (click)="navShop()"
+            class="nav__link {{
+              display.includes('shop') ? 'active-link' : ''
+            }}"
             ><i class="bi bi-shop"></i>Shop</a
           >
         </li>
         <li class="nav__item">
-          <a href="#" class="nav__link"><i class="bi bi-list"></i>Categories</a>
+          <a class="nav__link"><i class="bi bi-list"></i>Categories</a>
           <div id="dropdown">
             <ng-container *ngFor="let cate of category">
               <a (click)="navToCate(cate._id)">{{ cate.categoryName }}</a>
@@ -51,13 +57,21 @@
         </li>
 
         <li class="nav__item">
-          <a (click)="navToProfile()" class="nav__link"
+          <a
+            (click)="navToProfile()"
+            class="nav__link {{
+              display.includes('profile') ? 'active-link' : ''
+            }}"
             ><i class="bi bi-person"></i>My Account</a
           >
         </li>
 
         <li class="nav__item">
-          <a href="#contact" class="nav__link"
+          <a
+            href="#contact"
+            class="nav__link {{
+              display.includes('contact') ? 'active-link' : ''
+            }}"
             ><i class="bi bi-telephone"></i>Contact</a
           >
         </li>

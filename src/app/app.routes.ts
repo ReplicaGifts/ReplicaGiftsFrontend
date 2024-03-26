@@ -15,6 +15,7 @@ import { ShopeComponent } from './shope/shope.component';
 import { RegisterComponent } from './register/register.component';
 import { TearmsAndConditionComponent } from './tearms-and-condition/tearms-and-condition.component';
 import { PrivacyPaclicyComponent } from './privacy-paclicy/privacy-paclicy.component';
+import { OrderViewComponent } from './order-view/order-view.component';
 
 export const routes: Routes = [
 
@@ -29,6 +30,7 @@ export const routes: Routes = [
     { path: 'shop', component: ShopeComponent },
     { path: 'buy-now/:id', component: DeleveryDetailsComponent, canActivate: [UserAuthGuard] },
     { path: 'check-out', component: DeleveryDetailsComponent, canActivate: [UserAuthGuard] },
+    { path: 'order-view/:id', component: OrderViewComponent, canActivate: [UserAuthGuard] },
     { path: 'terms', component: TearmsAndConditionComponent },
     { path: 'privacy-policy', component: PrivacyPaclicyComponent },
 ];

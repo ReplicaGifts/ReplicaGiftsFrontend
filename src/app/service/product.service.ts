@@ -134,15 +134,10 @@ export class ProductService {
 
   limitedProduct(query: any) {
     // Create a shallow copy of the query object
-    let q = { ...query };
 
-    if (query.category) {
-      // Convert the category property to a comma-separated string
-      q.category = query.category.join(',');
-    }
 
     // Make the HTTP request using the modified query object
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/products/filter", { params: q });
+    return this.http.get("https://replicagiftsbackend.onrender.com/api/products/filter", { params: query });
   }
 
 

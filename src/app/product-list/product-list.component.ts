@@ -73,7 +73,8 @@ export class ProductListComponent {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
+    phone: ''
   }
 
   err!: string;
@@ -84,7 +85,7 @@ export class ProductListComponent {
 
   contactAdmin() {
 
-    if (this.contact.name === '' || this.contact.email === '' || this.contact.subject === '' || this.contact.message === '') {
+    if (this.contact.name === '' || this.contact.email === '' || this.contact.subject === '' || this.contact.message === '' || this.contact.phone === '') {
       this.err = "please fill all the fields"
       return;
     }
@@ -95,7 +96,8 @@ export class ProductListComponent {
         name: '',
         email: '',
         subject: '',
-        message: ''
+        message: '',
+        phone: '',
       }
     })
 

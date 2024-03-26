@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { UserAuthService } from '../../service/user-auth.service';
 import { Router } from '@angular/router';
 import { CategoryService } from '../../service/category.service';
@@ -15,6 +15,7 @@ import { NgFor, NgIf } from '@angular/common';
 })
 export class HeaderAllComponent {
 
+  @Input() display!: string;
 
   constructor(private user: UserAuthService, private router: Router, private categories: CategoryService, private wish: WishService, private cart: CartService) { }
 

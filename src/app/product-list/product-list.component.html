@@ -12,8 +12,13 @@
         <p class="home__description"></p>
         <a (click)="navToShop()" class="btns">Shop Now</a>
       </div>
-      <img src="../../assets/assets/img/banner.jpg" class="home__img" style="z-index: 100" alt="hats"
-        data-aos="fade-right" />
+      <img
+        src="../../assets/assets/img/banner.jpg"
+        class="home__img"
+        style="z-index: 100"
+        alt="hats"
+        data-aos="fade-right"
+      />
     </div>
   </section>
 
@@ -72,7 +77,11 @@
     <div class="categories__container swiper">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of categories; let i = index">
-          <a (click)="navToCategory(cate._id)" class="category__item swiper-slide" data-aos="flip-left">
+          <a
+            (click)="navToCategory(cate._id)"
+            class="category__item swiper-slide"
+            data-aos="flip-left"
+          >
             <img [src]="cate.thumbnail" alt="" class="category__img" />
             <h3 class="category__title">{{ cate.categoryName }}</h3>
           </a>
@@ -96,13 +105,21 @@
     <div class="new__container swiper">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of newProduct; let i = index">
-          <div class="product__item swiper-slide" data-aos="flip-right" data-aos="flip-right">
+          <div
+            class="product__item swiper-slide"
+            data-aos="flip-right"
+            data-aos="flip-right"
+          >
             <div class="product__banner">
               <a (click)="nav(cate._id)" class="product__images1">
                 <img [src]="cate.image" alt="" class="product__img default" />
               </a>
               <div class="product__actions">
-                <a (click)="addWish(cate._id)" class="action__btn" aria-label="Add to Wishlist">
+                <a
+                  (click)="addWish(cate._id)"
+                  class="action__btn"
+                  aria-label="Add to Wishlist"
+                >
                   <i class="fa-solid fa-heart"></i>
                 </a>
               </div>
@@ -112,15 +129,22 @@
             <div class="product__content">
               <span class="product__category">{{
                 cate.category.categoryName
-                }}</span>
+              }}</span>
               <a (click)="nav(cate._id)">
                 <h3 class="product__title">{{ cate.title }}</h3>
               </a>
-              <app-star-rating [rating]="cate.totalrating" [readonly]="true"></app-star-rating>
+              <app-star-rating
+                [rating]="cate.totalrating"
+                [readonly]="true"
+              ></app-star-rating>
               <div class="product__price flex">
                 <span class="new__price">${{ cate.amount }}</span>
                 <span class="old__price">${{ cate.amount }}</span>
-                <a (click)="nav(cate._id)" class="action__btn cart__btn" aria-label="Add To Cart">
+                <a
+                  (click)="nav(cate._id)"
+                  class="action__btn cart__btn"
+                  aria-label="Add To Cart"
+                >
                   <i class="fa fa-shopping-cart"></i>
                 </a>
               </div>
@@ -151,7 +175,11 @@
                 <img [src]="cate.image" alt="" class="product__img hover" />
               </a>
               <div class="product__actions">
-                <a (click)="addWish(cate._id)" class="action__btn" aria-label="Add to Wishlist">
+                <a
+                  (click)="addWish(cate._id)"
+                  class="action__btn"
+                  aria-label="Add to Wishlist"
+                >
                   <i class="fa-solid fa-heart"></i>
                 </a>
               </div>
@@ -159,15 +187,22 @@
             <div class="product__content">
               <span class="product__category">{{
                 cate.category.categoryName
-                }}</span>
+              }}</span>
               <a (click)="nav(cate._id)">
                 <h3 class="product__title">{{ cate.title }}</h3>
               </a>
-              <app-star-rating [rating]="cate.totalrating" [readonly]="true"></app-star-rating>
+              <app-star-rating
+                [rating]="cate.totalrating"
+                [readonly]="true"
+              ></app-star-rating>
               <div class="product__price flex">
                 <span class="new__price">${{ cate.amount }}</span>
                 <span class="old__price">${{ cate.price }}</span>
-                <a (click)="nav(cate._id)" class="action__btn cart__btn" aria-label="Add To Cart">
+                <a
+                  (click)="nav(cate._id)"
+                  class="action__btn cart__btn"
+                  aria-label="Add To Cart"
+                >
                   <i class="fa fa-shopping-cart"></i>
                 </a>
               </div>
@@ -197,7 +232,11 @@
                 <img [src]="cate.image" alt="" class="product__img default" />
               </a>
               <div class="product__actions">
-                <a (click)="addWish(cate._id)" class="action__btn" aria-label="Add to Wishlist">
+                <a
+                  (click)="addWish(cate._id)"
+                  class="action__btn"
+                  aria-label="Add to Wishlist"
+                >
                   <i class="fa-solid fa-heart"></i>
                 </a>
               </div>
@@ -205,15 +244,22 @@
             <div class="product__content">
               <span class="product__category">{{
                 cate.category.categoryName
-                }}</span>
+              }}</span>
               <a (click)="nav(cate._id)">
                 <h3 class="product__title">{{ cate.title }}</h3>
               </a>
-              <app-star-rating [rating]="cate.rating" [readonly]="true"></app-star-rating>
+              <app-star-rating
+                [rating]="cate.rating"
+                [readonly]="true"
+              ></app-star-rating>
               <div class="product__price flex">
                 <span class="new__price">${{ cate.amount }}</span>
                 <span class="old__price">${{ cate.price }}</span>
-                <a (click)="nav(cate._id)" class="action__btn cart__btn" aria-label="Add To Cart">
+                <a
+                  (click)="nav(cate._id)"
+                  class="action__btn cart__btn"
+                  aria-label="Add To Cart"
+                >
                   <i class="fa fa-shopping-cart"></i>
                 </a>
               </div>
@@ -258,11 +304,18 @@
     </h3>
     <div class="container">
       <div class="row">
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up">
+        <div
+          class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
+          data-aos="fade-up"
+        >
           <div class="icon-box icon-box-pink">
             <div class="icon">
               <a (click)="navToShop()" class="product__images1">
-                <img src="../../assets/assets/img/noun-quality-1716012.svg" alt="" class="product__img1 default" />
+                <img
+                  src="../../assets/assets/img/noun-quality-1716012.svg"
+                  alt=""
+                  class="product__img1 default"
+                />
               </a>
             </div>
             <h4 class="title"><a>Best Quality</a></h4>
@@ -274,11 +327,19 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="100">
+        <div
+          class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
+          data-aos="fade-up"
+          data-aos-delay="100"
+        >
           <div class="icon-box icon-box-cyan">
             <div class="icon">
               <a (click)="navToShop()" class="product__images1">
-                <img src="../../assets/assets/img/noun-price-427281.svg" alt="" class="product__img1 default" />
+                <img
+                  src="../../assets/assets/img/noun-price-427281.svg"
+                  alt=""
+                  class="product__img1 default"
+                />
               </a>
             </div>
             <h4 class="title"><a>Best Price</a></h4>
@@ -290,11 +351,19 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="200">
+        <div
+          class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
+          data-aos="fade-up"
+          data-aos-delay="200"
+        >
           <div class="icon-box icon-box-green">
             <div class="icon">
               <a (click)="navToShop()" class="product__images1">
-                <img src="../assets/assets/img/noun-customer-support-108460.svg" alt="" class="product__img1 default" />
+                <img
+                  src="../assets/assets/img/noun-customer-support-108460.svg"
+                  alt=""
+                  class="product__img1 default"
+                />
                 <!-- <img src="assets/img/product-2-2.jpg" alt="" class="product__img hover" /> -->
               </a>
             </div>
@@ -307,11 +376,19 @@
           </div>
         </div>
 
-        <div class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0" data-aos="fade-up" data-aos-delay="300">
+        <div
+          class="col-md-6 col-lg-3 d-flex align-items-stretch mb-5 mb-lg-0"
+          data-aos="fade-up"
+          data-aos-delay="300"
+        >
           <div class="icon-box icon-box-blue">
             <div class="icon">
               <a (click)="navToShop()" class="product__images1">
-                <img src="../../assets/assets/img/noun-order-6675087.svg" alt="" class="product__img1 default" />
+                <img
+                  src="../../assets/assets/img/noun-order-6675087.svg"
+                  alt=""
+                  class="product__img1 default"
+                />
               </a>
             </div>
             <h4 class="title"><a href="">Easy Order</a></h4>
@@ -331,18 +408,30 @@
       <div class="section-header">
         <h3 class="section__title1"><span>Frequently</span> Asked Questions</h3>
       </div>
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
+      <div
+        class="row justify-content-center"
+        data-aos="fade-up"
+        data-aos-delay="200"
+      >
         <div class="col-lg-10">
           <div class="accordion accordion-flush" id="faqlist">
             <div class="accordion-item">
               <h3 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-content-1">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-content-1"
+                >
                   <i class="bi bi-question-circle question-icon"></i>
                   What payment methods do you offer?
                 </button>
               </h3>
-              <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+              <div
+                id="faq-content-1"
+                class="accordion-collapse collapse"
+                data-bs-parent="#faqlist"
+              >
                 <div class="accordion-body">
                   We offer all modes of online payment such as credit card,
                   debit card, net banking, phone pe, G pay, UPI, Paytm via
@@ -354,13 +443,21 @@
 
             <div class="accordion-item">
               <h3 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-content-2">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-content-2"
+                >
                   <i class="bi bi-question-circle question-icon"></i>
                   Do I have gift wrap options?
                 </button>
               </h3>
-              <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+              <div
+                id="faq-content-2"
+                class="accordion-collapse collapse"
+                data-bs-parent="#faqlist"
+              >
                 <div class="accordion-body">
                   Yes. you have the option to get your order gift wrapped if you
                   are buying it for someone else. There is a 50 rupees extra
@@ -372,13 +469,21 @@
 
             <div class="accordion-item">
               <h3 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-content-3">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-content-3"
+                >
                   <i class="bi bi-question-circle question-icon"></i>
                   What file formats can I upload?
                 </button>
               </h3>
-              <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+              <div
+                id="faq-content-3"
+                class="accordion-collapse collapse"
+                data-bs-parent="#faqlist"
+              >
                 <div class="accordion-body">
                   You can upload your images in jpeg, jpg, or png formats. Make
                   sure they are of high resolution as the prints might get
@@ -390,13 +495,21 @@
 
             <div class="accordion-item">
               <h3 class="accordion-header">
-                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
-                  data-bs-target="#faq-content-4">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#faq-content-4"
+                >
                   <i class="bi bi-question-circle question-icon"></i>
                   How much does delivery cost?
                 </button>
               </h3>
-              <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
+              <div
+                id="faq-content-4"
+                class="accordion-collapse collapse"
+                data-bs-parent="#faqlist"
+              >
                 <div class="accordion-body">
                   <i class="bi bi-question-circle question-icon"></i>
                   There is no minimum amount required to avail of free shipping
@@ -424,7 +537,10 @@
             <div class="col-md-12">
               <div class="info-box">
                 <i class="bx bx-map"></i>
-                <h3><i class="fa fa-address-card" aria-hidden="true"></i>Our Address</h3>
+                <h3>
+                  <i class="fa fa-address-card" aria-hidden="true"></i>Our
+                  Address
+                </h3>
                 <p>
                   115, Big street, Pattukottai, Thanjavur, TamilNadu, 614601
                 </p>
@@ -433,7 +549,9 @@
             <div class="col-md-6">
               <div class="info-box mt-4">
                 <i class="bx bx-envelope"></i>
-                <h3><i class="fa fa-envelope" aria-hidden="true"></i>Email Us</h3>
+                <h3>
+                  <i class="fa fa-envelope" aria-hidden="true"></i>Email Us
+                </h3>
                 <p>
                   replicagifts567&#64;gmail.com<br />contact&#64;gmail.com.com
                 </p>
@@ -449,24 +567,72 @@
           </div>
         </div>
         <div class="col-lg-6 mt-4 mt-md-0">
-          <form action="forms/contact.php" method="post" role="form" class="php-email-form">
+          <form
+            action="forms/contact.php"
+            method="post"
+            role="form"
+            class="php-email-form"
+          >
             <div class="row">
               <div class="col-md-6 form-group">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required
-                  [(ngModel)]="contact.name" (input)="check()" />
+                <input
+                  type="text"
+                  name="name"
+                  class="form-control"
+                  id="name"
+                  placeholder="Your Name"
+                  required
+                  [(ngModel)]="contact.name"
+                  (input)="check()"
+                />
               </div>
               <div class="col-md-6 form-group mt-3 mt-md-0">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required
-                  [(ngModel)]="contact.email" (input)="check()" />
+                <input
+                  type="email"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="Your Email"
+                  required
+                  [(ngModel)]="contact.email"
+                  (input)="check()"
+                />
+              </div>
+              <div class="col-md-6 form-group mt-3 mt-md-0">
+                <input
+                  type="text"
+                  class="form-control"
+                  name="email"
+                  id="email"
+                  placeholder="Your Phone no"
+                  required
+                  [(ngModel)]="contact.phone"
+                  (input)="check()"
+                />
               </div>
             </div>
             <div class="form-group mt1">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required
-                [(ngModel)]="contact.subject" (input)="check()" />
+              <input
+                type="text"
+                class="form-control"
+                name="subject"
+                id="subject"
+                placeholder="Subject"
+                required
+                [(ngModel)]="contact.subject"
+                (input)="check()"
+              />
             </div>
             <div class="form-group mt-3">
-              <textarea class="form-control" name="message" rows="3" placeholder="Message" required
-                [(ngModel)]="contact.message" (input)="check()"></textarea>
+              <textarea
+                class="form-control"
+                name="message"
+                rows="3"
+                placeholder="Message"
+                required
+                [(ngModel)]="contact.message"
+                (input)="check()"
+              ></textarea>
             </div>
             <!-- <div class="my-3">
               <div class="loading">Loading</div>

@@ -38,12 +38,13 @@ export class ShopeComponent {
   check = false;
   pageNo: any[] = [];
   ngOnInit(): void {
-    window.scrollTo({ top: 0, behavior: "instant" })
 
+    window.scrollTo({ top: 0, behavior: "instant" })
     // Subscribe to filter changes and debounce the input
     this.filterSubject.pipe(
       debounceTime(300) // Debounce input to avoid rapid API requests
     ).subscribe((filters: any) => {
+
       this.getFilteredProduct(filters);
     });
 
@@ -75,6 +76,7 @@ export class ShopeComponent {
   }
 
   private updateDiscounts(minDiscount: number, maxDiscount: number) {
+    console.log(minDiscount, maxDiscount)
     for (let i = 0; i < 6; i++) {
       if (i === 0) {
         this.discounts[0] = minDiscount;
@@ -95,24 +97,10 @@ export class ShopeComponent {
   }
 
 
-  filterCategory(e: any, category: any) {
-    if (e.target.checked) {
-      // Initialize selectedFilters.category as an array if it's not already
-      if (!Array.isArray(this.selectedFilters.category)) {
-        this.selectedFilters.category = [];
-      }
-      // Push the category to the array
-      this.selectedFilters.category.push(category);
-    } else {
-      // If selectedFilters.category is not an array, set it to an empty array
-      if (!Array.isArray(this.selectedFilters.category)) {
-        this.selectedFilters.category = [];
-      }
-      // Remove the category from the array if it exists
-      const index = this.selectedFilters.category.indexOf(category);
-      if (index !== -1) {
-        this.selectedFilters.category.splice(index, 1);
-      }
+  filterCategory(category: any) {
+    if (category) {
+
+      this.selectedFilters.category = category;
     }
 
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
