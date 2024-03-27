@@ -8,6 +8,7 @@ import { CartService } from '../../service/cart.service'
 import { ProductService } from '../../service/product.service';
 import { FormsModule } from '@angular/forms';
 import { routes } from '../../app.routes';
+import { GuestService } from '../../service/guest.service';
 
 @Component({
   selector: 'app-header',
@@ -18,7 +19,8 @@ import { routes } from '../../app.routes';
 })
 export class HeaderComponent {
 
-  constructor(private user: UserAuthService, private router: Router, private categories: CategoryService, private wish: WishService, private cart: CartService, private product: ProductService, private route: ActivatedRoute) { }
+  constructor(private user: UserAuthService, private router: Router, private categories: CategoryService, private wish: WishService, private cart: CartService, private product: ProductService,
+    private guest: GuestService, private route: ActivatedRoute) { }
 
   isAuth: boolean = false;
   category: any[] = [];
@@ -34,26 +36,27 @@ export class HeaderComponent {
   display: any = '';
 
   ngOnInit() {
-    this.user.isAuthenticated();
+    this.isAuth = this.user.isAuthenticated();
 
-    this.user.isAuthenticatedValue.subscribe(value => {
-      this.isAuth = value;
-      this.cart.NoOFCartItem.subscribe(value => this.noOfCart = value);
-      this.wish.noOfWish.subscribe(value => this.noOfWish = value);
-      this.categories.getCategory().subscribe((category: any) => { this.category = category });
-      console.log(value)
-      if (value) {
-        this.user.getUser().subscribe((user: any) => {
-          this.username = user.username;
-          console.log(user)
-          this.profilePic = user.profile;
-        })
-      }
-    });
 
-    this.cart.CheckItems();
+    this.cart.NoOFCartItem.subscribe(value => this.noOfCart = value);
+    this.wish.noOfWish.subscribe(value => this.noOfWish = value);
+    this.categories.getCategory().subscribe((category: any) => { this.category = category });
+    if (this.isAuth) {
+      this.user.getUser().subscribe((user: any) => {
+        this.username = user.username;
+        console.log(user)
+        this.profilePic = user.profile;
+      })
 
-    this.wish.checkWish();
+      this.cart.CheckItems();
+
+      this.wish.checkWish();
+    } else {
+      this.cart.NoOFCartItem.next(this.guest.getCart().length);
+      this.wish.noOfWish.next(this.guest.getWish().length);
+    }
+
 
 
   }

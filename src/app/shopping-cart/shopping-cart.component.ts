@@ -4,6 +4,8 @@ import { FormsModule } from '@angular/forms';
 import { CartService } from '../service/cart.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserAuthService } from '../service/user-auth.service';
+import { GuestService } from '../service/guest.service';
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
@@ -12,12 +14,13 @@ import Swal from 'sweetalert2';
   styleUrl: './shopping-cart.component.css'
 })
 export class ShoppingCartComponent {
-  constructor(public cart: CartService, private router: Router) { }
+  constructor(public cart: CartService, private router: Router, private user: UserAuthService, private guest: GuestService) { }
 
   cartList: any[] = [];
 
   total: any = 0;
 
+  isAuth: Boolean = this.user.isAuthenticated();
 
 
   ngOnInit() {
@@ -28,19 +31,31 @@ export class ShoppingCartComponent {
   }
 
   get(isDelet: boolean = false) {
-    this.cart.getCart().subscribe((cart: any) => {
-      console.log(cart);
-      this.cartList = cart;
+    if (this.isAuth) {
+
+      this.cart.getCart().subscribe((cart: any) => {
+        this.cartList = cart;
+        if (isDelet) {
+          this.total = 0
+        }
+        this.cartList.map((cart) => {
+          this.total = this.total + cart.userWant.totalAmount;
+        })
+        this.cart.NoOFCartItem.next(this.cartList.length);
+
+      });
+    } else {
+      this.cart.NoOFCartItem.next(this.guest.getCart().length);
+
       if (isDelet) {
         this.total = 0
       }
+      this.cartList = this.guest.getCart();
       this.cartList.map((cart) => {
         this.total = this.total + cart.userWant.totalAmount;
       })
-      console.log(this.cartList);
-      this.cart.NoOFCartItem.next(this.cartList.length);
+    }
 
-    });
   }
   remove(id: any) {
     Swal.fire({
@@ -53,15 +68,27 @@ export class ShoppingCartComponent {
       confirmButtonText: "Yes, Remove it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cart.remove(id).subscribe((wish: any) => {
-          console.log(wish);
-          this.get(true)
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your cart item has been deleted.",
-            icon: "success"
+        if (this.isAuth) {
+          this.cart.remove(id).subscribe((wish: any) => {
+            console.log(wish);
+            this.get(true)
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your cart item has been deleted.",
+              icon: "success"
+            });
           });
-        });
+        } else {
+          this.guest.deleteCartItem(id) ?
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your cart item has been deleted.",
+              icon: "success"
+            })
+            : console.error("Cart item deleted");
+          this.get(true)
+
+        }
       }
     });
   }
@@ -74,8 +101,18 @@ export class ShoppingCartComponent {
     this.router.navigate(['/check-out'])
   }
 
-  updateQt(id: any, q: any) {
-    this.cart.editQuantity(id, q).subscribe((wish: any) => { console.log(wish); this.get(true) });
+  updateQt(id: any, q: any, f_id: any) {
+    if (this.isAuth) {
+
+      this.cart.editQuantity(id, q).subscribe((wish: any) => { console.log(wish); this.get(true) });
+    } else {
+      this.guest.editQuantity(id, q, f_id)
+
+      setTimeout(() => {
+        this.get()
+      }, 2000)
+
+    }
   }
 
 }
