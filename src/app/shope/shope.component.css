@@ -1,3 +1,22 @@
-.btns{
+.btns3 {
+    padding: 8px 16px;
+    border: 2px solid #ff6200;
+    border-radius: 50px;
+    background-color: transparent;
+    color: #ff6200;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
     margin: 5px;
-}
+    
+  }
+
+  .btns3:hover {
+    background-color: #ff6200;
+    color: #ffffff;
+  }
+
+  .btns3.active {
+    background-color: #ff6200;
+    color: #ffffff;
+    border-color: #ff6200;
+  }
