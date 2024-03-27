@@ -7,6 +7,8 @@ import { WishService } from '../service/wish.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, debounceTime } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { UserAuthService } from '../service/user-auth.service';
+import { GuestService } from '../service/guest.service';
 
 @Component({
   selector: 'app-shope',
@@ -17,7 +19,11 @@ import { FormsModule } from '@angular/forms';
 })
 export class ShopeComponent {
 
-  constructor(private categoryService: CategoryService, private product: ProductService, private router: Router, private route: ActivatedRoute, private wish: WishService) { }
+  constructor(private categoryService: CategoryService, private product: ProductService, private guest: GuestService,
+    private router: Router, private route: ActivatedRoute, private wish: WishService, private user: UserAuthService) { }
+
+  isAuth = this.user.isAuthenticated();
+
   selectedFilters: any = {
     search: '',
     page: 1,
@@ -160,9 +166,13 @@ export class ShopeComponent {
   }
 
   addWish(id: any) {
+    if (this.isAuth)
+      this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
+    else {
 
-    this.wish.addWish(id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
-
+      this.guest.addToWish(id)
+      this.wish.noOfWish.next(this.guest.getWish().length)
+    }
   }
 
 

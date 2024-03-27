@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Product } from '../model/product.model';
-import { ActivatedRoute, Router, createUrlTreeFromSnapshot } from '@angular/router';
-import { ProductService } from '../service/product.service';
-import { Subject, takeUntil, window } from 'rxjs';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Subject, takeUntil } from 'rxjs';
 import { CartService } from '../service/cart.service';
 import { CommonModule } from '@angular/common';
 import { PaymentService } from '../service/payment.service';
 import { ProfileService } from '../service/profile.service';
 import Swal from 'sweetalert2';
+import { UserAuthService } from '../service/user-auth.service';
+import { GuestService } from '../service/guest.service';
 
 
 @Component({
@@ -20,8 +21,11 @@ import Swal from 'sweetalert2';
 })
 export class DeleveryDetailsComponent {
 
-  constructor(private Profile: ProfileService, private router: Router, private route: ActivatedRoute, private cart: CartService, private payment: PaymentService) { }
+  constructor(private Profile: ProfileService, private router: Router, private route: ActivatedRoute,
+    private cart: CartService, private payment: PaymentService, private user: UserAuthService, private guest: GuestService) { }
   private unsubscribe$: Subject<void> = new Subject<void>();
+
+  isAuth = this.user.isAuthenticated();
 
   billingDetails = {
     name: '',
@@ -74,13 +78,21 @@ export class DeleveryDetailsComponent {
           }
         });
       } else {
-        this.cart.getCart().subscribe(res => {
-          this.shoppingCart = res;
+        if (this.isAuth) {
+          this.cart.getCart().subscribe(res => {
+            this.shoppingCart = res;
+            this.shoppingCart.map((cart: any) => {
+              this.totalPrice += cart.userWant.totalAmount;
+              this.gifts = cart.userWant.gifts;
+            })
+          });
+        } else {
+          this.shoppingCart = this.guest.getCart();
           this.shoppingCart.map((cart: any) => {
             this.totalPrice += cart.userWant.totalAmount;
             this.gifts = cart.userWant.gifts;
           })
-        });
+        }
       }
     });
 
@@ -117,57 +129,111 @@ export class DeleveryDetailsComponent {
     }
 
 
-    this.payment.createOrder(this.checkoutData).subscribe(res => {
-      if (res.success) {
-        // Handle payment success
-        console.log(res);
-        let options = {
-          "key": res.key_id,
-          "amount": `${res.amount}`,
-          "currency": "INR",
-          "name": res.product_name,
-          "description": res.description,
-          "image": "https://dummyimage.com/600x400/000/fff",
-          "order_id": res.order_id,
-          "handler": (response: any) => {
-            this.handlePaymentSuccess(response, res);
-          },
+    if (this.isAuth) {
+      this.payment.createOrder(this.checkoutData).subscribe(res => {
+        if (res.success) {
+          // Handle payment success
+          console.log(res);
+          let options = {
+            "key": res.key_id,
+            "amount": `${res.amount}`,
+            "currency": "INR",
+            "name": res.product_name,
+            "description": res.description,
+            "image": "https://dummyimage.com/600x400/000/fff",
+            "order_id": res.order_id,
+            "handler": (response: any) => {
+              this.handlePaymentSuccess(response, res);
+            },
 
-          "prefill": {
-            "contact": res.contact,
-            "name": res.name,
-            "email": res.email
-          },
-          "notes": {
-            "description": res.description
-          },
-          "theme": {
-            "color": "#2300a3"
-          }
-        };
-
-
-        this.payment.initializeRazorpay(options);
-        this.payment.openPayment()
+            "prefill": {
+              "contact": res.contact,
+              "name": res.name,
+              "email": res.email
+            },
+            "notes": {
+              "description": res.description
+            },
+            "theme": {
+              "color": "#2300a3"
+            }
+          };
 
 
-      } else {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: res.msg,
-        });
-      }
-    },
-      error => {
-        console.error(error);
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "An error occurred",
-        });
-      }
-    );
+          this.payment.initializeRazorpay(options);
+          this.payment.openPayment()
+
+
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: res.msg,
+          });
+        }
+      },
+        error => {
+          console.error(error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "An error occurred",
+          });
+        }
+      );
+    } else {
+      this.guest.checkout(this.checkoutData).subscribe((res: any) => {
+        if (res.success) {
+          // Handle payment success
+          console.log(res);
+          let options = {
+            "key": res.key_id,
+            "amount": `${res.amount}`,
+            "currency": "INR",
+            "name": res.product_name,
+            "description": res.description,
+            "image": "https://dummyimage.com/600x400/000/fff",
+            "order_id": res.order_id,
+            "handler": (response: any) => {
+              this.handlePaymentSuccess(response, res);
+            },
+
+            "prefill": {
+              "contact": res.contact,
+              "name": res.name,
+              "email": res.email
+            },
+            "notes": {
+              "description": res.description
+            },
+            "theme": {
+              "color": "#2300a3"
+            }
+          };
+
+
+          this.payment.initializeRazorpay(options);
+          this.payment.openPayment()
+
+
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: res.msg,
+          });
+        }
+      },
+        error => {
+          console.error(error);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "An error occurred",
+          });
+        }
+      );
+    }
 
 
   }
@@ -180,16 +246,37 @@ export class DeleveryDetailsComponent {
     console.log(paymentResponse)
 
     // Verify payment signature
-    this.payment.verifySignature(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature, paymentResponse.frameDetails).subscribe(payment => {
-      Swal.fire({
-        position: "top-end",
-        icon: "success",
-        title: "Payment Successed",
-        showConfirmButton: false,
-        timer: 1500
-      });
-      this.router.navigateByUrl('/');
-    })
+    if (this.isAuth) {
+
+
+      this.payment.verifySignature(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature, paymentResponse.frameDetails).subscribe(payment => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Payment Successed",
+          showConfirmButton: false,
+          timer: 1500
+        });
+        this.router.navigateByUrl('/');
+      })
+    } else {
+      this.guest.verify(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature, paymentResponse.frameDetails).subscribe(payment => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Payment Successed",
+          showConfirmButton: false,
+          timer: 1500
+        });
+
+        if (!this.detailId) {
+          localStorage.removeItem('cart');
+        }
+
+        this.router.navigateByUrl('/');
+      })
+
+    }
   }
 
 }

@@ -89,7 +89,9 @@
           content
           id="dashboard"
         >
-          <h3 class="tab__header">Hello {{ user.username }}</h3>
+          <h3 class="tab__header">
+            Hello {{ isAuth ? user.username : "Guest" }}
+          </h3>
           <div class="tab__body">
             <p class="tab__description">
               From your account dashboard. you can easily check & view your
@@ -171,6 +173,7 @@
           </div>
         </div>
         <div
+          *ngIf="isAuth"
           class="tab__content {{ display === 'address' ? 'active-tab' : '' }}"
           content
           id="address"

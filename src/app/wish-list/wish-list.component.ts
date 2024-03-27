@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
+import { UserAuthService } from '../service/user-auth.service';
+import { GuestService } from '../service/guest.service';
 
 @Component({
   selector: 'app-wish-list',
@@ -14,7 +16,9 @@ import Swal from 'sweetalert2';
 })
 export class WishListComponent {
 
-  constructor(public wish: WishService, private router: Router) { }
+  constructor(public wish: WishService, private router: Router, private user: UserAuthService, private guest: GuestService) { }
+
+  isAuth = this.user.isAuthenticated();
 
   wishList: any[] = [];
 
@@ -25,11 +29,19 @@ export class WishListComponent {
   }
 
   get() {
-    this.wish.getWishList().subscribe((wishList: any) => {
-      console.log(wishList);
-      this.wishList = wishList;
-      this.wish.noOfWish.next(wishList.length);
-    });
+    if (this.isAuth) {
+
+      this.wish.getWishList().subscribe((wishList: any) => {
+        console.log(wishList);
+        this.wishList = wishList;
+        this.wish.noOfWish.next(wishList.length);
+      });
+    } else {
+      this.wishList = this.guest.getWish();
+      this.wish.noOfWish.next(this.guest.getWish().length);
+
+      console.log(this.wishList);
+    }
   }
   removeWish(id: any) {
     Swal.fire({
@@ -42,14 +54,25 @@ export class WishListComponent {
       confirmButtonText: "Yes, Remove it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.wish.removeWish(id).subscribe((wish: any) => {
-          console.log(wish); this.get();
+        if (this.isAuth) {
+          this.wish.removeWish(id).subscribe((wish: any) => {
+            console.log(wish); this.get();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Wish item has been deleted.",
+              icon: "success"
+            });
+          });
+        } else {
+          this.guest.deleteWishItem(id);
+          this.get();
+          this.wish.noOfWish.next(this.guest.getWish().length);
           Swal.fire({
             title: "Deleted!",
             text: "Your Wish item has been deleted.",
             icon: "success"
           });
-        });
+        }
       }
     });
   }

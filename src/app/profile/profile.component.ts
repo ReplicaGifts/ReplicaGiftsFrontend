@@ -8,6 +8,7 @@ import { CartService } from '../service/cart.service';
 import Swal from 'sweetalert2';
 import { WishListComponent } from '../wish-list/wish-list.component';
 import { WishService } from '../service/wish.service';
+import { GuestService } from '../service/guest.service';
 
 @Component({
   selector: 'app-profile',
@@ -18,9 +19,12 @@ import { WishService } from '../service/wish.service';
 })
 export class ProfileComponent {
 
-  constructor(private userService: UserAuthService, private profile: ProfileService, private auth: UserAuthService, private router: Router, private cart: CartService, private wish: WishService) { }
+  constructor(private userService: UserAuthService, private profile: ProfileService, private auth: UserAuthService,
+    private router: Router, private cart: CartService, private wish: WishService, private guest: GuestService) { }
 
   user: any;
+
+  isAuth = this.userService.isAuthenticated();
 
   edit: boolean = false;
 
@@ -53,26 +57,30 @@ export class ProfileComponent {
   ngOnInit() {
     this.get()
     this.getCart()
-    this.getW()
+    this.getw()
     window.scrollTo({ top: 0, behavior: "instant" })
 
   }
 
   get() {
     this.edit = false
-    this.userService.getUser().subscribe((user: any) => {
-      this.orders = user.orders
-      if (user.billingDetails) {
+    if (this.isAuth) {
+      this.userService.getUser().subscribe((user: any) => {
+        this.orders = user.orders
+        if (user.billingDetails) {
 
-        this.billingDetails = user.billingDetails;
-      } else {
-        this.edit = true
-      }
+          this.billingDetails = user.billingDetails;
+        } else {
+          this.edit = true
+        }
 
-      this.user = user;
+        this.user = user;
+        this.getOrders()
+
+      })
+    } else {
       this.getOrders()
-
-    })
+    }
   }
 
   addAddress() {
@@ -88,10 +96,16 @@ export class ProfileComponent {
   }
 
   getOrders() {
-    this.profile.getOrder().subscribe((response: any) => {
-      this.orders = response;
-      console.log(response);
-    });
+    if (this.isAuth) {
+      this.profile.getOrder().subscribe((response: any) => {
+        this.orders = response;
+        console.log(response);
+      });
+    } else {
+      this.guest.orders().subscribe((response: any) => {
+        this.orders = response;
+      });
+    }
   }
 
   logout() {
@@ -115,21 +129,35 @@ export class ProfileComponent {
 
   cartList: any[] = [];
   total: number = 0;
-
   getCart(isDelet: boolean = false) {
-    this.cart.getCart().subscribe((cart: any) => {
-      console.log(cart);
-      this.cartList = cart;
+    if (this.isAuth) {
+
+      this.cart.getCart().subscribe((cart: any) => {
+        console.log(cart);
+        this.cartList = cart;
+        if (isDelet) {
+          this.total = 0
+        }
+        this.cartList.map((cart) => {
+          this.total = this.total + cart.userWant.totalAmount;
+        })
+        console.log(this.cartList);
+        this.cart.NoOFCartItem.next(this.cartList.length);
+
+      });
+    } else {
+
       if (isDelet) {
+        this.cart.NoOFCartItem.next(this.guest.getCart().length);
         this.total = 0
       }
+      this.cartList = this.guest.getCart();
+      console.log(this.cartList, this.isAuth);
       this.cartList.map((cart) => {
         this.total = this.total + cart.userWant.totalAmount;
       })
-      console.log(this.cartList);
-      this.cart.NoOFCartItem.next(this.cartList.length);
+    }
 
-    });
   }
   remove(id: any) {
     Swal.fire({
@@ -142,27 +170,44 @@ export class ProfileComponent {
       confirmButtonText: "Yes, Remove it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.cart.remove(id).subscribe((wish: any) => {
-          console.log(wish);
-          this.getCart(true)
-          Swal.fire({
-            title: "Deleted!",
-            text: "Your cart item has been deleted.",
-            icon: "success"
+        if (this.isAuth) {
+          this.cart.remove(id).subscribe((wish: any) => {
+            console.log(wish);
+            this.getCart(true)
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your cart item has been deleted.",
+              icon: "success"
+            });
           });
-        });
+        } else {
+          this.guest.deleteCartItem(id) ?
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your cart item has been deleted.",
+              icon: "success"
+            })
+            : console.error("Cart item deleted");
+          this.getCart(true)
+
+        }
       }
     });
   }
-
-
   wishList: any[] = [];
-  getW() {
-    this.wish.getWishList().subscribe((wishList: any) => {
-      console.log(wishList);
-      this.wishList = wishList;
-      this.wish.noOfWish.next(wishList.length);
-    });
+  getw() {
+    if (this.isAuth) {
+
+      this.wish.getWishList().subscribe((wishList: any) => {
+        console.log(wishList);
+        this.wishList = wishList;
+        this.wish.noOfWish.next(wishList.length);
+      });
+    } else {
+      this.wishList = this.guest.getWish();
+      this.wish.noOfWish.next(this.wishList.length);
+      console.log(this.wishList);
+    }
   }
   removeWish(id: any) {
     Swal.fire({
@@ -175,18 +220,27 @@ export class ProfileComponent {
       confirmButtonText: "Yes, Remove it!"
     }).then((result) => {
       if (result.isConfirmed) {
-        this.wish.removeWish(id).subscribe((wish: any) => {
-          console.log(wish); this.getW();
+        if (this.isAuth) {
+          this.wish.removeWish(id).subscribe((wish: any) => {
+            console.log(wish); this.getw();
+            Swal.fire({
+              title: "Deleted!",
+              text: "Your Wish item has been deleted.",
+              icon: "success"
+            });
+          });
+        } else {
+          this.guest.deleteWishItem(id);
+          this.getw();
           Swal.fire({
             title: "Deleted!",
             text: "Your Wish item has been deleted.",
             icon: "success"
           });
-        });
+        }
       }
     });
   }
-
 
   navToProduct(id: any) {
     this.router.navigateByUrl(`/product?id=${id}`)

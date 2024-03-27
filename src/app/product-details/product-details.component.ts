@@ -11,6 +11,8 @@ import { GiftsService } from '../service/gifts.service';
 import { CategoryService } from '../service/category.service';
 import { WishService } from '../service/wish.service';
 import Swal from 'sweetalert2';
+import { GuestService } from '../service/guest.service';
+import { UserAuthService } from '../service/user-auth.service';
 
 
 declare global {
@@ -39,11 +41,15 @@ export class ProductDetailsComponent {
     private giftservice: GiftsService,
     private category: CategoryService,
     private wish: WishService,
+    private guest: GuestService,
+    private user: UserAuthService,
   ) { }
   private unsubscribe$: Subject<void> = new Subject<void>();
   productId: any;
 
   new_review: string = "karthi";
+
+  isAuth: boolean = this.user.isAuthenticated();
 
   rating!: number;
   reviews!: any;
@@ -140,6 +146,7 @@ export class ProductDetailsComponent {
     });
 
     window.productContainer();
+    window.imgGallery();
   }
 
   isGiftSelected(giftId: any): boolean {
@@ -166,25 +173,55 @@ export class ProductDetailsComponent {
       }
     }
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
-      this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {
-        console.log(dat);
-        this.cart.addToCart(id, this.frameDeatails.quantity, dat._id).subscribe(dat => {
-          console.log(dat); this.cart.CheckItems();
+      if (this.isAuth) {
+        this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {
+          console.log(dat);
+          this.cart.addToCart(id, this.frameDeatails.quantity, dat._id).subscribe(dat => {
+            console.log(dat); this.cart.CheckItems();
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Item Added to Cart",
+              showConfirmButton: false,
+              timer: 1500
+            });
+          });
+          this.frameDeatails = {
+            userImage: '',
+            printType: '',
+            size: '',
+            quantity: 1,
+          };
+        });
+      } else {
+        if (this.guest.addToCart(this.frameDeatails, this.data, this.selectedGifts)) {
+
           Swal.fire({
             position: "top-end",
             icon: "success",
             title: "Item Added to Cart",
             showConfirmButton: false,
             timer: 1500
+          })
+
+          this.frameDeatails = {
+            userImage: '',
+            printType: '',
+            size: '',
+            quantity: 1,
+          };
+          this.cart.NoOFCartItem.next(this.guest.getCart().length);
+
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Fill the required fields",
           });
-        });
-        this.frameDeatails = {
-          userImage: '',
-          printType: '',
-          size: '',
-          quantity: 1,
-        };
-      });
+        }
+
+
+      }
     } else {
       Swal.fire({
         icon: "error",
@@ -210,10 +247,17 @@ export class ProductDetailsComponent {
     }
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
 
-      this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {
-        console.log(dat);
-        this.router.navigateByUrl(`/buy-now/${dat._id}`);
-      });
+      if (this.isAuth) {
+        this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {
+          console.log(dat);
+          this.router.navigateByUrl(`/buy-now/${dat._id}`);
+        });
+      } else {
+        this.guest.buyNow(this.frameDeatails, this.data, this.selectedGifts).subscribe((dat: any) => {
+          this.router.navigateByUrl(`/buy-now/${dat._id}`);
+
+        })
+      }
     } else {
       Swal.fire({
         icon: "error",
@@ -226,9 +270,15 @@ export class ProductDetailsComponent {
 
   addWish(id: any) {
 
-    this.wish.addWish(id).subscribe((wish: any) => {
-      console.log(wish);
-    });
+    if (this.isAuth) {
+      this.wish.addWish(id).subscribe((wish: any) => {
+        console.log(wish);
+      });
+    } else {
+      this.guest.addToWish(this.data);
+      this.wish.noOfWish.next(this.guest.getWish().length);
+
+    }
 
   }
 

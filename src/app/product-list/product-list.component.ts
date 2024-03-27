@@ -8,6 +8,7 @@ import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { HeaderComponent } from '../partials/header/header.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserAuthService } from '../service/user-auth.service';
+import { GuestService } from '../service/guest.service';
 
 declare global {
   interface Window {
@@ -28,13 +29,17 @@ declare global {
 })
 export class ProductListComponent {
 
-  constructor(private category: CategoryService, private user: UserAuthService, private product: ProductService, private router: Router, private wish: WishService) { }
+  constructor(private category: CategoryService, private user: UserAuthService,
+    private product: ProductService, private router: Router, private wish: WishService,
+    private guest: GuestService
+  ) { }
 
   categories: any[] = [];
 
   trending: any[] = [];
   newProduct: any[] = [];
 
+  isAuth = this.user.isAuthenticated();
 
   ngOnInit() {
     window.scrollTo({ top: 0, behavior: "instant" })
@@ -59,8 +64,15 @@ export class ProductListComponent {
   }
 
   addWish(id: any) {
+    if (this.isAuth) {
 
-    this.wish.addWish(id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
+      this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
+    } else {
+      this.guest.addToWish(id)
+
+      this.wish.noOfWish.next(this.guest.getWish().length);
+    }
+
 
   }
 

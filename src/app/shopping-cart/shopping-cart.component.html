@@ -95,13 +95,13 @@
               </h3>
             </td>
             <td>
-              <span class="table__price"><i class="bi bi-currency-rupee"></i>{{ w.productId.amount }} +
-                <i class="bi bi-currency-rupee"></i>{{ w.userWant.totalAmount - w.total }}</span>
+              <span *ngIf="w.userWant.gifts.length > 0" class="table__price"><i class="bi bi-currency-rupee"></i>{{ w.productId.amount }} +
+                {{ w.userWant.totalAmount - w.total }}</span>
+              <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
             </td>
             <td>
               <input type="number" [(ngModel)]="w.userWant.quantity" class="quantity"
-                (input)="updateQt(w._id, w.userWant.quantity)" />
-                
+                (input)="updateQt(w._id, w.userWant.quantity, w.userWant._id)" />
             </td>
             <td>
               <span class="subtotal"><i class="bi bi-currency-rupee"></i>{{ w.userWant.totalAmount }}</span>
@@ -114,8 +114,7 @@
       </table>
     </div>
     <div class="cart__group grid">
-      <div>
-      </div>
+      <div></div>
       <div class="cart__total">
         <!-- <h3 class="section__title">Cart Totals</h3> -->
         <table class="table">
