@@ -65,7 +65,7 @@
   <!--=============== WISHLIST ===============-->
   <section class="wishlist section--lg container">
     <div class="table__container">
-      <table class="table wishtab">
+      <table class="order__table wishtab">
         <thead>
           <tr>
             <th>Product</th>
@@ -73,7 +73,7 @@
             <th>Price</th>
             <th>Stock Status</th>
             <th>Action</th>
-            <th>Rename</th>
+            <th>Delete</th>
           </tr>
         </thead>
         <tbody>
@@ -87,7 +87,7 @@
               </h3>
             </td>
             <td>
-              <span class="table__price">${{ wish.amount }}</span>
+              <span class="table__price"><i class="bi bi-currency-rupee"></i>{{ wish.amount }}</span>
             </td>
             <td><span class="table__stock">In Stock</span></td>
             <td>

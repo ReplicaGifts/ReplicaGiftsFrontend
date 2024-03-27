@@ -173,8 +173,8 @@
           <h3 class="details__title">{{ data.title }}</h3>
           <!-- <p class="details__brand">Brand: <span>adidas</span></p> -->
           <div class="details__price flex">
-            <span class="new__price">${{ data.amount }}</span>
-            <span class="old__price">${{ data.price }}</span>
+            <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ data.amount }}</span>
+            <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ data.price }}</span>
             <span class="save__price">{{ data.discount }}% Off</span>
           </div>
           <a class="form-label" style="color: rgb(57, 57, 57)"> Category: </a>
@@ -230,7 +230,7 @@
                     [value]="+print.width + ' x ' + +print.height + ' inche'"
                     class=""
                   >
-                    {{ print.width }} x {{ print.height }} inche
+                    {{ print.width }} x {{ print.height }} inches
                   </option>
                 </select>
               </div>
@@ -282,7 +282,7 @@
                         <h3 class="product__title">{{ gift.name }}</h3>
                       </a>
                       <div class="product__price flex">
-                        <span class="new__price">${{ gift.price }}</span>
+                        <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ gift.price }}</span>
                       </div>
                     </div>
                     <div>
@@ -464,7 +464,7 @@
             </div>
           </section>
 
-          <div style="display: block; justify-content: space-between">
+          <div style="display: flex; justify-content: space-between">
             <div class="details__action">
               <!-- <input type="number" class="quantity" value="3" /> -->
               <button (click)="addCart(data._id)" class="btns btn--sm">

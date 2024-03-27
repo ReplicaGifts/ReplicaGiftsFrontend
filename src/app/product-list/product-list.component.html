@@ -138,8 +138,8 @@
                 [readonly]="true"
               ></app-star-rating>
               <div class="product__price flex">
-                <span class="new__price">${{ cate.amount }}</span>
-                <span class="old__price">${{ cate.amount }}</span>
+                <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
+                <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
                 <a
                   (click)="nav(cate._id)"
                   class="action__btn cart__btn"
@@ -196,8 +196,8 @@
                 [readonly]="true"
               ></app-star-rating>
               <div class="product__price flex">
-                <span class="new__price">${{ cate.amount }}</span>
-                <span class="old__price">${{ cate.price }}</span>
+                <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
+                <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ cate.price }}</span>
                 <a
                   (click)="nav(cate._id)"
                   class="action__btn cart__btn"
@@ -253,8 +253,8 @@
                 [readonly]="true"
               ></app-star-rating>
               <div class="product__price flex">
-                <span class="new__price">${{ cate.amount }}</span>
-                <span class="old__price">${{ cate.price }}</span>
+                <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
+                <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ cate.price }}</span>
                 <a
                   (click)="nav(cate._id)"
                   class="action__btn cart__btn"
@@ -536,9 +536,11 @@
           <div class="row">
             <div class="col-md-12">
               <div class="info-box">
-                <i class="bx bx-map"></i>
+                <a href="https://www.google.com/maps/place/115,+Big+St,+Mainckam+Colony,+Pattukkottai,+Tamil+Nadu+614601/data=!4m2!3m1!1s0x3b000096ad30d5cb:0x3127d169f9ab264d?sa=X&ved=1t:242&ictx=111" class="location-link">
+                  <i class="fas fa-map-marker-alt"></i> <!-- Font Awesome location icon -->
+                </a>
                 <h3>
-                  <i class="fa fa-address-card" aria-hidden="true"></i>Our
+                  Our
                   Address
                 </h3>
                 <p>
@@ -548,20 +550,26 @@
             </div>
             <div class="col-md-6">
               <div class="info-box mt-4">
-                <i class="bx bx-envelope"></i>
+                <a href="mailto:replicagifts567@gmail.com" class="email-link">
+                  <i class="fa fa-envelope" aria-hidden="true"></i>
+                </a>
+                
+               
                 <h3>
-                  <i class="fa fa-envelope" aria-hidden="true"></i>Email Us
+                  Email Us
                 </h3>
                 <p>
-                  replicagifts567&#64;gmail.com<br />contact&#64;gmail.com.com
+                  replicagifts567&#64;gmail.com<br />contact&#64;gmail.com
                 </p>
               </div>
             </div>
             <div class="col-md-6">
               <div class="info-box mt-4">
-                <i class="bx bx-phone-call"></i>
-                <h3><i class="fa fa-phone" aria-hidden="true"></i>Call Us</h3>
-                <p>+91 5589 55488 55<br />(+91) 91 444 93444</p>
+                <a href="tel:+123456789" class="call-link">
+                  <i class="fa fa-phone" aria-hidden="true"></i>
+                </a>
+                <h3>Call Us</h3>
+                <p>+91 5589 55488 55<br/>(+91) 91 444 93444</p>
               </div>
             </div>
           </div>
