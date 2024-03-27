@@ -48,6 +48,13 @@
           <i class="fi fi-rs-shopping-bag"></i> Orders
         </p>
         <p
+          (click)="changeDisplay('track')"
+          class="account__tab {{ display === 'track' ? 'active-tab' : '' }}"
+          data-target="#orders"
+        >
+          <i class="fi fi-rs-map"></i> Track Orders
+        </p>
+        <p
           (click)="changeDisplay('address')"
           class="account__tab {{ display === 'address' ? 'active-tab' : '' }}"
           data-target="#address"
@@ -103,23 +110,62 @@
                 <tr>
                   <th>Orders</th>
                   <th>Date</th>
-                  <th>Status</th>
+                  <th>Payment Status</th>
+                  <th>Delivery Status</th>
                   <th>Totals</th>
-                  <th>Actions</th>
                 </tr>
               </thead>
               <tbody>
                 <tr *ngFor="let order of orders">
                   <td>{{ order.product.title }}</td>
                   <td>{{ order.chreatedAt | date }}</td>
-                  <td>Processing</td>
-                  <td>${{ order.totalAmount }}</td>
-                  <td>
-                    <a (click)="navtoorder(order._id)" rou class="view__order"
-                      >View</a
-                    >
+                  <td>{{ order.status ? "Paid" : "Pending" }}</td>
+                  <td *ngIf="order.status">{{ order.deliveryStatus }}</td>
+                  <td *ngIf="!order.status">
+                    <button class="view__order" (click)="nav(order._id)">
+                      Checkout
+                    </button>
                   </td>
+                  <td>${{ order.totalAmount }}</td>
                 </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div
+          class="tab__content {{ display === 'track' ? 'active-tab' : '' }}"
+          content
+          id="orders"
+        >
+          <h3 class="tab__header">Track Your Orders</h3>
+          <div class="tab__body">
+            <table class="placed__order-table">
+              <thead>
+                <tr>
+                  <th>Orders</th>
+                  <th>Status</th>
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody>
+                <ng-container *ngFor="let order of orders">
+                  <tr *ngIf="order.status">
+                    <td>{{ order.product.title }}</td>
+                    <td>{{ order.deliveryStatus }}</td>
+                    <td>
+                      <a
+                        *ngIf="order.tracking_id"
+                        href="https://jabezraja31119979a.trackingmore.org/{{
+                          order.tracking_id
+                        }}?page=tracking-page&mode=iframe"
+                        rou
+                        class="view__order"
+                        >Track</a
+                      >
+                      <p *ngIf="!order.tracking_id">Under Processing</p>
+                    </td>
+                  </tr>
+                </ng-container>
               </tbody>
             </table>
           </div>

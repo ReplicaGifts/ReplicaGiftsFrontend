@@ -98,6 +98,14 @@ export class ProductDetailsComponent {
     category: ''
   };
 
+
+  frameDeatails = {
+    userImage: '',
+    printType: '',
+    size: '',
+    quantity: 1,
+  }
+
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: "instant" })
 
@@ -112,6 +120,12 @@ export class ProductDetailsComponent {
           takeUntil(this.unsubscribe$)
         ).subscribe((res: Product) => {
           this.data = res;
+          this.frameDeatails = {
+            userImage: '',
+            printType: res.availablePrintType[0].categoryName,
+            size: +res.availablePrintSize[0].width + ' x ' + +res.availablePrintSize[0].height + ' inche',
+            quantity: 1,
+          }
           this.giftservice.getGifts().subscribe((items: any) => {
             this.gifts = items.map((item: any) => { item['selected_quantity'] = 1; return item });
             console.log(this.gifts)
@@ -126,19 +140,13 @@ export class ProductDetailsComponent {
     });
 
     window.productContainer();
-
   }
 
   isGiftSelected(giftId: any): boolean {
     return this.selectedGifts.some(g => g.gift.toString() === giftId.toString());
   }
 
-  frameDeatails = {
-    userImage: '',
-    printType: '',
-    size: '',
-    quantity: 1,
-  }
+
 
   addFile(e: any) {
     this.frameDeatails.userImage = e.target.files[0];
@@ -146,7 +154,17 @@ export class ProductDetailsComponent {
 
 
   addCart(id: any) {
+    if (this.data.userImage) {
+      if (this.frameDeatails.userImage === '') {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You forgot to upload your image",
 
+        });
+        return;
+      }
+    }
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
       this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {
         console.log(dat);
@@ -179,6 +197,17 @@ export class ProductDetailsComponent {
 
 
   buyNow(id: any) {
+
+    if (this.data.userImage) {
+      if (this.frameDeatails.userImage === '') {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "You forgot to upload your image",
+        });
+        return;
+      }
+    }
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
 
       this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {

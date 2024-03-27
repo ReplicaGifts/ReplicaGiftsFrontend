@@ -249,14 +249,12 @@
             </div>
           </div>
 
-
           <div class="details__meta">
             <div class="meta__list">
               <p class="form-label">Make It Special:</p>
             </div>
           </div>
           <section class="new__arrivals container section">
-
             <div class="new__container swiper">
               <div class="swiper-wrapper">
                 <ng-container *ngFor="let gift of gifts; let i = index">
@@ -469,9 +467,9 @@
           <div style="display: block; justify-content: space-between">
             <div class="details__action">
               <!-- <input type="number" class="quantity" value="3" /> -->
-              <a (click)="addCart(data._id)" class="btns btn--sm"
-                >Add To Cart</a
-              >
+              <button (click)="addCart(data._id)" class="btns btn--sm">
+                Add To Cart
+              </button>
               <!-- <a href="#" class="details__action-btn">
               <i class="fi fi-rs-heart"></i>
             </a> -->

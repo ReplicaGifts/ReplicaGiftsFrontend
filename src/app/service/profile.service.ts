@@ -18,16 +18,15 @@ export class ProfileService {
     formData.append('phone', address.phone);
     formData.append('address', address.address);
     formData.append('city', address.city);
-    formData.append('country', address.country);
     formData.append('postcode', address.postcode);
     formData.append('state', address.state);
     formData.append('country', address.country);
-
+    console.log(formData);
 
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
-    return this.http.post("http://localhost:3000/api/profile/add-address", formData, _options);
+    return this.http.post("https://replicagiftsbackend.onrender.com/api/profile/add-address", formData, _options);
   }
   getAddress() {
 

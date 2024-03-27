@@ -80,7 +80,11 @@ export class ProfileComponent {
     this.profile.addAddress(this.billingDetails, this.proPic).subscribe(response => {
 
       console.log(response);
-    });
+    }, err => { console.log(err) });
+  }
+
+  nav(id: any) {
+    this.router.navigateByUrl(`/buy-now/${id}`);
   }
 
   getOrders() {
