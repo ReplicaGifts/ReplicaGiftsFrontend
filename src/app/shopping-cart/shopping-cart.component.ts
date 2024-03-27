@@ -49,6 +49,7 @@ export class ShoppingCartComponent {
 
       if (isDelet) {
         this.total = 0
+        console.log(this.total)
       }
       this.cartList = this.guest.getCart();
       this.cartList.map((cart) => {
@@ -109,7 +110,7 @@ export class ShoppingCartComponent {
       this.guest.editQuantity(id, q, f_id)
 
       setTimeout(() => {
-        this.get()
+        this.get(true)
       }, 2000)
 
     }

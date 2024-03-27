@@ -34,7 +34,7 @@ export class LoginComponent {
     if (this.myForm.valid) {
       this.auth.login(this.myForm.value).subscribe(user => {
         Swal.fire({
-          position: "top-end",
+          position: "center",
           icon: "success",
           title: "Login successed",
           showConfirmButton: false,

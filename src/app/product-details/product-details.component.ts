@@ -179,7 +179,7 @@ export class ProductDetailsComponent {
           this.cart.addToCart(id, this.frameDeatails.quantity, dat._id).subscribe(dat => {
             console.log(dat); this.cart.CheckItems();
             Swal.fire({
-              position: "top-end",
+              position: "center",
               icon: "success",
               title: "Item Added to Cart",
               showConfirmButton: false,
@@ -197,7 +197,7 @@ export class ProductDetailsComponent {
         if (this.guest.addToCart(this.frameDeatails, this.data, this.selectedGifts)) {
 
           Swal.fire({
-            position: "top-end",
+            position: "center",
             icon: "success",
             title: "Item Added to Cart",
             showConfirmButton: false,

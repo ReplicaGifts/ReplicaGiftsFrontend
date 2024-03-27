@@ -35,7 +35,7 @@ export class RegisterComponent {
         console.log(data);
         localStorage.setItem('user', JSON.stringify(data));
         Swal.fire({
-          position: "top-end",
+          position: "center",
           icon: "success",
           title: "Register successfully",
           showConfirmButton: false,
