@@ -304,3 +304,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   });
 });
+
+
+
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 4500 || document.documentElement.scrollTop > 4500) {
+    document.querySelector('.scroll-top-btn').classList.add('show');
+  } else {
+    document.querySelector('.scroll-top-btn').classList.remove('show');
+  }
+}
+
+function scrollToTop() {
+  document.body.scrollTop = 0; // For Safari
+  document.documentElement.scrollTop = 0; // For Chrome, Firefox, IE and Opera
+}
+
+

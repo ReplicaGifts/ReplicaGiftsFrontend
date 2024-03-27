@@ -52,14 +52,14 @@
           class="account__tab {{ display === 'track' ? 'active-tab' : '' }}"
           data-target="#orders"
         >
-          <i class="fi fi-rs-map"></i> Track Orders
+          <i class="fi fi-rs-map"></i> Order Tracking
         </p>
         <p
           (click)="changeDisplay('address')"
           class="account__tab {{ display === 'address' ? 'active-tab' : '' }}"
           data-target="#address"
         >
-          <i class="fi fi-rs-marker"></i> My Address
+          <i class="fi fi-rs-marker"></i> My Profile
         </p>
         <p
           (click)="changeDisplay('cart')"
@@ -67,14 +67,14 @@
           data-target="#cart"
         >
           <i class="fi fi-rs-cart-shopping-fast"></i>
-          My Cart
+          My Shopping Cart
         </p>
         <p
           (click)="changeDisplay('wish')"
           class="account__tab {{ display === 'wish' ? 'active-tab' : '' }}"
           data-target="#wish"
         >
-          <i class="fi fi-rs-heart"></i> My Wish
+          <i class="fi fi-rs-heart"></i> My Wishlist
         </p>
         <!-- <p class="account__tab" data-target="#change-password">
             <i class="fi fi-rs-settings-sliders"></i> Change Password
@@ -128,7 +128,7 @@
                       Checkout
                     </button>
                   </td>
-                  <td>${{ order.totalAmount }}</td>
+                  <td><i class="bi bi-currency-rupee"></i>{{ order.totalAmount }}</td>
                 </tr>
               </tbody>
             </table>
@@ -172,7 +172,6 @@
             </table>
           </div>
         </div>
-
         <div
           *ngIf="isAuth"
           class="tab__content {{ display === 'address' ? 'active-tab' : '' }}"
@@ -184,9 +183,7 @@
             <table class="placed__order-table">
               <thead>
                 <!-- <tr>
-             
                   <th>Address Details</th>
-
                 </tr> -->
               </thead>
               <tbody>
@@ -331,7 +328,7 @@
                   <th>Price</th>
                   <th>Quantity</th>
                   <th>Subtotal</th>
-                  <th>Rename</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -352,7 +349,7 @@
                   </td>
                   <td>
                     <span class="table__price"
-                      >${{ w.productId.amount }} +
+                      ><i class="bi bi-currency-rupee"></i>{{ w.productId.amount }} +<i class="bi bi-currency-rupee"></i>
                       {{ w.userWant.totalAmount - w.total }}</span
                     >
                   </td>
@@ -365,7 +362,7 @@
                     />
                   </td>
                   <td>
-                    <span class="subtotal">${{ w.userWant.totalAmount }}</span>
+                    <span class="subtotal"><i class="bi bi-currency-rupee"></i>{{ w.userWant.totalAmount }}</span>
                   </td>
                   <td>
                     <i
@@ -393,7 +390,7 @@
                   <th>Price</th>
                   <th>Stock Status</th>
                   <th>Action</th>
-                  <th>Rename</th>
+                  <th>Delete</th>
                 </tr>
               </thead>
               <tbody>
@@ -404,7 +401,7 @@
                     </h3>
                   </td>
                   <td>
-                    <span class="table__price">${{ wish.amount }}</span>
+                    <span class="table__price"><i class="bi bi-currency-rupee"></i>{{ wish.amount }}</span>
                   </td>
                   <td><span class="table__stock">In Stock</span></td>
                   <td>
