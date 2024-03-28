@@ -208,8 +208,7 @@ export class ProductDetailsComponent {
             printType: '',
             size: '',
             quantity: 1,
-          };
-          this.cart.NoOFCartItem.next(this.guest.getCart().length);
+          }
 
         } else {
           Swal.fire({

@@ -1,42 +1,3 @@
-<!-- <div class="container">
-  <table>
-    <thead>
-      <th>IMAGE</th>
-      <th>NAME</th>
-      <th>PRICE</th>
-      <th>QUANTITY</th>
-      <th>gifts</th>
-      <th>SUB TOTAL</th>
-
-      <th>RENAME</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let w of cartList">
-        <td><img [src]="w.productId.image" width="200" height="200" /></td>
-        <td>{{ w.productId.title }}</td>
-        <td>{{ w.productId.amount }}</td>
-        <td>{{ w.quantity }}</td>
-        <td>
-          <p *ngFor="let gif of w.userWant.gifts">
-            {{ gif.gift.name }} x {{ gif.quantity }}
-          </p>
-        </td>
-        <td>
-          {{ w.userWant.totalAmount }}
-        </td>
-        <td>
-          <button (click)="remove(w._id)" class="btn btn-danger">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>
-    Total: <span class="fw-bold">{{ total }}</span>
-  </h2>
-  <button class="btn btn-primary" (click)="checkout()">Checkout</button>
-</div> -->
-
 <div
   class="headertop"
   style="background-color: rgb(41, 41, 41); padding-bottom: 120px"
@@ -91,18 +52,19 @@
             <td>
               <h3 class="table__title">
                 {{ w.productId.title }}
-                <span *ngIf="w.userWant.gifts.length">
-                  +
-                  <span *ngFor="let gif of w.userWant.gifts">
+                <div *ngIf="w.userWant.gifts.length > 0">
+                  <p>+</p>
+                  <p *ngFor="let gif of w.userWant.gifts">
                     {{ gif.gift.name }} x {{ gif.quantity }}
-                  </span>
-                </span>
+                  </p>
+                </div>
               </h3>
             </td>
             <td>
-              <span *ngIf="w.userWant.gifts.length > 0" class="table__price"
-                ><i class="bi bi-currency-rupee"></i>{{ w.productId.amount }} +
-                {{ w.userWant.totalAmount - w.total }}</span
+              <i class="bi bi-currency-rupee"></i> {{ w.productId.amount }}
+              <span *ngIf="w.userWant.gifts.length > 0" class="table__price">
+                +
+                {{ giftTotal(w.userWant.gifts) }}</span
               >
               <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
             </td>

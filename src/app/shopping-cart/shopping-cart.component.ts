@@ -20,6 +20,8 @@ export class ShoppingCartComponent {
 
   total: any = 0;
 
+  giftsTotal: number = 0;
+
   isAuth: Boolean = this.user.isAuthenticated();
 
 
@@ -114,6 +116,15 @@ export class ShoppingCartComponent {
       }, 2000)
 
     }
+  }
+
+  giftTotal(gifts: any): number {
+    let total = 0;
+    gifts.forEach((element: any) => {
+      total += element.total;
+    });
+
+    return total
   }
 
 }

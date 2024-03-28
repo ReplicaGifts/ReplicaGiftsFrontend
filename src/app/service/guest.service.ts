@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import uniqid from 'uniqid';
+import { CartService } from './cart.service';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import uniqid from 'uniqid';
 export class GuestService {
 
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private cart: CartService) {
     this.initData('cart');
     this.initData('wish');
     this.initUser()
@@ -61,6 +62,9 @@ export class GuestService {
         const newItem = { _id: uniqid(), productId: product, quantity: +frameDeatails.quantity, userWant: frame, total: +frameDeatails.quantity * +product.amount };
         cart.push(newItem);
         this.setData(cart, 'cart');
+
+
+        this.cart.NoOFCartItem.next(this.getCart.length);
       })
       return true;
     } catch (error) {
