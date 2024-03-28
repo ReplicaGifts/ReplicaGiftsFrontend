@@ -173,8 +173,12 @@
           <h3 class="details__title">{{ data.title }}</h3>
           <!-- <p class="details__brand">Brand: <span>adidas</span></p> -->
           <div class="details__price flex">
-            <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ data.amount }}</span>
-            <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ data.price }}</span>
+            <span class="new__price"
+              ><i class="bi bi-currency-rupee"></i>{{ data.amount }}</span
+            >
+            <span class="old__price"
+              ><i class="bi bi-currency-rupee"></i>{{ data.price }}</span
+            >
             <span class="save__price">{{ data.discount }}% Off</span>
           </div>
           <a class="form-label" style="color: rgb(57, 57, 57)"> Category: </a>
@@ -241,7 +245,6 @@
                 <input
                   type="number"
                   class="quantity"
-                  [max]="data.quantity - 1"
                   min="1"
                   [(ngModel)]="frameDeatails.quantity"
                 />
@@ -282,7 +285,10 @@
                         <h3 class="product__title">{{ gift.name }}</h3>
                       </a>
                       <div class="product__price flex">
-                        <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ gift.price }}</span>
+                        <span class="new__price"
+                          ><i class="bi bi-currency-rupee"></i
+                          >{{ gift.price }}</span
+                        >
                       </div>
                     </div>
                     <div>

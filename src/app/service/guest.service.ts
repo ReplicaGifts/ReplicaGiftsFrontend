@@ -55,7 +55,7 @@ export class GuestService {
       formData.append('gifts', JSON.stringify(gifts));
 
 
-      this.http.post('http://localhost:3000/api/guest/add-frame', formData).subscribe((frame: any) => {
+      this.http.post('https://replicagiftsbackend.onrender.com/api/guest/add-frame', formData).subscribe((frame: any) => {
 
 
         const newItem = { _id: uniqid(), productId: product, quantity: +frameDeatails.quantity, userWant: frame, total: +frameDeatails.quantity * +product.amount };
@@ -83,7 +83,7 @@ export class GuestService {
     formData.append('user', this.initUser() ?? '');
 
 
-    return this.http.post('http://localhost:3000/api/guest/add-frame', formData);
+    return this.http.post('https://replicagiftsbackend.onrender.com/api/guest/add-frame', formData);
   }
   getCart(): any {
     console.log(this.getData('cart'));
@@ -105,7 +105,7 @@ export class GuestService {
       this.setData(cart, 'cart');
       if (frame) {
 
-        this.http.delete('http://localhost:3000/api/guest/remove/' + frame).subscribe(data => {
+        this.http.delete('https://replicagiftsbackend.onrender.com/api/guest/remove/' + frame).subscribe(data => {
           console.log(data)
         })
 
@@ -120,7 +120,7 @@ export class GuestService {
 
 
   editQuantity(id: any, quantity: any, frame_id: any) {
-    this.http.put('http://localhost:3000/api/guest/frame-quantity/' + frame_id, { quantity }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(async (data: any) => {
+    this.http.put('https://replicagiftsbackend.onrender.com/api/guest/frame-quantity/' + frame_id, { quantity }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(async (data: any) => {
       console.log(data);
 
       let cart = this.getCart();
@@ -171,17 +171,17 @@ export class GuestService {
 
 
   checkout(product: any) {
-    return this.http.post('http://localhost:3000/api/guest/createOrder', { user: this.initUser(), ...product }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+    return this.http.post('https://replicagiftsbackend.onrender.com/api/guest/createOrder', { user: this.initUser(), ...product }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
   }
 
   verify(orderId: any, paymentId: any, signature: any, frameIds: any) {
-    return this.http.post<any>('http://localhost:3000/api/guest/verifyPayment', { frameIds, orderId, paymentId, signature, user: this.initUser() }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+    return this.http.post<any>('https://replicagiftsbackend.onrender.com/api/guest/verifyPayment', { frameIds, orderId, paymentId, signature, user: this.initUser() }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
 
   }
 
 
   orders() {
-    return this.http.get<any>('http://localhost:3000/api/guest/orders/' + this.initUser())
+    return this.http.get<any>('https://replicagiftsbackend.onrender.com/api/guest/orders/' + this.initUser())
   }
 
 }

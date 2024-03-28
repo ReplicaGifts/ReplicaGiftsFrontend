@@ -37,8 +37,12 @@
   <button class="btn btn-primary" (click)="checkout()">Checkout</button>
 </div> -->
 
-<div class="headertop" style="background-color: rgb(41, 41, 41); padding-bottom: 120px">
-  <div style="
+<div
+  class="headertop"
+  style="background-color: rgb(41, 41, 41); padding-bottom: 120px"
+>
+  <div
+    style="
       padding-top: 100px;
       display: flex;
       align-items: center;
@@ -47,7 +51,8 @@
       font-size: 50px;
       font-weight: 800;
       letter-spacing: 1px;
-    ">
+    "
+  >
     Cart
   </div>
 </div>
@@ -95,19 +100,32 @@
               </h3>
             </td>
             <td>
-              <span *ngIf="w.userWant.gifts.length > 0" class="table__price"><i class="bi bi-currency-rupee"></i>{{ w.productId.amount }} +
-                {{ w.userWant.totalAmount - w.total }}</span>
+              <span *ngIf="w.userWant.gifts.length > 0" class="table__price"
+                ><i class="bi bi-currency-rupee"></i>{{ w.productId.amount }} +
+                {{ w.userWant.totalAmount - w.total }}</span
+              >
               <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
             </td>
             <td>
-              <input type="number" [(ngModel)]="w.userWant.quantity" class="quantity"
-                (input)="updateQt(w._id, w.userWant.quantity, w.userWant._id)" />
+              <input
+                type="number"
+                min="1"
+                [(ngModel)]="w.userWant.quantity"
+                class="quantity"
+                (input)="updateQt(w._id, w.userWant.quantity, w.userWant._id)"
+              />
             </td>
             <td>
-              <span class="subtotal"><i class="bi bi-currency-rupee"></i>{{ w.userWant.totalAmount }}</span>
+              <span class="subtotal"
+                ><i class="bi bi-currency-rupee"></i
+                >{{ w.userWant.totalAmount }}</span
+              >
             </td>
             <td>
-              <i (click)="remove(w._id)" class="fi fi-rs-trash table__trash"></i>
+              <i
+                (click)="remove(w._id)"
+                class="fi fi-rs-trash table__trash"
+              ></i>
             </td>
           </tr>
         </tbody>
@@ -128,7 +146,9 @@
           <tr>
             <td><span class="cart__total-title">Cart Subtotal</span></td>
             <td>
-              <span class="cart__total-price"><i class="bi bi-currency-rupee"></i>{{ total }}</span>
+              <span class="cart__total-price"
+                ><i class="bi bi-currency-rupee"></i>{{ total }}</span
+              >
             </td>
           </tr>
           <tr>
@@ -138,7 +158,9 @@
           <tr>
             <td><span class="cart__total-title">Total</span></td>
             <td>
-              <span class="cart__total-price"><i class="bi bi-currency-rupee"></i>{{ total }}</span>
+              <span class="cart__total-price"
+                ><i class="bi bi-currency-rupee"></i>{{ total }}</span
+              >
             </td>
           </tr>
         </table>

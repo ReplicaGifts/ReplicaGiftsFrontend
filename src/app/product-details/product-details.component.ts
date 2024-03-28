@@ -97,7 +97,6 @@ export class ProductDetailsComponent {
     userImage: false,
     image: '',
     additionalInfo: [] as any,
-    quantity: 0,
     availablePrintSize: [] as any,
     availablePrintType: [],
     reviews: [] as any,
