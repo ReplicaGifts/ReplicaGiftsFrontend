@@ -166,7 +166,7 @@ export class ProductDetailsComponent {
           icon: "error",
           title: "Oops...",
           text: "You forgot to upload your image",
-
+          position: 'center',
         });
         return;
       }

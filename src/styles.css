@@ -104,6 +104,7 @@ li {
 
 a {
   text-decoration: none;
+  cursor: pointer;
 }
 
 p {
@@ -838,6 +839,7 @@ table {
 /* Basic styling for the select element */
 #quantitySelect {
   padding: 15px;
+ 
   /* Adjust padding as needed */
   font-size: 14px;
   width: 100% !important;
@@ -846,6 +848,7 @@ table {
 
 /* Styling for the options within the select element */
 #quantitySelect option {
+  
   background: hsl(0, 0%, 93%) !important;
   /* Background color of options */
   color: black;
@@ -868,6 +871,7 @@ table {
 /* Custom styling for the select element to give it a border and shadow */
 #quantitySelect {
   border: 1px solid #ccc;
+
   /* Border color */
   border-radius: 4px;
   /* Border radius */
@@ -1084,6 +1088,7 @@ table {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
+ 
 }
 
 .action__btn::before,
@@ -1095,16 +1100,18 @@ table {
   -moz-transform: translateX(-50%);
   -ms-transform: translateX(-50%);
   -o-transform: translateX(-50%);
+  z-index: -2;
 }
 
 .action__btn::before {
   content: "";
-  top: -2px;
+  top: 1px;
   border: 0.5rem solid transparent;
   border-top-color: var(--first-color);
 }
 
 .action__btn::after {
+
   content: attr(aria-label);
   bottom: 100%;
   background-color: var(--first-color);
@@ -1791,15 +1798,18 @@ padding-top: 20px;
 
 .quantity {
   background-color: hsl(0, 0%, 100%);
-  width: 80px !important;
-  padding-block: 0.6rem;
-  padding-inline: 1rem 0.5rem;
+  width: 50px !important;
+  padding-block: 0.4rem;
+  padding-inline: 0.2rem 0.2rem;
   border-radius: 0.25rem;
   -webkit-border-radius: 0.25rem;
   -moz-border-radius: 0.25rem;
   -ms-border-radius: 0.25rem;
   -o-border-radius: 0.25rem;
 }
+
+
+
 
 .new.required .control-label:after {
   content: "*";
