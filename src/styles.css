@@ -129,6 +129,14 @@ table {
   border-collapse: collapse;
 }
 
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button {  
+
+   opacity: 1;
+
+}
+
 /*=============== REUSABLE CSS CLASSES ===============*/
 .container {
   max-width: 1320px;
