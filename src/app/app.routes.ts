@@ -16,6 +16,7 @@ import { RegisterComponent } from './register/register.component';
 import { TearmsAndConditionComponent } from './tearms-and-condition/tearms-and-condition.component';
 import { PrivacyPaclicyComponent } from './privacy-paclicy/privacy-paclicy.component';
 import { OrderViewComponent } from './order-view/order-view.component';
+import { FramesComponent } from './frames/frames.component';
 
 export const routes: Routes = [
 
@@ -32,5 +33,7 @@ export const routes: Routes = [
     { path: 'check-out', component: DeleveryDetailsComponent },
     { path: 'order-view/:id', component: OrderViewComponent },
     { path: 'terms', component: TearmsAndConditionComponent },
+    { path: 'frames', component: FramesComponent },
     { path: 'privacy-policy', component: PrivacyPaclicyComponent },
+
 ];

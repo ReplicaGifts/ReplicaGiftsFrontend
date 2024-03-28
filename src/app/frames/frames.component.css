@@ -1,0 +1,17 @@
+#canvas-container {
+  position: relative;
+  width: 500px;
+  height: 600px;
+}
+
+#overLay {
+  position: absolute;
+}
+img {
+  width: 500px;
+  height: 100%;
+}
+
+.index {
+  z-index: 1000;
+}
