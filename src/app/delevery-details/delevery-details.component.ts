@@ -114,6 +114,7 @@ export class DeleveryDetailsComponent {
         icon: "error",
         title: "Missing billing details",
         text: "Please fill out the billing details",
+        position:"center"
       });
 
       console.log(this.billingDetails)

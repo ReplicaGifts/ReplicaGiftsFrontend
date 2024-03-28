@@ -83,7 +83,7 @@
           >
         </li>
         <li class="nav__item">
-          <a class="nav__link"><i class="bi bi-list"></i>Categories</a>
+          <a (click)="navShop()" class="nav__link"><i class="bi bi-list"></i>Categories</a>
           <div id="dropdown">
             <ng-container *ngFor="let cate of category">
               <a (click)="navToCate(cate._id)">{{ cate.categoryName }}</a>

@@ -181,8 +181,8 @@
           <a class="short__description" style="color: rgb(106, 106, 106)">
             {{ data.category.categoryName }}
           </a>
-          <br />
-          <br />
+          <br/>
+          <br/>
           <a class="form-label" style="color: rgb(57, 57, 57)">
             Description:
           </a>
@@ -192,12 +192,7 @@
           <div *ngIf="data.userImage" class="details__meta">
             <div class="meta__list">
               <label class="form-label" for="customFile">Upload Image:</label>
-              <input
-                type="file"
-                class="form-control"
-                id="customFile"
-                (change)="addFile($event)"
-              />
+              <input type="file" class="form-control" id="customFile" (change)="addFile($event)" />
             </div>
           </div>
 
@@ -205,15 +200,8 @@
             <div class="details__meta">
               <div class="meta__list">
                 <p class="form-label">Select Print Type:</p>
-                <select
-                  id="quantitySelect"
-                  [(ngModel)]="frameDeatails.printType"
-                >
-                  <option
-                    *ngFor="let print of data.availablePrintType"
-                    [value]="print.categoryName"
-                    class=""
-                  >
+                <select id="quantitySelect" [(ngModel)]="frameDeatails.printType">
+                  <option *ngFor="let print of data.availablePrintType" [value]="print.categoryName" class="">
                     {{ print.categoryName }}
                   </option>
                 </select>
@@ -225,11 +213,8 @@
               <div class="meta__list">
                 <p class="form-label">Size:</p>
                 <select id="quantitySelect" [(ngModel)]="frameDeatails.size">
-                  <option
-                    *ngFor="let print of data.availablePrintSize"
-                    [value]="+print.width + ' x ' + +print.height + ' inche'"
-                    class=""
-                  >
+                  <option *ngFor="let print of data.availablePrintSize"
+                    [value]="+print.width + ' x ' + +print.height + ' inche'" class="">
                     {{ print.width }} x {{ print.height }} inches
                   </option>
                 </select>
@@ -238,80 +223,22 @@
             <div class="details__meta">
               <div class="meta__list">
                 <p class="form-label">Quantity:</p>
-                <input
-                  type="number"
-                  class="quantity"
-                  [max]="data.quantity - 1"
-                  min="1"
-                  [(ngModel)]="frameDeatails.quantity"
-                />
+                <input type="number" class="quantity" [max]="data.quantity - 1" min="1"
+                  [(ngModel)]="frameDeatails.quantity" />
               </div>
             </div>
           </div>
 
-          <div class="details__meta">
+          <!-- <div class="details__meta">
             <div class="meta__list">
               <p class="form-label">Make It Special:</p>
             </div>
-          </div>
-          <section class="new__arrivals container section">
-            <div class="new__container swiper">
-              <div class="swiper-wrapper">
-                <ng-container *ngFor="let gift of gifts; let i = index">
-                  <div
-                    class="product__item swiper-slide"
-                    data-aos="flip-right"
-                    data-aos="flip-right"
-                  >
-                    <div class="product__banner">
-                      <a class="product__images1">
-                        <img
-                          [src]="gift.thumbnail"
-                          alt=""
-                          class="product__img default"
-                        />
-                      </a>
-                      <!-- <div class="product__actions">
-                      <a (click)="addWish(gift._id)" class="action__btn" aria-label="Add to Wishlist">
-                        <i class="fi fi-rs-heart"></i>
-                      </a>
-                    </div> -->
-                    </div>
-                    <div class="product__content">
-                      <a>
-                        <h3 class="product__title">{{ gift.name }}</h3>
-                      </a>
-                      <div class="product__price flex">
-                        <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ gift.price }}</span>
-                      </div>
-                    </div>
-                    <div>
-                      <button
-                        *ngIf="isGiftSelected(gift._id)"
-                        class="btns2"
-                        (click)="removeGift(gift)"
-                      >
-                        Remove
-                      </button>
-                      <button
-                        *ngIf="!isGiftSelected(gift._id)"
-                        class="btns2"
-                        (click)="addGift(gift)"
-                      >
-                        Add
-                      </button>
-                    </div>
-                  </div>
-                </ng-container>
-              </div>
-              <div class="swiper-button-prev">
-                <i class="fi fi-rs-angle-left"></i>
-              </div>
-              <div class="swiper-button-next">
-                <i class="fi fi-rs-angle-right"></i>
-              </div>
-            </div>
-          </section>
+          </div> -->
+
+
+
+
+          
 
           <section id="faq" class="">
             <div data-aos="fade-up">
@@ -321,29 +248,17 @@
                 </div>
               </div>
 
-              <div
-                class="row justify-content-center"
-                data-aos="fade-up"
-                data-aos-delay="200"
-              >
+              <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
                 <div class="col-lg-10">
                   <div class="accordion accordion-flush" id="faqlist">
                     <div class="accordion-item">
                       <h3 class="accordion-header">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#faq-content-1"
-                        >
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#faq-content-1">
                           Get Flat 10% off, for first time users
                         </button>
                       </h3>
-                      <div
-                        id="faq-content-1"
-                        class="accordion-collapse collapse"
-                        data-bs-parent="#faqlist"
-                      >
+                      <div id="faq-content-1" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                         <div class="accordion-body">
                           Terms & Conditions Code is valid for the first time
                           buyers only Code can be used one time per user only A
@@ -362,20 +277,12 @@
 
                     <div class="accordion-item">
                       <h3 class="accordion-header">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#faq-content-2"
-                        >
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#faq-content-2">
                           Get Flat 15% Cashback, Use Code LOYAL
                         </button>
                       </h3>
-                      <div
-                        id="faq-content-2"
-                        class="accordion-collapse collapse"
-                        data-bs-parent="#faqlist"
-                      >
+                      <div id="faq-content-2" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                         <div class="accordion-body">
                           Terms & Conditions A minimum order value of ₹599 is
                           required to be eligible for this offer Max discount of
@@ -393,20 +300,12 @@
 
                     <div class="accordion-item">
                       <h3 class="accordion-header">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#faq-content-3"
-                        >
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#faq-content-3">
                           Flat 5% cashback upto INR 750 (New user to Simpl)
                         </button>
                       </h3>
-                      <div
-                        id="faq-content-3"
-                        class="accordion-collapse collapse"
-                        data-bs-parent="#faqlist"
-                      >
+                      <div id="faq-content-3" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                         <div class="accordion-body">
                           Terms & Conditions Get 5% cashback up to INR 750 on
                           your first transaction on Simpl A minimum order value
@@ -433,21 +332,13 @@
 
                     <div class="accordion-item">
                       <h3 class="accordion-header">
-                        <button
-                          class="accordion-button collapsed"
-                          type="button"
-                          data-bs-toggle="collapse"
-                          data-bs-target="#faq-content-4"
-                        >
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                          data-bs-target="#faq-content-4">
                           Get upto 15% cashback on a transaction with Mobikwik
                           wallet!
                         </button>
                       </h3>
-                      <div
-                        id="faq-content-4"
-                        class="accordion-collapse collapse"
-                        data-bs-parent="#faqlist"
-                      >
+                      <div id="faq-content-4" class="accordion-collapse collapse" data-bs-parent="#faqlist">
                         <div class="accordion-body">
                           Terms & Conditions Get upto 15% cashback on a
                           transaction with Mobikwik wallet! Transaction to be
@@ -485,6 +376,8 @@
     </div>
   </section>
 
+ 
+
   <!--=============== DETAILS TAB ===============-->
   <section class="details__tab container mb-5">
     <div class="detail__tabs">
@@ -501,91 +394,57 @@
           </tr>
         </table>
       </div>
-      <!-- <div class="details__tab-content" content id="reviews">
-        <div class="reviews__container grid">
-          <div class="review__single">
-            <div>
-              <img src="assets/img/avatar-1.jpg" alt="" class="review__img" />
-              <h4 class="review__title">Jacky Chan</h4>
-            </div>
-            <div class="review__data">
-              <div class="review__rating">
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-              </div>
-              <p class="review__description">
-                Thank you, very fast shipping from Poland only 3days.
-              </p>
-              <span class="review__date">December 4, 2022 at 3:12 pm</span>
-            </div>
-          </div>
-          <div class="review__single">
-            <div>
-              <img src="assets/img/avatar-2.jpg" alt="" class="review__img" />
-              <h4 class="review__title">Meriem Js</h4>
-            </div>
-            <div class="review__data">
-              <div class="review__rating">
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-              </div>
-              <p class="review__description">Great low price and works well</p>
-              <span class="review__date">August 23, 2022 at 19:45 pm</span>
-            </div>
-          </div>
-          <div class="review__single">
-            <div>
-              <img src="assets/img/avatar-3.jpg" alt="" class="review__img" />
-              <h4 class="review__title">Moh Benz</h4>
-            </div>
-            <div class="review__data">
-              <div class="review__rating">
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-                <i class="fi fi-rs-star"></i>
-              </div>
-              <p class="review__description">
-                Authentic and beautiful, Love these ways more than ever
-                expected, They are great earphones.
-              </p>
-              <span class="review__date">March 2, 2021 at 10:01 am</span>
-            </div>
-          </div>
-        </div>
-        <div class="review__form">
-          <h4 class="review__form-title">Add a review</h4>
-          <div class="rate__product">
-            <i class="fi fi-rs-star"></i>
-            <i class="fi fi-rs-star"></i>
-            <i class="fi fi-rs-star"></i>
-            <i class="fi fi-rs-star"></i>
-            <i class="fi fi-rs-star"></i>
-          </div>
-          <form action="" class="form grid">
-            <textarea
-              class="form__input textarea"
-              placeholder="Write Comment"
-            ></textarea>
-            <div class="form__group grid">
-              <input type="text" placeholder="Name" class="form__input" />
-              <input type="email" placeholder="Email" class="form__input" />
-            </div>
-            <div class="form__btn">
-              <button class="btn">Submit Review</button>
-            </div>
-          </form>
-        </div>
-      </div> -->
     </div>
   </section>
+
+
+
+  <section class="new__arrivals container section">
+    <h3 class="section__title" data-aos="fade-right">
+      <span>Make</span> It Special
+    </h3>
+    <div class="new__container swiper">
+      <div class="swiper-wrapper">
+        <ng-container *ngFor="let gift of gifts; let i = index">
+          <div class="product__item swiper-slide" data-aos="flip-right" data-aos="flip-right">
+            <div class="product__banner">
+              <a class="product__images1">
+                <img [src]="gift.thumbnail" alt="" class="product__img default" />
+              </a>
+              <!-- <div class="product__actions">
+              <a (click)="addWish(gift._id)" class="action__btn" aria-label="Add to Wishlist">
+                <i class="fi fi-rs-heart"></i>
+              </a>
+            </div> -->
+            </div>
+            <div class="product__content">
+              <a>
+                <h3 class="product__title">{{ gift.name }}</h3>
+              </a>
+              <div class="product__price flex">
+                <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ gift.price }}</span>
+              </div>
+            </div>
+            <div>
+              <button *ngIf="isGiftSelected(gift._id)" class="btns2" (click)="removeGift(gift)">
+                Remove
+              </button>
+              <button *ngIf="!isGiftSelected(gift._id)" class="btns2" (click)="addGift(gift)">
+                Add
+              </button>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="swiper-button-prev">
+        <i class="fi fi-rs-angle-left"></i>
+      </div>
+      <div class="swiper-button-next">
+        <i class="fi fi-rs-angle-right"></i>
+      </div>
+    </div>
+  </section>
+
 
   <!-- <section class="products container section--lg">
     <h3 class="section__title"><span>Related</span> Products</h3>

@@ -32,23 +32,16 @@
       </div>
       <ul class="nav__list" data-aos="fade-left">
         <li class="nav__item">
-          <a
-            (click)="nav()"
-            class="nav__link {{ display === '/' ? 'active-link' : '' }}"
-            ><i class="bi bi-house"></i>Home</a
-          >
+          <a (click)="nav()" class="nav__link {{ display === '/' ? 'active-link' : '' }}"><i
+              class="bi bi-house"></i>Home</a>
         </li>
         <li class="nav__item">
-          <a
-            (click)="navShop()"
-            class="nav__link {{
+          <a (click)="navShop()" class="nav__link {{
               display.includes('shop') ? 'active-link' : ''
-            }}"
-            ><i class="bi bi-shop"></i>Shop</a
-          >
+            }}"><i class="bi bi-shop"></i>Shop</a>
         </li>
         <li class="nav__item">
-          <a class="nav__link"><i class="bi bi-list"></i>Categories</a>
+          <a (click)="navShop()" class="nav__link"><i class="bi bi-list"></i>Categories</a>
           <div id="dropdown">
             <ng-container *ngFor="let cate of category">
               <a (click)="navToCate(cate._id)">{{ cate.categoryName }}</a>
@@ -57,23 +50,15 @@
         </li>
 
         <li class="nav__item">
-          <a
-            (click)="navToProfile()"
-            class="nav__link {{
+          <a (click)="navToProfile()" class="nav__link {{
               display.includes('profile') ? 'active-link' : ''
-            }}"
-            ><i class="bi bi-person"></i>My Account</a
-          >
+            }}"><i class="bi bi-person"></i>My Account</a>
         </li>
 
         <li class="nav__item">
-          <a
-            href="#contact"
-            class="nav__link {{
+          <a href="#contact" class="nav__link {{
               display.includes('contact') ? 'active-link' : ''
-            }}"
-            ><i class="bi bi-telephone"></i>Contact</a
-          >
+            }}"><i class="bi bi-telephone"></i>Contact</a>
         </li>
         <!-- <li class="nav__item">
             <a href="login-register.html" class="nav__link">Login</a>
@@ -96,7 +81,7 @@
         <span *ngIf="noOfCart > 0" class="count">{{ noOfCart }}</span>
       </a>
       <div class="header__action-btn nav__toggle" id="nav-toggle">
-        <img src="../../../assets/assets//img/menu-burger.svg" alt="" />
+        <img src="../../../assets/assets/img/menu-burger.svg" alt="" />
       </div>
     </div>
   </nav>
