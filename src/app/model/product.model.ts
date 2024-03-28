@@ -11,7 +11,6 @@ export class Product {
         title: '',
         description: ''
     }];
-    quantity!: number;
 
     availablePrintSize!: [{
         _id?: any,

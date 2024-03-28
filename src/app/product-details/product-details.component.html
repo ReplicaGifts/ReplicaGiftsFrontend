@@ -1,165 +1,4 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-lg-6">
-      <div><img [src]="data.image" class="w-100" alt="" srcset="" /></div>
-    </div>
 
-    <div class="col-lg-6">
-      <h2>{{ data.title }}</h2>
-      <p>{{ data.description }}</p>
-      <p>{{ data.category }}</p>
-
-      <h3 class="my-3">
-        {{ data.amount }}
-        <span class="text-decoration-line-through"> {{ data.price }}</span> ({{
-          data.discount
-        }}% off)
-      </h3>
-    </div>
-  </div>
-  <div class="row">
-    <div *ngIf="data.userImage" class="mb-3 col-lg-12">
-      <label for="formFile" class="form-label">Upload Image</label>
-      <input
-        class="form-control"
-        type="file"
-        id="formFile"
-        (change)="addFile($event)"
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="inputState" class="form-label">Select Print Type:</label>
-      <select
-        id="inputState"
-        class="form-select"
-        [(ngModel)]="frameDeatails.printType"
-      >
-        <option selected>Choose...</option>
-        <option
-          *ngFor="let print of data.availablePrintType"
-          [value]="print.categoryName"
-          class=""
-        >
-          {{ print.categoryName }}
-        </option>
-      </select>
-    </div>
-    <div class="col-md-6">
-      <label for="inputState1" class="form-label">Select Size</label>
-      <select
-        id="inputState1"
-        class="form-select"
-        [(ngModel)]="frameDeatails.size"
-      >
-        <option selected>Choose...</option>
-        <option
-          *ngFor="let print of data.availablePrintSize"
-          [value]="+print.width + ' x ' + +print.height + ' inche'"
-          class=""
-        >
-          {{ print.width }} x {{ print.height }} inche
-        </option>
-      </select>
-    </div>
-    <div class="col-md-12">
-      <label for="inputCity" class="form-label">Quantity</label>
-      <input
-        type="number"
-        [max]="data.quantity - 1"
-        min="1"
-        class="form-control"
-        id="inputCity"
-        [(ngModel)]="frameDeatails.quantity"
-      />
-    </div>
-    <button (click)="addCart(data._id)" class="my-3 btn btn-primary">
-      Add to cart
-    </button>
-    <button (click)="buyNow(data._id)" class="btn btn-success">Buy Now</button>
-  </div>
-
-  <table class="table">
-    <tr *ngFor="let info of data.additionalInfo">
-      <td>{{ info.title }}</td>
-      <td>{{ info.description }}</td>
-    </tr>
-  </table>
-
-  <strong>Review</strong>
-
-  <ng-container class="mx-5" *ngIf="new_review">
-    <div class="d-flex align-items-top">
-      <span class="avatar">{{ new_review.charAt(0).toUpperCase() }}</span>
-      <p class="mt-2">
-        {{ new_review }}
-        <app-star-rating (user_rating)="getrating($event)"></app-star-rating>
-      </p>
-    </div>
-    <div class="position-relative mt-0 mx-lg-5">
-      <input
-        type="text"
-        class="form-control pe-5"
-        placeholder="Write Your Review.."
-        name="review"
-        [formControl]="comment"
-      />
-      <i
-        class="bi bi-send-plus-fill text-success absolute"
-        (click)="addrating()"
-      ></i>
-    </div>
-  </ng-container>
-  <ng-container *ngFor="let review of data.reviews">
-    <div class="d-flex align-items-top my-4">
-      <span class="avatar">{{
-        review.user.username.charAt(0).toUpperCase()
-      }}</span>
-      <div class="content pt-2">
-        <p class="m-0 p-0 fw-medium">{{ review.user.username }}</p>
-        <app-star-rating
-          [readonly]="true"
-          [rating]="review.rating"
-        ></app-star-rating>
-        <p class="m-0 p-0">
-          {{ review.comment }}
-        </p>
-      </div>
-    </div>
-    <hr *ngIf="reviews.length > 1" />
-  </ng-container>
-
-  <h2>Gifts</h2>
-
-  <div class="row">
-    <div *ngFor="let gift of gifts" class="col-lg-3">
-      <img [src]="gift.thumbnail" alt="" srcset="" width="150" height="150" />
-      <h4>{{ gift.name }}</h4>
-      <input
-        type="number"
-        class="form-control"
-        placeholder="quantity"
-        min="1"
-        [max]="gift.quantity"
-        [(ngModel)]="gift.selected_quantity"
-      />
-      <h5>{{ gift.selected_quantity * gift.price }}</h5>
-      <button
-        *ngIf="!isGiftSelected(gift._id)"
-        (click)="addGift(gift)"
-        class="btn btn-primary"
-      >
-        Add
-      </button>
-      <button
-        *ngIf="isGiftSelected(gift._id)"
-        class="btn btn-danger"
-        (click)="removeGift(gift)"
-      >
-        Remove
-      </button>
-    </div>
-  </div>
-</div> -->
 
 <main class="main">
   <!--=============== DETAILS ===============-->
@@ -173,8 +12,12 @@
           <h3 class="details__title">{{ data.title }}</h3>
           <!-- <p class="details__brand">Brand: <span>adidas</span></p> -->
           <div class="details__price flex">
-            <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ data.amount }}</span>
-            <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ data.price }}</span>
+            <span class="new__price"
+              ><i class="bi bi-currency-rupee"></i>{{ data.amount }}</span
+            >
+            <span class="old__price"
+              ><i class="bi bi-currency-rupee"></i>{{ data.price }}</span
+            >
             <span class="save__price">{{ data.discount }}% Off</span>
           </div>
           <a class="form-label" style="color: rgb(57, 57, 57)"> Category: </a>
@@ -223,22 +66,55 @@
             <div class="details__meta">
               <div class="meta__list">
                 <p class="form-label">Quantity:</p>
-                <input type="number" class="quantity" [max]="data.quantity - 1" min="1"
-                  [(ngModel)]="frameDeatails.quantity" />
+                <input
+                  type="number"
+                  class="quantity"
+                  min="1"
+                  [(ngModel)]="frameDeatails.quantity"
+                />
               </div>
             </div>
           </div>
 
-          <!-- <div class="details__meta">
-            <div class="meta__list">
-              <p class="form-label">Make It Special:</p>
-            </div>
-          </div> -->
+         
+                    </div>
 
 
-
-
+                    <!-- <div class="product__content">
+                      <a>
+                        <h3 class="product__title">{{ gift.name }}</h3>
+                      </a>
+                      <div class="product__price flex">
+                        <span class="new__price"
+                          ><i class="bi bi-currency-rupee"></i
+                          >{{ gift.price }}</span
+                        >
+                      </div>
+                    </div> -->
+                    <!-- <div>
+                      <button
+                        *ngIf="isGiftSelected(gift._id)"
+                        class="btns2"
+                        (click)="removeGift(gift)"
+                      >
+                        Remove
+                      </button>
+                      <button
+                        *ngIf="!isGiftSelected(gift._id)"
+                        class="btns2"
+                        (click)="addGift(gift)"
+                      >
+                        Add
+                      </button>
+                    </div> -->
+                  </div>
+                
+              </div>
           
+            
+            </section>
+            
+       
 
           <section id="faq" class="">
             <div data-aos="fade-up">
@@ -371,10 +247,10 @@
               <a (click)="buyNow(data._id)" class="btns1 btn--sm">Buy Now</a>
             </div>
           </div>
-        </div>
+        <!-- </div>
       </div>
-    </div>
-  </section>
+   -->
+  <!-- </section> -->
 
  
 

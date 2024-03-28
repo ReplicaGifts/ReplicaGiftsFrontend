@@ -97,7 +97,6 @@ export class ProductDetailsComponent {
     userImage: false,
     image: '',
     additionalInfo: [] as any,
-    quantity: 0,
     availablePrintSize: [] as any,
     availablePrintType: [],
     reviews: [] as any,
@@ -209,8 +208,7 @@ export class ProductDetailsComponent {
             printType: '',
             size: '',
             quantity: 1,
-          };
-          this.cart.NoOFCartItem.next(this.guest.getCart().length);
+          }
 
         } else {
           Swal.fire({

@@ -27,6 +27,8 @@ export class HeaderComponent {
   noOfWish: number = 0;
   noOfCart: number = 0;
 
+  toggle: boolean | string = false;
+
   searchMenu: any[] = [];
 
   searchText: any;

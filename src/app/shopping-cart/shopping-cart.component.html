@@ -1,45 +1,9 @@
-<!-- <div class="container">
-  <table>
-    <thead>
-      <th>IMAGE</th>
-      <th>NAME</th>
-      <th>PRICE</th>
-      <th>QUANTITY</th>
-      <th>gifts</th>
-      <th>SUB TOTAL</th>
-
-      <th>RENAME</th>
-    </thead>
-    <tbody>
-      <tr *ngFor="let w of cartList">
-        <td><img [src]="w.productId.image" width="200" height="200" /></td>
-        <td>{{ w.productId.title }}</td>
-        <td>{{ w.productId.amount }}</td>
-        <td>{{ w.quantity }}</td>
-        <td>
-          <p *ngFor="let gif of w.userWant.gifts">
-            {{ gif.gift.name }} x {{ gif.quantity }}
-          </p>
-        </td>
-        <td>
-          {{ w.userWant.totalAmount }}
-        </td>
-        <td>
-          <button (click)="remove(w._id)" class="btn btn-danger">Delete</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>
-    Total: <span class="fw-bold">{{ total }}</span>
-  </h2>
-  <button class="btn btn-primary" (click)="checkout()">Checkout</button>
-</div> -->
-
-<div class="headertop"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover; padding-bottom: 120px">
-  <div style="
+<div
+  class="headertop"
+  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover; padding-bottom: 120px"
+>
+  <div
+    style="
       padding-top: 100px;
       display: flex;
       align-items: center;
@@ -48,7 +12,8 @@
       font-size: 50px;
       font-weight: 800;
       letter-spacing: 1px;
-    ">
+    "
+  >
     Cart
   </div>
 </div>
@@ -87,30 +52,42 @@
             <td>
               <h3 class="table__title">
                 {{ w.productId.title }}
-                <span *ngIf="w.userWant.gifts.length">
-                  +
-                  <span *ngFor="let gif of w.userWant.gifts">
+                <div *ngIf="w.userWant.gifts.length > 0">
+                  <p>+</p>
+                  <p *ngFor="let gif of w.userWant.gifts">
                     {{ gif.gift.name }} x {{ gif.quantity }}
-                  </span>
-                </span>
+                  </p>
+                </div>
               </h3>
             </td>
             <td>
-              <span *ngIf="w.userWant.gifts.length > 0" class="table__price"><i class="bi bi-currency-rupee"></i>{{
-                w.productId.amount }} +
-                <i class="bi bi-currency-rupee"></i>{{ w.userWant.totalAmount - w.total }}</span>
+              <i class="bi bi-currency-rupee"></i> {{ w.productId.amount }}
+              <span *ngIf="w.userWant.gifts.length > 0" class="table__price">
+                +
+                {{ giftTotal(w.userWant.gifts) }}</span
+              >
               <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
             </td>
             <td>
-              <input type="number" [(ngModel)]="w.userWant.quantity" class="quantity"
-                  (input)="updateQt(w._id, w.userWant.quantity, w.userWant._id)" />
-          </td>
-          
-            <td>
-              <span class="subtotal"><i class="bi bi-currency-rupee"></i>{{ w.userWant.totalAmount }}</span>
+              <input
+                type="number"
+                min="1"
+                [(ngModel)]="w.userWant.quantity"
+                class="quantity"
+                (input)="updateQt(w._id, w.userWant.quantity, w.userWant._id)"
+              />
             </td>
             <td>
-              <i (click)="remove(w._id)" class="fi fi-rs-trash table__trash"></i>
+              <span class="subtotal"
+                ><i class="bi bi-currency-rupee"></i
+                >{{ w.userWant.totalAmount }}</span
+              >
+            </td>
+            <td>
+              <i
+                (click)="remove(w._id)"
+                class="fi fi-rs-trash table__trash"
+              ></i>
             </td>
           </tr>
         </tbody>
@@ -131,7 +108,9 @@
           <tr>
             <td><span class="cart__total-title">Cart Subtotal</span></td>
             <td>
-              <span class="cart__total-price"><i class="bi bi-currency-rupee"></i>{{ total }}</span>
+              <span class="cart__total-price"
+                ><i class="bi bi-currency-rupee"></i>{{ total }}</span
+              >
             </td>
           </tr>
           <tr>
@@ -141,7 +120,9 @@
           <tr>
             <td><span class="cart__total-title">Total</span></td>
             <td>
-              <span class="cart__total-price"><i class="bi bi-currency-rupee"></i>{{ total }}</span>
+              <span class="cart__total-price"
+                ><i class="bi bi-currency-rupee"></i>{{ total }}</span
+              >
             </td>
           </tr>
         </table>

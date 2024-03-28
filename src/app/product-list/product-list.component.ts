@@ -42,6 +42,7 @@ export class ProductListComponent {
   isAuth = this.user.isAuthenticated();
 
   ngOnInit() {
+    window.productContainer()
     window.scrollTo({ top: 0, behavior: "instant" })
 
     this.category.getCategory().subscribe((category: any) => this.categories = category);
@@ -49,10 +50,6 @@ export class ProductListComponent {
     this.product.getNew().subscribe((trending: any) => this.newProduct = trending);
   }
 
-  ngAfterViewInit() {
-    window.productContainer()
-
-  }
 
   nav(id: any) {
     this.router.navigateByUrl(`/product/${id}`)

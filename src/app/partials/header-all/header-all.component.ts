@@ -5,6 +5,7 @@ import { CategoryService } from '../../service/category.service';
 import { WishService } from '../../service/wish.service';
 import { CartService } from '../../service/cart.service';
 import { NgFor, NgIf } from '@angular/common';
+import { GuestService } from '../../service/guest.service';
 
 @Component({
   selector: 'app-header-all',
@@ -17,7 +18,7 @@ export class HeaderAllComponent {
 
   @Input() display!: string;
 
-  constructor(private user: UserAuthService, private router: Router, private categories: CategoryService, private wish: WishService, private cart: CartService) { }
+  constructor(private user: UserAuthService, private router: Router, private categories: CategoryService, private wish: WishService, private cart: CartService, private guest: GuestService) { }
 
   isAuth: boolean = false;
   category: any[] = [];
@@ -25,18 +26,21 @@ export class HeaderAllComponent {
   noOfCart: number = 0;
 
   ngOnInit() {
-    this.user.isAuthenticated();
+    this.isAuth = this.user.isAuthenticated();
 
-    this.user.isAuthenticatedValue.subscribe(value => {
-      this.isAuth = value;
-      this.cart.NoOFCartItem.subscribe(item => { this.noOfCart = item });
-      this.wish.noOfWish.subscribe(item => { this.noOfWish = item });
-      this.categories.getCategory().subscribe((category: any) => { this.category = category });
-    });
 
-    this.cart.CheckItems();
+    this.cart.NoOFCartItem.subscribe(value => this.noOfCart = value);
+    this.wish.noOfWish.subscribe(value => this.noOfWish = value);
+    this.categories.getCategory().subscribe((category: any) => { this.category = category });
+    if (this.isAuth) {
 
-    this.wish.checkWish();
+      this.cart.CheckItems();
+
+      this.wish.checkWish();
+    } else {
+      this.cart.NoOFCartItem.next(this.guest.getCart().length);
+      this.wish.noOfWish.next(this.guest.getWish().length);
+    }
 
   }
 
