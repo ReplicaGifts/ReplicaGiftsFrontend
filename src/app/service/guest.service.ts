@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import uniqid from 'uniqid';
 import { CartService } from './cart.service';
 
 @Injectable({
@@ -17,7 +16,7 @@ export class GuestService {
 
   private initUser(): string | null {
     if (!localStorage.getItem('id')) {
-      localStorage.setItem('id', uniqid())
+      localStorage.setItem('id', self.crypto.randomUUID())
     }
 
     return localStorage.getItem('id');
@@ -51,15 +50,17 @@ export class GuestService {
       formData.append('printType', frameDeatails.printType);
       formData.append('userImage', frameDeatails.userImage);
       formData.append('size', frameDeatails.size);
+      formData.append('userImageModel', frameDeatails.frame, 'userImageModel.png');
+
       formData.append('product', product._id);
       formData.append('user', this.initUser() ?? '');
       formData.append('gifts', JSON.stringify(gifts));
 
 
-      this.http.post('https://replicagiftsbackend.onrender.com/api/guest/add-frame', formData).subscribe((frame: any) => {
+      this.http.post('http://localhost:3000/api/guest/add-frame', formData).subscribe((frame: any) => {
 
 
-        const newItem = { _id: uniqid(), productId: product, quantity: +frameDeatails.quantity, userWant: frame, total: +frameDeatails.quantity * +product.amount };
+        const newItem = { _id: self.crypto.randomUUID(), productId: product, quantity: +frameDeatails.quantity, userWant: frame, total: +frameDeatails.quantity * +product.amount };
         cart.push(newItem);
         this.setData(cart, 'cart');
 
@@ -82,12 +83,15 @@ export class GuestService {
     formData.append('userImage', frameDeatails.userImage);
     formData.append('size', frameDeatails.size);
     formData.append('product', product._id);
+    if (frameDeatails.frame)
+
+      formData.append('userImageModel', frameDeatails.frame, 'userImageModel.png');
 
     formData.append('gifts', JSON.stringify(gifts));
     formData.append('user', this.initUser() ?? '');
 
 
-    return this.http.post('https://replicagiftsbackend.onrender.com/api/guest/add-frame', formData);
+    return this.http.post('http://localhost:3000/api/guest/add-frame', formData);
   }
   getCart(): any {
     console.log(this.getData('cart'));
@@ -124,7 +128,7 @@ export class GuestService {
 
 
   editQuantity(id: any, quantity: any, frame_id: any) {
-    this.http.put('https://replicagiftsbackend.onrender.com/api/guest/frame-quantity/' + frame_id, { quantity }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(async (data: any) => {
+    this.http.put('http://localhost:3000/api/guest/frame-quantity/' + frame_id, { quantity }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(async (data: any) => {
       console.log(data);
 
       let cart = this.getCart();

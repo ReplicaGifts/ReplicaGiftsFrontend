@@ -11,6 +11,7 @@ export class Product {
         title: '',
         description: ''
     }];
+    frame?: '';
 
     availablePrintSize!: [{
         _id?: any,

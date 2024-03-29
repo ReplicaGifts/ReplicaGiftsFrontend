@@ -1,39 +1,49 @@
-<input
-  type="file"
-  (change)="handleFileInput($event)"
-  accept="image/*"
-  class="my-5"
-/>
-<br />
-<button class="btn" (click)="edit = !edit">{{ edit ? "Save" : "Edit" }}</button>
-<br />
-<br />
-<div id="canvas-container">
-  <img
-    [src]="frameSrc[no]"
-    id="overLay"
-    class="{{ edit ? '' : 'index' }}"
-    alt=""
-    srcset=""
-  />
-  <canvas
-    #canvas1
-    id="canvas1"
-    [width]="canvasWidth"
-    [height]="canvasHeight"
-    [style.backgroundColor]="'transparent'"
-    (mousedown)="mouseDownHandler($event)"
-    (mousemove)="mouseMoveHandler($event)"
-    (mouseup)="mouseUpHandler($event)"
-    (mouseenter)="mouseEnterHandler()"
-    tabindex="1"
-  >
-    > Sorry, your browser doesn't support canvas technology.
-  </canvas>
-</div>
+<section class="mt-sm-0">
+  <div class="file-container {{ hide ? 'hide' : '' }}">
+    <div class="position-relative w-100 h-100">
+      <i class="fa fa-upload icon"></i>
+      <input
+        type="file"
+        (change)="handleFileInput($event)"
+        class="file-input"
+        id="fileInput"
+        accept="image/*"
+      />
+      <span class="up">UPLOAD</span>
+    </div>
+  </div>
+  <br />
+  <br />
+  <br />
+  <div id="canvas-container">
+    <img
+      [src]="frameSrc"
+      id="overLay"
+      class="{{ edit ? '' : 'index' }}"
+      alt=""
+      srcset=""
+    />
+    <canvas
+      #canvas1
+      id="canvas1"
+      [width]="canvasWidth"
+      [height]="canvasHeight"
+      [style.backgroundColor]="'transparent'"
+      (mousedown)="mouseDownHandler($event)"
+      (mousemove)="mouseMoveHandler($event)"
+      (mouseup)="mouseUpHandler($event)"
+      (mouseenter)="mouseEnterHandler()"
+      tabindex="1"
+      style="position: absolute; top: 0; left: 0"
+    >
+      > Sorry, your browser doesn't support canvas technology.
+    </canvas>
+  </div>
+  <button *ngIf="!edit" class="btn" (click)="edit = !edit">Edit</button>
 
-<button class="btn" *ngIf="no > 0" (click)="no = no - 1">privious</button>
-<button class="btn" *ngIf="no < frameSrc.length" (click)="no = no + 1">
-  next
-</button>
-<button class="btn" (click)="captureScreenshot()">Download</button>
+  <button *ngIf="edit" class="btn" (click)="edit = !edit; captureScreenshot()">
+    Save
+  </button>
+
+  <!-- <button class="btn" (click)="captureScreenshot()">Download</button> -->
+</section>

@@ -13,6 +13,7 @@ import { WishService } from '../service/wish.service';
 import Swal from 'sweetalert2';
 import { GuestService } from '../service/guest.service';
 import { UserAuthService } from '../service/user-auth.service';
+import { FramesComponent } from '../frames/frames.component';
 
 
 declare global {
@@ -27,7 +28,7 @@ declare global {
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, FormsModule, StarRatingComponent, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, StarRatingComponent, ReactiveFormsModule, FramesComponent, RouterLink],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -100,15 +101,18 @@ export class ProductDetailsComponent {
     availablePrintSize: [] as any,
     availablePrintType: [],
     reviews: [] as any,
-    category: ''
+    category: '',
+    frame: ''
   };
 
+  img = false
 
   frameDeatails = {
     userImage: '',
     printType: '',
     size: '',
     quantity: 1,
+    frame: '' as any
   }
 
   ngOnInit(): void {
@@ -130,6 +134,8 @@ export class ProductDetailsComponent {
             printType: res.availablePrintType[0].categoryName,
             size: +res.availablePrintSize[0].width + ' x ' + +res.availablePrintSize[0].height + ' inche',
             quantity: 1,
+            frame: '' as any
+
           }
           this.giftservice.getGifts().subscribe((items: any) => {
             this.gifts = items.map((item: any) => { item['selected_quantity'] = 1; return item });
@@ -158,9 +164,13 @@ export class ProductDetailsComponent {
     this.frameDeatails.userImage = e.target.files[0];
   }
 
+  addCaputue(balb: any) {
+    this.frameDeatails.frame = balb.file;
+  }
 
   addCart(id: any) {
     if (this.data.userImage) {
+      console.log(this.data.userImage)
       if (this.frameDeatails.userImage === '') {
         Swal.fire({
           icon: "error",
@@ -190,6 +200,8 @@ export class ProductDetailsComponent {
             printType: '',
             size: '',
             quantity: 1,
+            frame: '' as any
+
           };
         });
       } else {
@@ -207,6 +219,8 @@ export class ProductDetailsComponent {
             userImage: '',
             printType: '',
             size: '',
+            frame: '' as any,
+
             quantity: 1,
           }
 

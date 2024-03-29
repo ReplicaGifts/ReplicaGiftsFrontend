@@ -22,7 +22,8 @@ export class ProfileComponent {
   constructor(private userService: UserAuthService, private profile: ProfileService, private auth: UserAuthService,
     private router: Router, private cart: CartService, private wish: WishService, private guest: GuestService) { }
 
-  user: any;
+  user: any = { username: '' }
+
 
   isAuth = this.userService.isAuthenticated();
 
@@ -123,17 +124,25 @@ export class ProfileComponent {
     this.router.navigateByUrl('/order-view/' + id)
   }
 
-  updateQt(id: any, q: any) {
-    this.cart.editQuantity(id, q).subscribe((wish: any) => { console.log(wish); this.getCart(true) });
-  }
+  updateQt(id: any, q: any, f_id: any) {
+    if (this.isAuth) {
 
+      this.cart.editQuantity(id, q).subscribe((wish: any) => { console.log(wish); this.getCart(true) });
+    } else {
+      this.guest.editQuantity(id, q, f_id)
+
+      setTimeout(() => {
+        this.getCart(true)
+      }, 2000)
+
+    }
+  }
   cartList: any[] = [];
   total: number = 0;
   getCart(isDelet: boolean = false) {
     if (this.isAuth) {
 
       this.cart.getCart().subscribe((cart: any) => {
-        console.log(cart);
         this.cartList = cart;
         if (isDelet) {
           this.total = 0
@@ -141,18 +150,17 @@ export class ProfileComponent {
         this.cartList.map((cart) => {
           this.total = this.total + cart.userWant.totalAmount;
         })
-        console.log(this.cartList);
         this.cart.NoOFCartItem.next(this.cartList.length);
 
       });
     } else {
+      this.cart.NoOFCartItem.next(this.guest.getCart().length);
 
       if (isDelet) {
-        this.cart.NoOFCartItem.next(this.guest.getCart().length);
         this.total = 0
+        console.log(this.total)
       }
       this.cartList = this.guest.getCart();
-      console.log(this.cartList, this.isAuth);
       this.cartList.map((cart) => {
         this.total = this.total + cart.userWant.totalAmount;
       })
@@ -205,7 +213,8 @@ export class ProfileComponent {
       });
     } else {
       this.wishList = this.guest.getWish();
-      this.wish.noOfWish.next(this.wishList.length);
+      this.wish.noOfWish.next(this.guest.getWish().length);
+
       console.log(this.wishList);
     }
   }
@@ -222,7 +231,7 @@ export class ProfileComponent {
       if (result.isConfirmed) {
         if (this.isAuth) {
           this.wish.removeWish(id).subscribe((wish: any) => {
-            console.log(wish); this.getw();
+            console.log(wish); this.get();
             Swal.fire({
               title: "Deleted!",
               text: "Your Wish item has been deleted.",
@@ -231,7 +240,8 @@ export class ProfileComponent {
           });
         } else {
           this.guest.deleteWishItem(id);
-          this.getw();
+          this.get();
+          this.wish.noOfWish.next(this.guest.getWish().length);
           Swal.fire({
             title: "Deleted!",
             text: "Your Wish item has been deleted.",
@@ -241,6 +251,16 @@ export class ProfileComponent {
       }
     });
   }
+
+  giftTotal(gifts: any): number {
+    let total = 0;
+    gifts.forEach((element: any) => {
+      total += element.total;
+    });
+
+    return total
+  }
+
 
   navToProduct(id: any) {
     this.router.navigateByUrl(`/product?id=${id}`)

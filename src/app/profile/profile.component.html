@@ -1,6 +1,11 @@
 <div
   class="headertop"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover; padding-bottom: 120px"
+  style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif);
+    background-size: cover;
+    padding-bottom: 120px;
+  "
 >
   <div
     style="
@@ -128,7 +133,9 @@
                       Checkout
                     </button>
                   </td>
-                  <td><i class="bi bi-currency-rupee"></i>{{ order.totalAmount }}</td>
+                  <td>
+                    <i class="bi bi-currency-rupee"></i>{{ order.totalAmount }}
+                  </td>
                 </tr>
               </tbody>
             </table>
@@ -337,20 +344,25 @@
                     <h3 class="table__title">
                       {{ w.productId.title }} x {{ w.quantity }}
                       <span *ngIf="w.userWant.gifts.length">
-                        +
                         <span
                           class="w-100"
                           *ngFor="let gif of w.userWant.gifts"
                         >
+                          +
                           {{ gif.gift.name }} x {{ gif.quantity }}
                         </span>
                       </span>
                     </h3>
                   </td>
                   <td>
-                    <span class="table__price"
-                      ><i class="bi bi-currency-rupee"></i>{{ w.productId.amount }} +<i class="bi bi-currency-rupee"></i>
-                      {{ w.userWant.totalAmount - w.total }}</span
+                    <i class="bi bi-currency-rupee"></i>
+                    {{ w.productId.amount }}
+                    <span
+                      *ngIf="w.userWant.gifts.length > 0"
+                      class="table__price"
+                    >
+                      +
+                      {{ giftTotal(w.userWant.gifts) }}</span
                     >
                   </td>
                   <td>
@@ -358,11 +370,17 @@
                       type="number"
                       [(ngModel)]="w.userWant.quantity"
                       class="quantity"
-                      (input)="updateQt(w._id, w.userWant.quantity)"
+                      min="1"
+                      (input)="
+                        updateQt(w._id, w.userWant.quantity, w.userWant._id)
+                      "
                     />
                   </td>
                   <td>
-                    <span class="subtotal"><i class="bi bi-currency-rupee"></i>{{ w.userWant.totalAmount }}</span>
+                    <span class="subtotal"
+                      ><i class="bi bi-currency-rupee"></i
+                      >{{ w.userWant.totalAmount }}</span
+                    >
                   </td>
                   <td>
                     <i
@@ -401,11 +419,14 @@
                     </h3>
                   </td>
                   <td>
-                    <span class="table__price"><i class="bi bi-currency-rupee"></i>{{ wish.amount }}</span>
+                    <span class="table__price"
+                      ><i class="bi bi-currency-rupee"></i
+                      >{{ wish.amount }}</span
+                    >
                   </td>
                   <td><span class="table__stock">In Stock</span></td>
                   <td>
-                    <a [routerLink]="['/product', wish._id]" class="btns"
+                    <a [routerLink]="['/product', wish._id]" class="active-link"
                       >Add to Cart</a
                     >
                   </td>

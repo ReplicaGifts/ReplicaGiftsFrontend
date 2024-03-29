@@ -36,11 +36,15 @@ export class CartService {
 
 
   addFrame(frameDeatails: any, gifts: any, id: any) {
+
+
     const formData = new FormData();
 
     formData.append('quantity', frameDeatails.quantity);
     formData.append('printType', frameDeatails.printType);
     formData.append('userImage', frameDeatails.userImage);
+    if (frameDeatails.frame)
+      formData.append('userImageModel', frameDeatails.frame, 'userImageModel.png');
     formData.append('size', frameDeatails.size);
     formData.append('product', id);
 
@@ -51,7 +55,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/frame/add-frame", formData, _options)
+    return this.http.post("http://localhost:3000/api/frame/add-frame", formData, _options)
 
   }
 

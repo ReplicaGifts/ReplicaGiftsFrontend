@@ -1,6 +1,5 @@
 import { Routes } from '@angular/router';
 
-import { AuthGuard } from './auth.guard';
 
 import { ProductListComponent } from './product-list/product-list.component';
 import { ProductDetailsComponent } from './product-details/product-details.component';
@@ -8,7 +7,6 @@ import { LoginComponent } from './login/login.component';
 import { ProfileComponent } from './profile/profile.component';
 import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
 import { WishListComponent } from './wish-list/wish-list.component';
-import { UserAuthGuard } from './user-auth.guard';
 import { DeleveryDetailsComponent } from './delevery-details/delevery-details.component';
 import { ShopeComponent } from './shope/shope.component';
 

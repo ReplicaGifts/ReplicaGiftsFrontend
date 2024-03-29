@@ -15,7 +15,6 @@
   cursor: pointer;
 }
 
-
 /* .new__container{
   overflow: scroll !important;
 } */
@@ -31,9 +30,22 @@
   margin-left: 0;
   height: 240px;
   width: 100%;
-
 }
 
-.new__arrivals{
+.new__arrivals {
   margin-bottom: 40px !important;
+}
+
+/* .floating-box {
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: absolute;
+} */
+
+.floating-box div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

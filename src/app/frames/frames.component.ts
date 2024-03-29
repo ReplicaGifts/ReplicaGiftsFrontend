@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
 import { fabric } from 'fabric';
 import html2canvas from 'html2canvas';
 
@@ -11,6 +11,13 @@ import html2canvas from 'html2canvas';
   styleUrl: './frames.component.css'
 })
 export class FramesComponent {
+
+  @Input()
+  frameSrc!: string; // Replace with the path to your frame image
+
+  @Output() file = new EventEmitter<any>();
+  @Output() image = new EventEmitter<any>();
+
   @ViewChild('canvas1') canvas1!: ElementRef<HTMLCanvasElement>;
   canvas1Context!: fabric.Canvas;
 
@@ -19,13 +26,7 @@ export class FramesComponent {
   imageY: number = 0;
   isDragging: boolean = false;
 
-  no: number = 0;
-  frameSrc: string[] = ['https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/6eed28d6-e8da-4210-84ca-6971c6c8f053/da51a2p-6d2ba5ab-4882-4d4d-9a51-5ea937225d04.png/v1/fill/w_998,h_801,strp/pink_blue_frame_shape_by_lashonda1980_da51a2p-pre.png?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7ImhlaWdodCI6Ijw9ODIyIiwicGF0aCI6IlwvZlwvNmVlZDI4ZDYtZThkYS00MjEwLTg0Y2EtNjk3MWM2YzhmMDUzXC9kYTUxYTJwLTZkMmJhNWFiLTQ4ODItNGQ0ZC05YTUxLTVlYTkzNzIyNWQwNC5wbmciLCJ3aWR0aCI6Ijw9MTAyNCJ9XV0sImF1ZCI6WyJ1cm46c2VydmljZTppbWFnZS5vcGVyYXRpb25zIl19.0bBhA7jnjISRoyVSWQq-576HxRYmwRBLIcoGW-m5530',
-    '../../../assets/5a358ce28f8dc2.329000951513458914588.png',
-    '../../../assets/transparent-christmas-graphics-61ad80810041b7.1612230116387605770011.png',
-    '../../../assets/—Pngtree—vector metal picture frame golden_5432883.png'
-  ]; // Replace with the path to your frame image
-
+  hide: boolean = false;
 
   edit: boolean = false;
 
@@ -42,9 +43,10 @@ export class FramesComponent {
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
+    window.scrollTo({ top: 800, behavior: "smooth" })
 
     const overlayImage = new Image();
-    overlayImage.src = this.frameSrc[this.no];
+    overlayImage.src = this.frameSrc;
     overlayImage.onload = () => {
       this.canvasWidth = 500;
       this.canvasHeight = 600;
@@ -62,6 +64,7 @@ export class FramesComponent {
     this.canvas1Context.setWidth(this.canvasWidth);
     this.canvas1Context.setHeight(this.canvasHeight);
     const file = event.target.files[0];
+    this.image.emit(event);
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
@@ -73,6 +76,8 @@ export class FramesComponent {
   }
 
   private addImageToCanvas(): void {
+    this.hide = true;
+    this.canvas1Context.clear();
     if (this.imageSrc)
       fabric.Image.fromURL(this.imageSrc.toString(), (img) => {
         let width = img.width ?? 1;
@@ -102,6 +107,7 @@ export class FramesComponent {
         });
 
         this.canvas1Context.add(img);
+        this.captureScreenshot()
       });
   }
 
@@ -129,23 +135,24 @@ export class FramesComponent {
   captureScreenshot() {
     const elementToCapture = this.elementRef.nativeElement.querySelector('#canvas-container');
 
-    html2canvas(elementToCapture).then(canvas => {
-      // Convert canvas to a data URL
-      const screenshotData = canvas.toDataURL('image/png');
+    setTimeout(() => {
+      html2canvas(elementToCapture, {
+        allowTaint: true,
+        useCORS: true
+      })
+        .then(canvas => {
+          // Convert canvas to blob
+          canvas.toBlob(blob => {
 
-      // Create a temporary anchor element
-      const downloadLink = document.createElement('a');
-      downloadLink.href = screenshotData;
+            const data = {
+              file: blob,
+              message: 'success'
+            }
 
-      // Set the download attribute to specify the filename
-      downloadLink.download = 'screenshot.png';
+            this.file.emit(data);
 
-      // Append the anchor element to the DOM and trigger a click event to initiate download
-      document.body.appendChild(downloadLink);
-      downloadLink.click();
-
-      // Remove the anchor element from the DOM
-      document.body.removeChild(downloadLink);
-    });
+          }, 'image/png'); // Specify the MIME type of the image (e.g., 'image/png')
+        });
+    }, 500)
   }
 }
