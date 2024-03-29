@@ -32,7 +32,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
 
-    return this.http.post(this.baseUrl + "api/carts/add-cart/" + id, { quantity, frameId }, _options)
+    return this.http.post(this.baseUrl + "/api/carts/add-cart/" + id, { quantity, frameId }, _options)
 
   }
 
@@ -68,14 +68,14 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>(this.baseUrl + "api/frame/get/" + id, _options)
+    return this.http.get<any>(this.baseUrl + "/api/frame/get/" + id, _options)
   }
   frameData(id: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>(this.baseUrl + "api/frame/get-frame/" + id, _options)
+    return this.http.get<any>(this.baseUrl + "/api/frame/get-frame/" + id, _options)
   }
 
   getAllFrames() {
@@ -83,7 +83,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>(this.baseUrl + "api/frame/orders", _options)
+    return this.http.get<any>(this.baseUrl + "/api/frame/orders", _options)
   }
 
   getCart() {
@@ -91,7 +91,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get(this.baseUrl + "api/carts/get-cart/", _options)
+    return this.http.get(this.baseUrl + "/api/carts/get-cart/", _options)
   }
 
   remove(id: any) {
@@ -99,14 +99,14 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.delete(this.baseUrl + "api/carts/remove-item/" + id, _options)
+    return this.http.delete(this.baseUrl + "/api/carts/remove-item/" + id, _options)
   }
 
   editQuantity(id: any, quantity: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.post(this.baseUrl + "api/carts/edit-quantity/" + id, { quantity }, _options)
+    return this.http.post(this.baseUrl + "/api/carts/edit-quantity/" + id, { quantity }, _options)
 
   }
 
