@@ -286,7 +286,7 @@
                 <td>
                   <h3 class="table__title">
                     {{ prod.productId.title }} x {{ prod.quantity }}
-                    +
+                    <p style="color: rgb(255, 145, 0); font-size: 18px;"> + </p>
                     <ul class="list-unstyled">
                       <li *ngFor="let gif of prod.userWant.gifts">
                         {{ gif.gift.name }} x {{ gif.quantity }}

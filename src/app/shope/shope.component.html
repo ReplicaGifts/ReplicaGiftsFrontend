@@ -129,7 +129,7 @@
     <div class="d-flex justify-content-center my-4" style="margin-left: 100px;">
       <ng-container *ngIf="pageNo.length > 1">
         <button class="btns3 btn-link" (click)="selectedFilters.page = 1; applySearch()">
-          &#xAB; First
+          First
         </button>
         <button class=" btns3 {{
             selectedFilters.page === i + 1 ? 'active' : 'btn-link'
@@ -139,7 +139,7 @@
         <button *ngIf="selectedFilters.page < pageNo.length" class="btns3 btn-link" (click)="
             selectedFilters.page = selectedFilters.page + 1; applySearch()
           ">
-          &#xBB;
+          <i class="bi bi-arrow-right"></i>
         </button>
       </ng-container>
     </div>
