@@ -273,4 +273,29 @@ export class ProfileComponent {
   //   this.router.navigate(['/login']);
   // }
 
+
+  updateGift(id: any, quantity: any, gift: any, _id: any): void {
+    this.cart.editgiftQty(id, quantity, gift).subscribe((response: any) => {
+      if (!this.isAuth) {
+        this.guest.updateUserWant(response.frame, _id);
+      }
+      setTimeout(() => {
+        this.getCart(true);
+
+      }, 500)
+    })
+  }
+
+  removeGift(f_id: any, g_id: any, _id: any) {
+    this.cart.deleteGift(f_id, g_id).subscribe((response: any) => {
+      if (!this.isAuth) {
+        this.guest.updateUserWant(response.frame, _id);
+      }
+      setTimeout(() => {
+        this.getCart(true);
+
+      }, 500)
+    })
+  }
+
 }

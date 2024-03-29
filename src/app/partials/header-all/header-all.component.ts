@@ -19,6 +19,7 @@ export class HeaderAllComponent {
   @Input() display!: string;
 
   constructor(private user: UserAuthService, private router: Router, private categories: CategoryService, private wish: WishService, private cart: CartService, private guest: GuestService) { }
+  toggle: boolean | string = false;
 
   isAuth: boolean = false;
   category: any[] = [];

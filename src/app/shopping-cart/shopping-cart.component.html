@@ -97,7 +97,8 @@
               <i class="bi bi-currency-rupee"></i> {{ w.productId.amount }}
               <span *ngIf="w.userWant.gifts.length > 0" class="table__price">
                 <p style="color: rgb(255, 145, 0)">+</p>
-                {{ giftTotal(w.userWant.gifts) }}</span
+                <i class="bi bi-currency-rupee"></i
+                >{{ giftTotal(w.userWant.gifts) }}</span
               >
               <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
             </td>
