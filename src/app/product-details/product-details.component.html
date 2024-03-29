@@ -10,8 +10,12 @@
           <h3 class="details__title">{{ data.title }}</h3>
           <!-- <p class="details__brand">Brand: <span>adidas</span></p> -->
           <div class="details__price flex">
-            <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ data.amount }}</span>
-            <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ data.price }}</span>
+            <span class="new__price"
+              ><i class="bi bi-currency-rupee"></i>{{ data.amount }}</span
+            >
+            <span class="old__price"
+              ><i class="bi bi-currency-rupee"></i>{{ data.price }}</span
+            >
             <span class="save__price">{{ data.discount }}% Off</span>
           </div>
           <a class="form-label" style="color: rgb(57, 57, 57)"> Category: </a>
@@ -79,7 +83,12 @@
             <div class="details__meta">
               <div class="meta__list">
                 <p class="form-label">Quantity:</p>
-                <input type="number" class="quantity" min="1" [(ngModel)]="frameDeatails.quantity" />
+                <input
+                  type="number"
+                  class="quantity"
+                  min="1"
+                  [(ngModel)]="frameDeatails.quantity"
+                />
               </div>
             </div>
           </div>
@@ -99,16 +108,8 @@
               <a (click)="buyNow(data._id)" class="btns1 btn--sm">Buy Now</a>
             </div>
           </div>
-<<<<<<< HEAD
         </div>
-
-=======
-
-        </div>
-
-
->>>>>>> 3d108db95b2e1a9f220fa287649757cd8f0fb72d
-        <!-- <div class="product__content">
+        <!--
                       <a>
                         <h3 class="product__title">{{ gift.name }}</h3>
                       </a>
@@ -136,7 +137,6 @@
                       </button>
                     </div> -->
       </div>
-<<<<<<< HEAD
     </div>
     <div class="floating-box" *ngIf="data.frame && img">
       <div>
@@ -149,28 +149,9 @@
     </div>
   </section>
 
-=======
-
-    </div>
-
-
-
-
-  </section>
-
->>>>>>> 3d108db95b2e1a9f220fa287649757cd8f0fb72d
   <!-- </div>
       </div>
    -->
-  <!-- </section> -->
-<<<<<<< HEAD
-=======
-
-
-
->>>>>>> 3d108db95b2e1a9f220fa287649757cd8f0fb72d
-  <!--=============== DETAILS TAB ===============-->
-
 
   <section class="details__tab container mb-5">
     <div class="detail__tabs">
@@ -190,10 +171,6 @@
     </div>
   </section>
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 3d108db95b2e1a9f220fa287649757cd8f0fb72d
   <section class="new__arrivals container section">
     <h3 class="section__title" data-aos="fade-right">
       <span>Make</span> It Special
@@ -258,19 +235,11 @@
     </div>
   </section>
 
-<<<<<<< HEAD
-=======
-
-
-
-
->>>>>>> 3d108db95b2e1a9f220fa287649757cd8f0fb72d
   <section id="faq" class="new__arrivals container section">
     <h3 class="section__title" data-aos="fade-right">
       <span>Get</span> Offers:
     </h3>
     <div data-aos="fade-up">
-<<<<<<< HEAD
       <!-- <div class="details__meta">
         <div class="meta__list">
           <p class="form-label">Get Offers:</p>
@@ -282,10 +251,6 @@
         data-aos="fade-up"
         data-aos-delay="200"
       >
-=======
-
-      <div class="row justify-content-center" data-aos="fade-up" data-aos-delay="200">
->>>>>>> 3d108db95b2e1a9f220fa287649757cd8f0fb72d
         <div class="col-lg-10">
           <div class="accordion accordion-flush" id="faqlist">
             <div class="accordion-item">
