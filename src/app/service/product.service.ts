@@ -7,7 +7,8 @@ import { Product } from '../model/product.model';
 })
 export class ProductService {
 
-
+  // baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://replicagiftsbackend.onrender.com';
   constructor(private http: HttpClient) { }
 
   _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
@@ -38,14 +39,14 @@ export class ProductService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${admin ? JSON.parse(admin).token : ""}` }) };
 
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/products/add-product", formData, _options)
+    return this.http.post(this.baseUrl + "/api/products/add-product", formData, _options)
 
 
   }
 
 
   get() {
-    return this.http.get<Product[]>("https://replicagiftsbackend.onrender.com/api/products/all");
+    return this.http.get<Product[]>(this.baseUrl + "/api/products/all");
   }
 
   edit(data: any, id: any) {
@@ -77,7 +78,7 @@ export class ProductService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${admin ? JSON.parse(admin).token : ""}` }) };
 
 
-    return this.http.put("https://replicagiftsbackend.onrender.com/api/products/update/" + id, formData, _options);
+    return this.http.put(this.baseUrl + "/api/products/update/" + id, formData, _options);
 
   }
 
@@ -88,25 +89,25 @@ export class ProductService {
 
 
 
-    return this.http.delete("https://replicagiftsbackend.onrender.com/api/products/delete/" + id, _options);
+    return this.http.delete(this.baseUrl + "/api/products/delete/" + id, _options);
 
   }
 
 
   getTrending() {
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/products/trending-products");
+    return this.http.get(this.baseUrl + "/api/products/trending-products");
   }
   getNew() {
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/products/new-arrivals");
+    return this.http.get(this.baseUrl + "/api/products/new-arrivals");
   }
 
   getProduct(id: any) {
-    return this.http.get<Product>("https://replicagiftsbackend.onrender.com/api/products/data/" + id);
+    return this.http.get<Product>(this.baseUrl + "/api/products/data/" + id);
   }
 
 
   getProductCategoryWise(id: any) {
-    return this.http.get<Product[]>("https://replicagiftsbackend.onrender.com/api/products/category/" + id);
+    return this.http.get<Product[]>(this.baseUrl + "/api/products/category/" + id);
   }
 
   fetchOutOfStock() {
@@ -115,7 +116,7 @@ export class ProductService {
     const admin: string | null = sessionStorage.getItem('admin');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${admin ? JSON.parse(admin).token : ""}` }) };
 
-    return this.http.get<Product[]>("https://replicagiftsbackend.onrender.com/api/products/out-of-stock", _options);
+    return this.http.get<Product[]>(this.baseUrl + "/api/products/out-of-stock", _options);
 
   }
 
@@ -126,7 +127,7 @@ export class ProductService {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/products/add-review/" + id, { comment, rating }, _options);
+    return this.http.post(this.baseUrl + "/api/products/add-review/" + id, { comment, rating }, _options);
 
   }
 
@@ -137,14 +138,14 @@ export class ProductService {
 
 
     // Make the HTTP request using the modified query object
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/products/filter", { params: query });
+    return this.http.get(this.baseUrl + "/api/products/filter", { params: query });
   }
 
 
 
 
   priceRange() {
-    return this.http.get<any[]>("https://replicagiftsbackend.onrender.com/api/products/price-range");
+    return this.http.get<any[]>(this.baseUrl + "/api/products/price-range");
   }
 
 }

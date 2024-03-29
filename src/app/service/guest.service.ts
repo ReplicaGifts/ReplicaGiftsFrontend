@@ -7,7 +7,8 @@ import { CartService } from './cart.service';
 })
 export class GuestService {
 
-
+  // baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://replicagiftsbackend.onrender.com';
   constructor(private http: HttpClient, private cart: CartService) {
     this.initData('cart');
     this.initData('wish');
@@ -50,14 +51,16 @@ export class GuestService {
       formData.append('printType', frameDeatails.printType);
       formData.append('userImage', frameDeatails.userImage);
       formData.append('size', frameDeatails.size);
-      formData.append('userImageModel', frameDeatails.frame, 'userImageModel.png');
+      if (frameDeatails.frame)
+
+        formData.append('userImageModel', frameDeatails.frame, 'userImageModel.png');
 
       formData.append('product', product._id);
       formData.append('user', this.initUser() ?? '');
       formData.append('gifts', JSON.stringify(gifts));
 
 
-      this.http.post('http://localhost:3000/api/guest/add-frame', formData).subscribe((frame: any) => {
+      this.http.post(this.baseUrl + '/api/guest/add-frame', formData).subscribe((frame: any) => {
 
 
         const newItem = { _id: self.crypto.randomUUID(), productId: product, quantity: +frameDeatails.quantity, userWant: frame, total: +frameDeatails.quantity * +product.amount };
@@ -91,10 +94,9 @@ export class GuestService {
     formData.append('user', this.initUser() ?? '');
 
 
-    return this.http.post('http://localhost:3000/api/guest/add-frame', formData);
+    return this.http.post(this.baseUrl + '/api/guest/add-frame', formData);
   }
   getCart(): any {
-    console.log(this.getData('cart'));
     return this.getData('cart');
   }
 
@@ -113,7 +115,7 @@ export class GuestService {
       this.setData(cart, 'cart');
       if (frame) {
 
-        this.http.delete('https://replicagiftsbackend.onrender.com/api/guest/remove/' + frame).subscribe(data => {
+        this.http.delete(this.baseUrl + '/api/guest/remove/' + frame).subscribe(data => {
           console.log(data)
         })
 
@@ -128,7 +130,7 @@ export class GuestService {
 
 
   editQuantity(id: any, quantity: any, frame_id: any) {
-    this.http.put('http://localhost:3000/api/guest/frame-quantity/' + frame_id, { quantity }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(async (data: any) => {
+    this.http.put(this.baseUrl + '/api/guest/frame-quantity/' + frame_id, { quantity }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) }).subscribe(async (data: any) => {
       console.log(data);
 
       let cart = this.getCart();
@@ -179,17 +181,33 @@ export class GuestService {
 
 
   checkout(product: any) {
-    return this.http.post('https://replicagiftsbackend.onrender.com/api/guest/createOrder', { user: this.initUser(), ...product }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+    return this.http.post(this.baseUrl + '/api/guest/createOrder', { user: this.initUser(), ...product }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
   }
 
   verify(orderId: any, paymentId: any, signature: any, frameIds: any) {
-    return this.http.post<any>('https://replicagiftsbackend.onrender.com/api/guest/verifyPayment', { frameIds, orderId, paymentId, signature, user: this.initUser() }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
+    return this.http.post<any>(this.baseUrl + '/api/guest/verifyPayment', { frameIds, orderId, paymentId, signature, user: this.initUser() }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) });
 
   }
 
 
   orders() {
-    return this.http.get<any>('https://replicagiftsbackend.onrender.com/api/guest/orders/' + this.initUser())
+    return this.http.get<any>(this.baseUrl + '/api/guest/orders/' + this.initUser())
+  }
+
+  async updateUserWant(frame: any, id: any) {
+    let cart = this.getCart();
+
+    const updatedCart = await Promise.all(cart.map(async (car: any) => {
+      if (car._id.toString() === id.toString()) {
+        car.userWant = frame;
+        return car;
+      } else {
+        return car;
+
+      }
+    }));
+    this.setData(updatedCart, 'cart');
+
   }
 
 }

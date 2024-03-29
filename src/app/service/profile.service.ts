@@ -8,6 +8,9 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
+  // baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://replicagiftsbackend.onrender.com';
+
   addAddress(address: any, pic: any) {
 
     const formData = new FormData();
@@ -26,21 +29,21 @@ export class ProfileService {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/profile/add-address", formData, _options);
+    return this.http.post(this.baseUrl + "/api/profile/add-address", formData, _options);
   }
   getAddress() {
 
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/profile/get-address", _options);
+    return this.http.get(this.baseUrl + "/api/profile/get-address", _options);
   }
 
   getOrder() {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/frame/user-orders", _options);
+    return this.http.get(this.baseUrl + "/api/frame/user-orders", _options);
   }
 
 }

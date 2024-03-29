@@ -9,6 +9,8 @@ export class PaymentService {
 
   constructor(private http: HttpClient) { }
 
+  // baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://replicagiftsbackend.onrender.com';
 
   private rzp: any;
 
@@ -35,7 +37,7 @@ export class PaymentService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
 
-    return this.http.post<any>('https://replicagiftsbackend.onrender.com/api/payment/createOrder', product, _options);
+    return this.http.post<any>(this.baseUrl + '/api/payment/createOrder', product, _options);
   }
 
   verifySignature(orderId: any, paymentId: any, signature: any, frameIds: any) {
@@ -44,7 +46,7 @@ export class PaymentService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
 
-    return this.http.post<any>('https://replicagiftsbackend.onrender.com/api/payment/verifyPayment', { frameIds, orderId, paymentId, signature }, _options);
+    return this.http.post<any>(this.baseUrl + '/api/payment/verifyPayment', { frameIds, orderId, paymentId, signature }, _options);
   }
 
 }

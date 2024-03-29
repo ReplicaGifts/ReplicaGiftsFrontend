@@ -9,6 +9,10 @@ import { BehaviorSubject } from 'rxjs';
 export class CartService {
   constructor(private http: HttpClient) { }
 
+
+  // baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://replicagiftsbackend.onrender.com';
+
   NoOFCartItem = new BehaviorSubject<number>(0);
 
   CheckItems() {
@@ -28,7 +32,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/carts/add-cart/" + id, { quantity, frameId }, _options)
+    return this.http.post(this.baseUrl + "api/carts/add-cart/" + id, { quantity, frameId }, _options)
 
   }
 
@@ -55,7 +59,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.post("http://localhost:3000/api/frame/add-frame", formData, _options)
+    return this.http.post(this.baseUrl + "/api/frame/add-frame", formData, _options)
 
   }
 
@@ -64,14 +68,14 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>("https://replicagiftsbackend.onrender.com/api/frame/get/" + id, _options)
+    return this.http.get<any>(this.baseUrl + "api/frame/get/" + id, _options)
   }
   frameData(id: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>("https://replicagiftsbackend.onrender.com/api/frame/get-frame/" + id, _options)
+    return this.http.get<any>(this.baseUrl + "api/frame/get-frame/" + id, _options)
   }
 
   getAllFrames() {
@@ -79,7 +83,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get<any>("https://replicagiftsbackend.onrender.com/api/frame/orders", _options)
+    return this.http.get<any>(this.baseUrl + "api/frame/orders", _options)
   }
 
   getCart() {
@@ -87,7 +91,7 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/carts/get-cart/", _options)
+    return this.http.get(this.baseUrl + "api/carts/get-cart/", _options)
   }
 
   remove(id: any) {
@@ -95,14 +99,28 @@ export class CartService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.delete("https://replicagiftsbackend.onrender.com/api/carts/remove-item/" + id, _options)
+    return this.http.delete(this.baseUrl + "api/carts/remove-item/" + id, _options)
   }
 
   editQuantity(id: any, quantity: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/carts/edit-quantity/" + id, { quantity }, _options)
+    return this.http.post(this.baseUrl + "api/carts/edit-quantity/" + id, { quantity }, _options)
+
+  }
+
+  editgiftQty(f_id: any, quantity: number, gift_id: any) {
+    const token: string | null = localStorage.getItem('user');
+    let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
+    return this.http.put(this.baseUrl + "/api/frame/gift-quantity/" + f_id, { quantity, gift: gift_id }, _options)
+
+  }
+
+  deleteGift(f_id: any, gift_id: any) {
+    const token: string | null = localStorage.getItem('user');
+    let _options = { params: { frameId: f_id, giftId: gift_id }, headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
+    return this.http.delete(this.baseUrl + "/api/frame/gift", _options)
 
   }
 

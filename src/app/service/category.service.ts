@@ -7,6 +7,8 @@ import { Injectable } from '@angular/core';
 export class CategoryService {
 
   constructor(private http: HttpClient) { }
+  // baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://replicagiftsbackend.onrender.com';
 
   _options = { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) };
 
@@ -23,26 +25,26 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/category/add-category", formData, _options)
+    return this.http.post(this.baseUrl + "/api/category/add-category", formData, _options)
 
 
   }
 
   getCategory() {
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/category/all")
+    return this.http.get(this.baseUrl + "/api/category/all")
   }
 
   getCategoryOnly() {
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/category/category-only")
+    return this.http.get(this.baseUrl + "/api/category/category-only")
 
   }
   getprintType() {
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/category/printType")
+    return this.http.get(this.baseUrl + "/api/category/printType")
 
   }
 
   getcategoryById(category: any) {
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/products/category/" + category);
+    return this.http.get(this.baseUrl + "/api/products/category/" + category);
   }
 
   addPrintType(data: any) {
@@ -56,7 +58,7 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/category/printType", formData, _options)
+    return this.http.post(this.baseUrl + "/api/category/printType", formData, _options)
   }
 
 
@@ -73,7 +75,7 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.put("https://replicagiftsbackend.onrender.com/api/category/update/" + id, formData, _options)
+    return this.http.put(this.baseUrl + "/api/category/update/" + id, formData, _options)
   }
 
   delete(id: any) {
@@ -81,7 +83,7 @@ export class CategoryService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}` }) };
 
 
-    return this.http.delete("https://replicagiftsbackend.onrender.com/api/category/delete/" + id, _options)
+    return this.http.delete(this.baseUrl + "/api/category/delete/" + id, _options)
   }
 
 }

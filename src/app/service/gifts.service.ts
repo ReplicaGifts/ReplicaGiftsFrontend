@@ -8,6 +8,8 @@ export class GiftsService {
 
   constructor(private http: HttpClient) { }
 
+  // baseUrl = 'http://localhost:3000';
+  baseUrl = 'https://replicagiftsbackend.onrender.com';
 
   adaGift(data: any) {
 
@@ -24,13 +26,13 @@ export class GiftsService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${admin ? JSON.parse(admin).token : ""}` }) };
 
 
-    return this.http.post("https://replicagiftsbackend.onrender.com/api/gifts", formData, _options)
+    return this.http.post(this.baseUrl + "/api/gifts", formData, _options)
 
   }
 
   getGifts() {
 
-    return this.http.get("https://replicagiftsbackend.onrender.com/api/gifts");
+    return this.http.get(this.baseUrl + "/api/gifts");
 
   }
 
@@ -48,13 +50,13 @@ export class GiftsService {
     let _options = { headers: new HttpHeaders({ 'Authorization': `Bearer ${admin ? JSON.parse(admin).token : ""}` }) };
 
 
-    return this.http.put("https://replicagiftsbackend.onrender.com/api/gifts/update/" + id, formData, _options)
+    return this.http.put(this.baseUrl + "/api/gifts/update/" + id, formData, _options)
 
   }
 
 
   delete(id: string) {
-    return this.http.delete("https://replicagiftsbackend.onrender.com/api/gifts/delete/" + id);
+    return this.http.delete(this.baseUrl + "/api/gifts/delete/" + id);
   }
 
 

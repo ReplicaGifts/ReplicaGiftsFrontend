@@ -1,6 +1,11 @@
 <div
   class="headertop"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover; padding-bottom: 120px"
+  style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif);
+    background-size: cover;
+    padding-bottom: 120px;
+  "
 >
   <div
     style="
@@ -53,17 +58,45 @@
               <h3 class="table__title">
                 {{ w.productId.title }}
                 <div *ngIf="w.userWant.gifts.length > 0">
-                  <p style="color: rgb(255, 145, 0);">+</p>
-                  <p *ngFor="let gif of w.userWant.gifts">
-                    {{ gif.gift.name }} x {{ gif.quantity }}
-                  </p>
+                  <p style="color: rgb(255, 145, 0)">+</p>
+
+                  <table>
+                    <tr *ngFor="let gif of w.userWant.gifts">
+                      <td>{{ gif.gift.name }}</td>
+                      <td>
+                        <input
+                          type="number"
+                          min="1"
+                          [max]="gif.gift.quantity"
+                          [(ngModel)]="gif.quantity"
+                          class="quantity"
+                          (input)="
+                            updateGift(
+                              w.userWant._id,
+                              gif.quantity,
+                              gif.gift._id,
+                              w._id
+                            )
+                          "
+                        />
+                      </td>
+                      <td>
+                        <i
+                          (click)="
+                            removeGift(w.userWant._id, gif.gift._id, w._id)
+                          "
+                          class="fi fi-rs-trash table__trash"
+                        ></i>
+                      </td>
+                    </tr>
+                  </table>
                 </div>
               </h3>
             </td>
             <td>
               <i class="bi bi-currency-rupee"></i> {{ w.productId.amount }}
               <span *ngIf="w.userWant.gifts.length > 0" class="table__price">
-                <p style="color: rgb(255, 145, 0);">+</p>
+                <p style="color: rgb(255, 145, 0)">+</p>
                 {{ giftTotal(w.userWant.gifts) }}</span
               >
               <!-- <span class="table__price">${{ w.productId.amount }}</span> -->

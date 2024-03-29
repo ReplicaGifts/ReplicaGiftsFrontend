@@ -1,19 +1,4 @@
-/*=============== SHOW MENU ===============*/
-const navMenu = document.getElementById("nav-menu"),
-  navToggle = document.getElementById("nav-toggle"),
-  navClose = document.getElementById("nav-close");
 
-if (navToggle) {
-  navToggle.addEventListener("click", () => {
-    navMenu.classList.add("show-menu");
-  });
-}
-
-if (navClose) {
-  navClose.addEventListener("click", () => {
-    navMenu.classList.remove("show-menu");
-  });
-}
 
 /*=============== IMAGE GALLERY ===============*/
 
@@ -307,7 +292,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 
-window.onscroll = function() {scrollFunction()};
+window.onscroll = function () { scrollFunction() };
 
 function scrollFunction() {
   if (document.body.scrollTop > 4500 || document.documentElement.scrollTop > 4500) {
