@@ -7,7 +7,7 @@ import { Product } from '../model/product.model';
 })
 export class ProductService {
 
-  // baseUrl = 'http://localhost:3000';
+  // baseUrl = 'https://replicagiftsbackend.onrender.com';
   baseUrl = 'https://replicagiftsbackend.onrender.com';
   constructor(private http: HttpClient) { }
 

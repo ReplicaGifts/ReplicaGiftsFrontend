@@ -7,7 +7,7 @@ import { CartService } from './cart.service';
 })
 export class GuestService {
 
-  // baseUrl = 'http://localhost:3000';
+  // baseUrl = 'https://replicagiftsbackend.onrender.com';
   baseUrl = 'https://replicagiftsbackend.onrender.com';
   constructor(private http: HttpClient, private cart: CartService) {
     this.initData('cart');

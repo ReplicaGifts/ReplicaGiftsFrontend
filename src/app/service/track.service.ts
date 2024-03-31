@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TrackService {
-  private baseUrl = 'http://localhost:3000/api/trackmore'; // Your backend API URL
+  private baseUrl = 'https://replicagiftsbackend.onrender.com/api/trackmore'; // Your backend API URL
 
   constructor(private http: HttpClient) { }
 

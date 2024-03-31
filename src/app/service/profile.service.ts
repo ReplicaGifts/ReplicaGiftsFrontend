@@ -8,7 +8,7 @@ export class ProfileService {
 
   constructor(private http: HttpClient) { }
 
-  // baseUrl = 'http://localhost:3000';
+  // baseUrl = 'https://replicagiftsbackend.onrender.com';
   baseUrl = 'https://replicagiftsbackend.onrender.com';
 
   addAddress(address: any, pic: any) {
