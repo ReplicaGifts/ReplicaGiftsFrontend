@@ -43,6 +43,7 @@
           <tr>
             <th class="trnew">Product</th>
             <th class="trnew">Name</th>
+            <th class="trnew">Gift</th>
             <th class="trnew">Price</th>
             <th class="trnew">Quantity</th>
             <th class="trnew">Subtotal</th>
@@ -58,40 +59,43 @@
               <h3 class="table__title">
                 {{ w.productId.title }}
                 <div *ngIf="w.userWant.gifts.length > 0">
-                  <p style="color: rgb(255, 145, 0)">+</p>
+                  <!-- <p style="color: rgb(255, 145, 0)">+</p> -->
 
-                  <table>
-                    <tr *ngFor="let gif of w.userWant.gifts">
-                      <td>{{ gif.gift.name }}</td>
-                      <td>
-                        <input
-                          type="number"
-                          min="1"
-                          [max]="gif.gift.quantity"
-                          [(ngModel)]="gif.quantity"
-                          class="quantity"
-                          (input)="
-                            updateGift(
-                              w.userWant._id,
-                              gif.quantity,
-                              gif.gift._id,
-                              w._id
-                            )
-                          "
-                        />
-                      </td>
-                      <td>
-                        <i
-                          (click)="
-                            removeGift(w.userWant._id, gif.gift._id, w._id)
-                          "
-                          class="fi fi-rs-trash table__trash"
-                        ></i>
-                      </td>
-                    </tr>
-                  </table>
+                  
                 </div>
               </h3>
+            </td>
+            <td>
+              <table>
+                <tr *ngFor="let gif of w.userWant.gifts">
+                  <td>{{ gif.gift.name }}</td>
+                  <td>
+                    <input
+                      type="number"
+                      min="1"
+                      [max]="gif.gift.quantity"
+                      [(ngModel)]="gif.quantity"
+                      class="quantity"
+                      (input)="
+                        updateGift(
+                          w.userWant._id,
+                          gif.quantity,
+                          gif.gift._id,
+                          w._id
+                        )
+                      "
+                    />
+                  </td>
+                  <td>
+                    <i
+                      (click)="
+                        removeGift(w.userWant._id, gif.gift._id, w._id)
+                      "
+                      class="fi fi-rs-trash table__trash"
+                    ></i>
+                  </td>
+                </tr>
+              </table>
             </td>
             <td>
               <i class="bi bi-currency-rupee"></i> {{ w.productId.amount }}
