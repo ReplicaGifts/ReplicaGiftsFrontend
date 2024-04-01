@@ -19,8 +19,16 @@ import { GuestService } from '../../service/guest.service';
 })
 export class HeaderComponent {
 
-  constructor(private user: UserAuthService, private router: Router, private categories: CategoryService, private wish: WishService, private cart: CartService, private product: ProductService,
-    private guest: GuestService, private route: ActivatedRoute) { }
+  constructor(private user: UserAuthService,
+    private router: Router,
+    private categories: CategoryService,
+    private wish: WishService,
+    private cart: CartService,
+    private product: ProductService,
+    private guest: GuestService,
+    private route: ActivatedRoute) { }
+
+  show: boolean = false;
 
   isAuth: boolean = false;
   category: any[] = [];

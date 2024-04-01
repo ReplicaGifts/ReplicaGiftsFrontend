@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component } from '@angular/core';
 import { ProductService } from '../service/product.service';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Product } from '../model/product.model';
@@ -14,6 +14,7 @@ import Swal from 'sweetalert2';
 import { GuestService } from '../service/guest.service';
 import { UserAuthService } from '../service/user-auth.service';
 import { FramesComponent } from '../frames/frames.component';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 
 declare global {
@@ -28,7 +29,7 @@ declare global {
 @Component({
   selector: 'app-product-details',
   standalone: true,
-  imports: [CommonModule, FormsModule, StarRatingComponent, ReactiveFormsModule, FramesComponent, RouterLink],
+  imports: [CommonModule, FormsModule, StarRatingComponent, ReactiveFormsModule, FramesComponent, RouterLink, SpinnerComponent],
   templateUrl: './product-details.component.html',
   styleUrl: './product-details.component.css'
 })
@@ -48,29 +49,17 @@ export class ProductDetailsComponent {
   private unsubscribe$: Subject<void> = new Subject<void>();
   productId: any;
 
-  new_review: string = "karthi";
 
   isAuth: boolean = this.user.isAuthenticated();
 
-  rating!: number;
-  reviews!: any;
+
   comment = new FormControl('', Validators.required)
 
-  relatedProduct: any[] = []
+  relatedProduct: any[] = [];
+
+  spinner: boolean = false;
 
 
-  getrating(rating: number) {
-    this.rating = rating;
-  }
-
-  addrating() {
-
-    if (this.comment.valid && this.comment.value) {
-      this.productService.addreview(this.data._id, this.comment.value, this.rating).subscribe((review: any) => {
-        this.data = review;
-      });
-    }
-  }
 
   gifts: any = [];
 
@@ -103,7 +92,7 @@ export class ProductDetailsComponent {
     reviews: [] as any,
     category: '',
     frame: ''
-  };
+  }
 
   img = false
 
@@ -118,7 +107,6 @@ export class ProductDetailsComponent {
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: "instant" })
 
-    this.rating = 0;
     this.route.params.pipe(
       takeUntil(this.unsubscribe$)
     ).subscribe(params => {
@@ -246,9 +234,11 @@ export class ProductDetailsComponent {
 
 
   buyNow(id: any) {
+    this.spinner = true;
 
     if (this.data.userImage) {
       if (this.frameDeatails.userImage === '') {
+        this.spinner = false;
         Swal.fire({
           icon: "error",
           title: "Oops...",
@@ -261,16 +251,21 @@ export class ProductDetailsComponent {
 
       if (this.isAuth) {
         this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {
+          this.spinner = false;
           console.log(dat);
           this.router.navigateByUrl(`/buy-now/${dat._id}`);
         });
       } else {
         this.guest.buyNow(this.frameDeatails, this.data, this.selectedGifts).subscribe((dat: any) => {
+          this.spinner = false;
+
           this.router.navigateByUrl(`/buy-now/${dat._id}`);
 
         })
       }
     } else {
+      this.spinner = false;
+
       Swal.fire({
         icon: "error",
         title: "Oops...",

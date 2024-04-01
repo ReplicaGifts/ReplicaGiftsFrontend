@@ -32,7 +32,7 @@ export class ShopeComponent {
   };
   categories: any[] = [];
   ranges: number[] = [];
-  discounts: number[] = [];
+  discounts: number[] = [10, 20, 30, 40, 50];
   products: any[] = [];
 
   selectedSort: number = 0;
@@ -59,11 +59,8 @@ export class ShopeComponent {
 
       if (id) {
 
-        if (!Array.isArray(this.selectedFilters.category)) {
-          this.selectedFilters.category = [];
-        }
         this.check = id;
-        this.selectedFilters.category.push(id);
+        this.filterCategory(id);
       }
 
     });
@@ -74,33 +71,13 @@ export class ShopeComponent {
       if (price.success) {
         this.ranges = price.ranges;
         // Update discounts array based on fetched data
-        this.updateDiscounts(price.minDiscount, price.maxDiscount);
       }
     });
 
     this.categoryService.getCategory().subscribe((category: any) => this.categories = category);
   }
 
-  private updateDiscounts(minDiscount: number, maxDiscount: number) {
-    console.log(minDiscount, maxDiscount)
-    for (let i = 0; i < 6; i++) {
-      if (i === 0) {
-        this.discounts[0] = minDiscount;
-      } else {
-        if (minDiscount === maxDiscount) {
-          break;
-        }
 
-        let d = this.discounts[i - 1] + 10;
-        if (d < maxDiscount) {
-          this.discounts.push(d);
-        } else {
-          this.discounts.push(maxDiscount);
-          break;
-        }
-      }
-    }
-  }
 
 
   filterCategory(category: any) {

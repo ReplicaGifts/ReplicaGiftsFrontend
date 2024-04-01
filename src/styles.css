@@ -7,6 +7,17 @@ body {
   overflow-x: hidden;
 }
 
+.spin {
+  position: fixed;
+
+  width: 100vw;
+  height: 50vh;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 :root {
   --header-height: 4rem;
 
@@ -129,12 +140,9 @@ table {
   border-collapse: collapse;
 }
 
-
-input[type=number]::-webkit-inner-spin-button, 
-input[type=number]::-webkit-outer-spin-button {  
-
-   opacity: 1;
-
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  opacity: 1;
 }
 
 /*=============== REUSABLE CSS CLASSES ===============*/
@@ -331,7 +339,8 @@ input[type=number]::-webkit-outer-spin-button {
 
 /*=============== HEADER & NAV ===============*/
 
-.headertop {}
+.headertop {
+}
 
 .header__top {
   background-color: var(--body-color);
@@ -847,7 +856,7 @@ input[type=number]::-webkit-outer-spin-button {
 /* Basic styling for the select element */
 #quantitySelect {
   padding: 15px;
- 
+
   /* Adjust padding as needed */
   font-size: 14px;
   width: 100% !important;
@@ -856,7 +865,6 @@ input[type=number]::-webkit-outer-spin-button {
 
 /* Styling for the options within the select element */
 #quantitySelect option {
-  
   background: hsl(0, 0%, 93%) !important;
   /* Background color of options */
   color: black;
@@ -1096,7 +1104,6 @@ input[type=number]::-webkit-outer-spin-button {
   -moz-border-radius: 50%;
   -ms-border-radius: 50%;
   -o-border-radius: 50%;
- 
 }
 
 .action__btn::before,
@@ -1119,7 +1126,6 @@ input[type=number]::-webkit-outer-spin-button {
 }
 
 .action__btn::after {
-
   content: attr(aria-label);
   bottom: 100%;
   background-color: var(--first-color);
@@ -1424,7 +1430,7 @@ padding-top: 20px;
   margin-bottom: 0.5rem;
 }
 
-.table>:not(:last-child)>:last-child>* {
+.table > :not(:last-child) > :last-child > * {
   border-bottom: 1px solid rgb(199, 199, 199);
 }
 
@@ -1816,9 +1822,6 @@ padding-top: 20px;
   -o-border-radius: 0.25rem;
 }
 
-
-
-
 .new.required .control-label:after {
   content: "*";
   color: red;
@@ -2053,7 +2056,6 @@ padding-top: 20px;
 .table__title,
 .table__stock {
   color: var(--text-color);
-
 }
 
 .table__description {
@@ -2064,7 +2066,6 @@ padding-top: 20px;
 .table__trash {
   color: var(--text-color-light);
   cursor: pointer;
-
 }
 
 .table__trash:hover {
@@ -3121,7 +3122,7 @@ color: rgb(255, 89, 0) ;
   font-weight: 600;
 }
 
-.contact .php-email-form .error-message br+br {
+.contact .php-email-form .error-message br + br {
   margin-top: 25px;
 }
 
