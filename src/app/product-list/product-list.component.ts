@@ -10,6 +10,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserAuthService } from '../service/user-auth.service';
 import { GuestService } from '../service/guest.service';
 import Swal from 'sweetalert2';
+import '../../../node_modules/aos/dist/aos.css'
 
 declare global {
   interface Window {
@@ -64,22 +65,22 @@ export class ProductListComponent {
     if (this.isAuth) {
       this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
 
-          if (this.isAuth) {
-            Swal.fire({
-              position: "center",
-              icon: "success",
-              title: "Item Added to Wishlist",
-              showConfirmButton: false,
-              timer: 1000
-            });
-            return;
-          }
+      if (this.isAuth) {
+        Swal.fire({
+          position: "center",
+          icon: "success",
+          title: "Item Added to Wishlist",
+          showConfirmButton: false,
+          timer: 1000
+        });
+        return;
+      }
 
-        
-        }
 
-     
-    
+    }
+
+
+
     else {
       this.guest.addToWish(id)
 

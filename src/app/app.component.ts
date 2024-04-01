@@ -32,7 +32,7 @@ export class AppComponent {
 
   ngOnInit(): void {
 
-   AOS.init({
+    AOS.init({
       duration: 1200,
       easing: 'ease-in-out',
       once: true // Animations only occur once
@@ -47,10 +47,10 @@ export class AppComponent {
       }
     });
 
- 
 
-   
-    
+
+
+
   }
   get isAdminRoute() {
     return this.routerService.isRouteAdmin();

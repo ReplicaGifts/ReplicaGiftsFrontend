@@ -31,7 +31,12 @@
 
 <div
   class="headertop"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover; padding-bottom: 120px"
+  style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif);
+    background-size: cover;
+    padding-bottom: 120px;
+  "
 >
   <div
     style="
@@ -49,8 +54,24 @@
   </div>
 </div>
 
+<div
+  *ngIf="wishList.length <= 0"
+  class="section--lg container d-flex justify-content-between align-items-center gap-5"
+>
+  <img
+    src="../../assets/assets/img/kettle-desaturated._CB424694257_.svg"
+    width="300"
+    height="300"
+    alt=""
+    srcset=""
+  />
+  <div class="w-100">
+    <h4>The Your Wish List Is Empty.</h4>
+  </div>
+</div>
+
 <!--=============== MAIN ===============-->
-<main class="main">
+<main class="main" *ngIf="wishList.length > 0">
   <!--=============== BREADCRUMB ===============-->
   <section class="breadcrumb">
     <ul class="breadcrumb__list flex container">
@@ -87,7 +108,9 @@
               </h3>
             </td>
             <td>
-              <span class="table__price"><i class="bi bi-currency-rupee"></i>{{ wish.amount }}</span>
+              <span class="table__price"
+                ><i class="bi bi-currency-rupee"></i>{{ wish.amount }}</span
+              >
             </td>
             <td><span class="table__stock">In Stock</span></td>
             <td>

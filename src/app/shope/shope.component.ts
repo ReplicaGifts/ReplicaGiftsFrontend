@@ -41,6 +41,8 @@ export class ShopeComponent {
 
   private filterSubject = new BehaviorSubject<any>(this.selectedFilters);
 
+  spinner = false;
+
   check = false;
   pageNo: any[] = [];
   ngOnInit(): void {

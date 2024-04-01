@@ -116,7 +116,7 @@
         >
           <h3 class="tab__header">Your Orders</h3>
           <div class="tab__body">
-            <table class="placed__order-table">
+            <table class="placed__order-table" *ngIf="orders.length > 0">
               <thead>
                 <tr>
                   <th>Orders</th>
@@ -155,7 +155,7 @@
         >
           <h3 class="tab__header">Track Your Orders</h3>
           <div class="tab__body">
-            <table class="placed__order-table">
+            <table class="placed__order-table" *ngIf="orders.length > 0">
               <thead>
                 <tr>
                   <th>Orders</th>
@@ -337,7 +337,7 @@
         >
           <h3 class="tab__header">Your Cart</h3>
           <div class="tab__body">
-            <table class="placed__order-table">
+            <table class="placed__order-table" *ngIf="cartList.length > 0">
               <thead>
                 <tr>
                   <th>Name</th>
@@ -441,9 +441,9 @@
           content
           id="orders"
         >
-          <h3 class="tab__header">Your Cart</h3>
+          <h3 class="tab__header">Your Wish</h3>
           <div class="tab__body">
-            <table class="placed__order-table">
+            <table class="placed__order-table" *ngIf="wishList.length > 0">
               <thead>
                 <tr>
                   <th>Name</th>

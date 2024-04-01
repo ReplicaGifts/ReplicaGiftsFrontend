@@ -75,7 +75,7 @@
     <h3 class="section__title" data-aos="fade-right">
       <span>Popular</span> Categories
     </h3>
-    <div class="categories__container swiper">
+    <div class="categories__container swiper" data-aos="fade-right">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of categories; let i = index">
           <a
@@ -100,13 +100,14 @@
   <!--=============== NEW ARRIVALS ===============-->
 
   <section class="new__arrivals container section">
-    <h3 class="section__title" data-aos="fade-right">
+    <h3 class="section__title" data-aos="fade-left">
       <span>New</span> Arrivals
     </h3>
-    <div class="new__container swiper">
+    <div class="new__container swiper" data-aos="fade-left">
       <div class="swiper-wrapper">
-        <ng-container *ngFor="let cate of newProduct; let i = index">
+        <ng-container *ngIf="newProduct.length > 0">
           <div
+            *ngFor="let cate of newProduct; let i = index"
             class="product__item swiper-slide"
             data-aos="flip-right"
             data-aos="flip-right"
@@ -167,13 +168,13 @@
   </section>
 
   <section class="new__arrivals container section">
-    <h3 class="section__title" data-aos="fade-right">
+    <h3 class="section__title" data-aos="fade-left">
       <span>Trending</span> Now
     </h3>
-    <div class="new__container swiper">
+    <div class="new__container swiper" data-aos="fade-right">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of trending; let i = index">
-          <div class="product__item swiper-slide" data-aos="flip-right" >
+          <div class="product__item swiper-slide" data-aos="flip-right">
             <div class="product__banner">
               <a (click)="nav(cate._id)" class="product__images1">
                 <img [src]="cate.image" alt="" class="product__img default" />
@@ -229,10 +230,10 @@
   </section>
 
   <section class="new__arrivals container section">
-    <h3 class="section__title" data-aos="fade-right">
+    <h3 class="section__title" data-aos="fade-left">
       <span>Best</span> Seller
     </h3>
-    <div class="new__container swiper">
+    <div class="new__container swiper" data-aos="fade-left">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of trending; let i = index">
           <div class="product__item swiper-slide" data-aos="flip-right">
