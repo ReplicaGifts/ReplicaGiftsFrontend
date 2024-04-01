@@ -212,7 +212,7 @@
                 <td>
                   <h3 class="table__title">
                     {{ prod.productId.title }} x {{ prod.quantity }}
-                    <ng-container *ngIf="prod.userWant.gifts > 0">
+                    <ng-container *ngIf="prod.userWant.gifts.length > 0">
                       <p style="color: rgb(255, 145, 0); font-size: 18px">+</p>
                       <ul class="list-unstyled">
                         <li *ngFor="let gif of prod.userWant.gifts">

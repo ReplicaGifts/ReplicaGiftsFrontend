@@ -1,29 +1,10 @@
 <app-header></app-header>
 
-<main class="main">
-  <div
-    class="toast align-items-center"
-    role="alert"
-    aria-live="polite"
-    aria-atomic="true"
-    data-bs-delay="10000"
-  >
-    <div class="d-flex">
-      <div class="toast-body">Hello, world! This is a toast message.</div>
-      <button
-        type="button"
-        class="btn-close me-2 m-auto"
-        data-bs-dismiss="toast"
-        aria-label="Close"
-      ></button>
-    </div>
-  </div>
-
-
-
+<main class="main" style="z-index: 1">
   <!--=============== HOME ===============-->
-  <section class="home section--lg" data-aos="fade-up">
-    <div class="home__container container grid">
+
+  <section class="home section--lg" data-aos="fade-up" style="z-index: 1">
+    <div class="home__container container grid" style="z-index: 1">
       <div class="home__content">
         <span class="home__subtitle">New Photo Designs</span>
         <h1 class="home__title">
@@ -41,9 +22,6 @@
       />
     </div>
   </section>
-
-
-
 
   <!--=============== CATEGORIES ===============-->
 
@@ -161,8 +139,12 @@
                 [readonly]="true"
               ></app-star-rating>
               <div class="product__price flex">
-                <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
-                <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
+                <span class="new__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span
+                >
+                <span class="old__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span
+                >
                 <a
                   (click)="nav(cate._id)"
                   class="action__btn cart__btn"
@@ -183,7 +165,6 @@
       </div>
     </div>
   </section>
-
 
   <section class="new__arrivals container section">
     <h3 class="section__title" data-aos="fade-right">
@@ -220,8 +201,12 @@
                 [readonly]="true"
               ></app-star-rating>
               <div class="product__price flex">
-                <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
-                <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ cate.price }}</span>
+                <span class="new__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span
+                >
+                <span class="old__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ cate.price }}</span
+                >
                 <a
                   (click)="nav(cate._id)"
                   class="action__btn cart__btn"
@@ -277,8 +262,12 @@
                 [readonly]="true"
               ></app-star-rating>
               <div class="product__price flex">
-                <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span>
-                <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ cate.price }}</span>
+                <span class="new__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ cate.amount }}</span
+                >
+                <span class="old__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ cate.price }}</span
+                >
                 <a
                   (click)="nav(cate._id)"
                   class="action__btn cart__btn"
@@ -322,7 +311,6 @@
   </section>
   <!-- End Cta Section -->
 
-  
   <section id="services" class="services new__arrivals container section1">
     <h3 class="section__title1" data-aos="fade-right">
       <span>Why</span> Replicagifts?
@@ -427,8 +415,6 @@
       </div>
     </div>
   </section>
-
-
 
   <section id="faq" class="faq">
     <div data-aos="fade-up">
@@ -563,13 +549,14 @@
           <div class="row">
             <div class="col-md-12">
               <div class="info-box">
-                <a href="https://www.google.com/maps/place/115,+Big+St,+Mainckam+Colony,+Pattukkottai,+Tamil+Nadu+614601/data=!4m2!3m1!1s0x3b000096ad30d5cb:0x3127d169f9ab264d?sa=X&ved=1t:242&ictx=111" class="location-link">
-                  <i class="fas fa-map-marker-alt"></i> <!-- Font Awesome location icon -->
+                <a
+                  href="https://www.google.com/maps/place/115,+Big+St,+Mainckam+Colony,+Pattukkottai,+Tamil+Nadu+614601/data=!4m2!3m1!1s0x3b000096ad30d5cb:0x3127d169f9ab264d?sa=X&ved=1t:242&ictx=111"
+                  class="location-link"
+                >
+                  <i class="fas fa-map-marker-alt"></i>
+                  <!-- Font Awesome location icon -->
                 </a>
-                <h3>
-                  Our
-                  Address
-                </h3>
+                <h3>Our Address</h3>
                 <p>
                   115, Big street, Pattukottai, Thanjavur, TamilNadu, 614601
                 </p>
@@ -580,14 +567,9 @@
                 <a href="mailto:replicagifts567@gmail.com" class="email-link">
                   <i class="fa fa-envelope" aria-hidden="true"></i>
                 </a>
-                
-               
-                <h3>
-                  Email Us
-                </h3>
-                <p>
-                  replicagifts567&#64;gmail.com<br />contact&#64;gmail.com
-                </p>
+
+                <h3>Email Us</h3>
+                <p>replicagifts567&#64;gmail.com<br />contact&#64;gmail.com</p>
               </div>
             </div>
             <div class="col-md-6">
@@ -596,7 +578,7 @@
                   <i class="fa fa-phone" aria-hidden="true"></i>
                 </a>
                 <h3>Call Us</h3>
-                <p>+91 5589 55488 55<br/>(+91) 91 444 93444</p>
+                <p>+91 5589 55488 55<br />(+91) 91 444 93444</p>
               </div>
             </div>
           </div>

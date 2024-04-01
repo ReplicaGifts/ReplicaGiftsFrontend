@@ -1,5 +1,14 @@
-<div class="headertop" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover; padding-bottom: 120px">
-  <div style="
+<div
+  class="headertop"
+  style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif);
+    background-size: cover;
+    padding-bottom: 120px;
+  "
+>
+  <div
+    style="
       padding-top: 100px;
       display: flex;
       align-items: center;
@@ -8,7 +17,8 @@
       font-size: 50px;
       font-weight: 800;
       letter-spacing: 1px;
-    ">
+    "
+  >
     Shopping Products
   </div>
 </div>
@@ -26,12 +36,23 @@
     <div style="width: 100%; padding-bottom: 20px">
       <ul class="nav__list" style="float: right; padding-right: 40px">
         <li class="nav__item">
-          <a class="nav__link" style="padding-right: 500px; color: rgb(136, 136, 136)">Showing {{ products.length }}
-            photos</a>
+          <a
+            class="nav__link"
+            style="padding-right: 500px; color: rgb(136, 136, 136)"
+            >Showing {{ products.length }} photos</a
+          >
         </li>
         <li class="nav__item">
-          <a href="#" class="nav__link" style="padding-right: 20px; color: rgb(136, 136, 136)"><img
-              src="../../assets/assets/img/sort-descending-6609.svg" alt="" style="padding-right: 6px" />SORT</a>
+          <a
+            href="#"
+            class="nav__link"
+            style="padding-right: 20px; color: rgb(136, 136, 136)"
+            ><img
+              src="../../assets/assets/img/sort-descending-6609.svg"
+              alt=""
+              style="padding-right: 6px"
+            />SORT</a
+          >
 
           <a (click)="applySort(0)" class="nav__link">Popularities</a>
           <div id="dropdown">
@@ -48,16 +69,25 @@
     </div>
     <div class="sidebar col-lg-3">
       <h3>
-        <img style="width: 30px; height: 30px; margin-right: 20px" src="../../assets/assets/img/noun-filter-4800805.svg"
-          alt="" />Filter
+        <img
+          style="width: 30px; height: 30px; margin-right: 20px"
+          src="../../assets/assets/img/noun-filter-4800805.svg"
+          alt=""
+        />Filter
       </h3>
       <!-- <input type="text" placeholder="Product Search..." class="form__input" /> -->
       <hr />
       <h3>Category</h3>
       <ul class="category-list">
         <li *ngFor="let category of categories">
-          <input type="radio" class="checkboxsyle" name="category" [value]="category._id"
-            [checked]="check === category._id" (change)="filterCategory(category._id)" />{{ category.categoryName }}
+          <input
+            type="radio"
+            class="checkboxsyle"
+            name="category"
+            [value]="category._id"
+            [checked]="check === category._id"
+            (change)="filterCategory(category._id)"
+          />{{ category.categoryName }}
         </li>
       </ul>
       <hr />
@@ -65,8 +95,12 @@
       <ul class="category-list">
         <li *ngFor="let pric of ranges; let i = index">
           <ng-container *ngIf="i !== ranges.length - 1">
-            <input type="radio" class="checkboxsyle" name="price"
-              (change)="applyPriceRange($event, ranges[i], ranges[i + 1])" />
+            <input
+              type="radio"
+              class="checkboxsyle"
+              name="price"
+              (change)="applyPriceRange($event, ranges[i], ranges[i + 1])"
+            />
             <i class="bi bi-currency-rupee"></i>{{ ranges[i] }} -
             <i class="bi bi-currency-rupee"></i>{{ ranges[i + 1] }}
           </ng-container>
@@ -76,31 +110,55 @@
       <h3>Discount Range</h3>
       <ul class="category-list">
         <li *ngFor="let dis of discounts">
-          <input type="radio" class="checkboxsyle" (change)="applyDiscount($event, dis)" />{{ dis }}% Off or More
+          <input
+            type="radio"
+            class="checkboxsyle"
+            name="discount"
+            (change)="applyDiscount($event, dis)"
+          />{{ dis }}% Off or More
         </li>
       </ul>
 
-      <hr />
+      <!-- <hr />
       <h3>Review Range</h3>
 
       <ul class="category-list">
         <li *ngFor="let rating of [1, 2, 3, 4]" style="display: flex">
-          <input class="form-check" type="radio" name="rating" (click)="applyRating($event, rating)" />
-          <app-star-rating [rating]="rating" [readonly]="true"></app-star-rating>
+          <input
+            class="form-check"
+            type="radio"
+            name="rating"
+            (click)="applyRating($event, rating)"
+          />
+          <app-star-rating
+            [rating]="rating"
+            [readonly]="true"
+          ></app-star-rating>
         </li>
-      </ul>
+      </ul> -->
     </div>
 
     <div class="products__container grid col-lg-9">
-      <div *ngFor="let product of products; let i = index" class="product__item">
+      <div
+        *ngFor="let product of products; let i = index"
+        class="product__item"
+      >
         <div class="product__banner">
           <a (click)="nav(product._id)" class="product__images1">
-            <img id="productImage" [src]="product.image" alt="" class="product__img default" style="height: 250px" />
+            <img
+              id="productImage"
+              [src]="product.image"
+              alt=""
+              class="product__img default"
+              style="height: 250px"
+            />
           </a>
           <div class="product__actions">
-
-            <a (click)="addWish(product)" class="action__btn" aria-label="Add to Wishlist">
-
+            <a
+              (click)="addWish(product)"
+              class="action__btn"
+              aria-label="Add to Wishlist"
+            >
               <i class="fa-solid fa-heart"></i>
             </a>
           </div>
@@ -108,37 +166,56 @@
         <div class="product__content">
           <span class="product__category">{{
             product.category.categoryName
-            }}</span>
+          }}</span>
           <a (click)="nav(product._id)">
             <h3 class="product__title">{{ product.title }}</h3>
           </a>
-          <app-star-rating [rating]="product.totalrating" [readonly]="true"></app-star-rating>
+          <app-star-rating
+            [rating]="product.totalrating"
+            [readonly]="true"
+          ></app-star-rating>
           <div class="product__price flex">
-            <span class="new__price"><i class="bi bi-currency-rupee"></i>{{ product.amount }}</span>
-            <span class="old__price"><i class="bi bi-currency-rupee"></i>{{ product.price }}</span>
-            <a (click)="nav(product._id)" class="action__btn cart__btn" aria-label="Add To Cart">
+            <span class="new__price"
+              ><i class="bi bi-currency-rupee"></i>{{ product.amount }}</span
+            >
+            <span class="old__price"
+              ><i class="bi bi-currency-rupee"></i>{{ product.price }}</span
+            >
+            <a
+              (click)="nav(product._id)"
+              class="action__btn cart__btn"
+              aria-label="Add To Cart"
+            >
               <i class="fa fa-shopping-cart"></i>
             </a>
           </div>
         </div>
       </div>
-
-
-
     </div>
-    <div class="d-flex justify-content-center my-4" style="margin-left: 100px;">
+    <div class="d-flex justify-content-center my-4" style="margin-left: 100px">
       <ng-container *ngIf="pageNo.length > 1">
-        <button class="btns3 btn-link" (click)="selectedFilters.page = 1; applySearch()">
+        <button
+          class="btns3 btn-link"
+          (click)="selectedFilters.page = 1; applySearch()"
+        >
           First
         </button>
-        <button class=" btns3 {{
+        <button
+          class=" btns3 {{
             selectedFilters.page === i + 1 ? 'active' : 'btn-link'
-          }}" *ngFor="let _ of pageNo; let i = index" (click)="selectedFilters.page = _; applySearch()">
+          }}"
+          *ngFor="let _ of pageNo; let i = index"
+          (click)="selectedFilters.page = _; applySearch()"
+        >
           {{ i + 1 }}
         </button>
-        <button *ngIf="selectedFilters.page < pageNo.length" class="btns3 btn-link" (click)="
+        <button
+          *ngIf="selectedFilters.page < pageNo.length"
+          class="btns3 btn-link"
+          (click)="
             selectedFilters.page = selectedFilters.page + 1; applySearch()
-          ">
+          "
+        >
           <i class="bi bi-arrow-right"></i>
         </button>
       </ng-container>
