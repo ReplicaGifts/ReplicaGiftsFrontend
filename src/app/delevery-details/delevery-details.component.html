@@ -1,142 +1,18 @@
-<!-- <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <label for="namee" class="form-label">Name</label>
-      <input
-        type="text"
-        class="form-control"
-        id="namee"
-        [(ngModel)]="billingDetails.name"
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="email" class="form-label">Email</label>
-      <input
-        type="email"
-        class="form-control"
-        id="email"
-        [(ngModel)]="billingDetails.email"
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="city" class="form-label">City</label>
-      <input
-        type="text"
-        class="form-control"
-        id="city"
-        [(ngModel)]="billingDetails.city"
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="state" class="form-label">State</label>
-      <input
-        type="text"
-        class="form-control"
-        id="state"
-        [(ngModel)]="billingDetails.state"
-      />
-    </div>
-    <div class="col-md-12">
-      <label for="country" class="form-label">Country</label>
-      <input
-        type="country"
-        class="form-control"
-        id="country"
-        [(ngModel)]="billingDetails.country"
-      />
-    </div>
-    <div class="col-md-12">
-      <label for="country" class="form-label">Address</label>
-      <input
-        type="address"
-        class="form-control"
-        id="address"
-        [(ngModel)]="billingDetails.address"
-      />
-    </div>
+<div *ngIf="spinner" class="spin">
+  <app-spinner></app-spinner>
+</div>
 
-    <div class="col-md-6">
-      <label for="city" class="form-label">Postcode</label>
-      <input
-        type="text"
-        class="form-control"
-        id="postcode"
-        [(ngModel)]="billingDetails.postcode"
-      />
-    </div>
-    <div class="col-md-6">
-      <label for="country" class="form-label">Phone</label>
-      <input
-        type="phone"
-        class="form-control"
-        id="phone"
-        [(ngModel)]="billingDetails.phone"
-      />
-    </div>
-  </div>
-
-  <table>
-    <thead>
-      <th colspan="2">PRODUCT</th>
-      <th>TOTAL</th>
-    </thead>
-    <tbody>
-      <tr *ngIf="product">
-        <td>
-          <img
-            [src]="product.image"
-            width="100"
-            height="100"
-            alt=""
-            srcset=""
-          />
-        </td>
-        <td>
-          {{ product.title }} x {{ quantity }} +
-          <ul class="list-unstyled">
-            <li *ngFor="let gif of gifts">
-              {{ gif.gift.name }} x {{ gif.quantity }}
-            </li>
-          </ul>
-        </td>
-        <td>{{ totalPrice }}</td>
-      </tr>
-      <ng-container *ngFor="let prod of shoppingCart">
-        <tr *ngIf="shoppingCart">
-          <td>
-            <img
-              [src]="prod.productId.image"
-              width="100"
-              height="100"
-              alt=""
-              srcset=""
-            />
-          </td>
-          <td>
-            {{ prod.productId.title }} x {{ prod.quantity }}
-            +
-            <ul class="list-unstyled">
-              <li *ngFor="let gif of prod.userWant.gifts">
-                {{ gif.gift.name }} x {{ gif.quantity }}
-              </li>
-            </ul>
-          </td>
-          <td>{{ prod.userWant.totalAmount }}</td>
-        </tr>
-      </ng-container>
-    </tbody>
-    <tfoot>
-      <th>TOTAL</th>
-      <td>
-        {{ totalPrice }}
-      </td>
-    </tfoot>
-  </table>
-  <button (click)="checkout()" class="btn btn-warning">Checkout</button>
-</div> -->
-
-<div class="headertop" style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover; padding-bottom: 120px">
-  <div style="
+<div
+  class="headertop"
+  style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif);
+    background-size: cover;
+    padding-bottom: 120px;
+  "
+>
+  <div
+    style="
       padding-top: 100px;
       display: flex;
       align-items: center;
@@ -145,7 +21,8 @@
       font-size: 50px;
       font-weight: 800;
       letter-spacing: 1px;
-    ">
+    "
+  >
     Checkout
   </div>
 </div>
@@ -178,8 +55,14 @@
 
           <div class="new required col-md-6">
             <label class="control-label"> First name </label>
-            <input type="text" class="form-control" id="inputName" placeholder="" required="required"
-              [(ngModel)]="billingDetails.name" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.name"
+            />
           </div>
 
           <!-- <div class="new required col-md-6">
@@ -195,8 +78,14 @@
 
           <div class="new required col-md-6">
             <label class="control-label"> Email </label>
-            <input type="email" class="form-control" id="inputName" placeholder="" required="required"
-              [(ngModel)]="billingDetails.email" />
+            <input
+              type="email"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.email"
+            />
           </div>
 
           <!-- <div class="new required col-md-6">
@@ -206,15 +95,26 @@
 
           <div class="new required col-md-6">
             <label class="control-label"> City </label>
-            <input type="text" class="form-control" id="inputName" placeholder="" required="required"
-              [(ngModel)]="billingDetails.city" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.city"
+            />
           </div>
-
 
           <div class="new required col-md-6">
             <label class="control-label"> Phone </label>
-            <input type="text" class="form-control" id="inputName" placeholder="" required="required"
-              [(ngModel)]="billingDetails.phone" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.phone"
+            />
           </div>
 
           <!-- <div class="new required col-md-6">
@@ -229,13 +129,24 @@
 
           <div class="new required col-md-12">
             <label class="control-label"> Street Address </label>
-            <input type="text" class="form-control" id="inputName" placeholder="" required="required"
-              [(ngModel)]="billingDetails.address" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.address"
+            />
           </div>
 
           <div class="new required col-md-12">
             <label class="control-label"> State </label>
-            <input class="form-control" id="inputName" required="required" [(ngModel)]="billingDetails.state" />
+            <input
+              class="form-control"
+              id="inputName"
+              required="required"
+              [(ngModel)]="billingDetails.state"
+            />
             <!-- <option value="">Select a state</option>
               <option value="Alabama">Alabama</option>
               <option value="Alaska">Alaska</option> -->
@@ -245,8 +156,14 @@
 
           <div class="new required col-md-12">
             <label class="control-label"> Country </label>
-            <input type="text" class="form-control" id="inputName" placeholder="" required="required"
-              [(ngModel)]="billingDetails.country" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.country"
+            />
           </div>
           <!-- <div class="new required col-md-6">
             <label for="inputPostcode" class="form-label">Postcode</label>
@@ -255,16 +172,20 @@
 
           <div class="new required col-md-12">
             <label class="control-label"> Postcode </label>
-            <input type="text" class="form-control" id="inputName" placeholder="" required="required"
-              [(ngModel)]="billingDetails.postcode" />
+            <input
+              type="text"
+              class="form-control"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.postcode"
+            />
           </div>
 
           <!-- <div class="new required col-md-6">
             <label for="inputPhone" class="form-label">Phone</label>
             <input type="text" class="form-control" id="inputPhone" placeholder="">
           </div> -->
-
-
         </div>
       </div>
       <div class="checkout__group">
@@ -281,21 +202,31 @@
             <ng-container *ngFor="let prod of shoppingCart">
               <tr *ngIf="shoppingCart">
                 <td>
-                  <img [src]="prod.productId.image" class="order__img" alt="" srcset="" />
+                  <img
+                    [src]="prod.productId.image"
+                    class="order__img"
+                    alt=""
+                    srcset=""
+                  />
                 </td>
                 <td>
                   <h3 class="table__title">
                     {{ prod.productId.title }} x {{ prod.quantity }}
-                    <p style="color: rgb(255, 145, 0); font-size: 18px;"> + </p>
-                    <ul class="list-unstyled">
-                      <li *ngFor="let gif of prod.userWant.gifts">
-                        {{ gif.gift.name }} x {{ gif.quantity }}
-                      </li>
-                    </ul>
+                    <ng-container *ngIf="prod.userWant.gifts > 0">
+                      <p style="color: rgb(255, 145, 0); font-size: 18px">+</p>
+                      <ul class="list-unstyled">
+                        <li *ngFor="let gif of prod.userWant.gifts">
+                          {{ gif.gift.name }} x {{ gif.quantity }}
+                        </li>
+                      </ul>
+                    </ng-container>
                   </h3>
                 </td>
                 <td>
-                  <span class="table__price"><i class="bi bi-currency-rupee"></i>{{ prod.userWant.totalAmount }}</span>
+                  <span class="table__price"
+                    ><i class="bi bi-currency-rupee"></i
+                    >{{ prod.userWant.totalAmount }}</span
+                  >
                 </td>
               </tr>
             </ng-container>
@@ -305,17 +236,23 @@
               </td>
               <td>
                 <h3 class="table__title">
-                  {{ product.title }} x {{ quantity }} +
-                  <ul class="list-unstyled">
-                    <li *ngFor="let gif of gifts">
-                      {{ gif.gift.name }} x {{ gif.quantity }}
-                    </li>
-                  </ul>
+                  {{ product.title }} x {{ quantity }}
+                  <ng-container *ngIf="gifts.length > 0">
+                    <p style="color: rgb(255, 145, 0); font-size: 18px">+</p>
+
+                    <ul class="list-unstyled">
+                      <li *ngFor="let gif of gifts">
+                        {{ gif.gift.name }} x {{ gif.quantity }}
+                      </li>
+                    </ul>
+                  </ng-container>
                 </h3>
                 <p class="table__quantity"></p>
               </td>
               <td>
-                <span class="table__price"><i class="bi bi-currency-rupee"></i>{{ totalPrice }}</span>
+                <span class="table__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ totalPrice }}</span
+                >
               </td>
             </tr>
             <tr>
@@ -324,7 +261,9 @@
               </td>
               <td><span class="order__subtitle">Total</span></td>
               <td>
-                <span class="order__grand-total"><i class="bi bi-currency-rupee"></i>{{ totalPrice }}</span>
+                <span class="order__grand-total"
+                  ><i class="bi bi-currency-rupee"></i>{{ totalPrice }}</span
+                >
               </td>
             </tr>
           </tbody>

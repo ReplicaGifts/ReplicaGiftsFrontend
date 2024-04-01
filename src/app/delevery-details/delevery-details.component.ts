@@ -10,12 +10,13 @@ import { ProfileService } from '../service/profile.service';
 import Swal from 'sweetalert2';
 import { UserAuthService } from '../service/user-auth.service';
 import { GuestService } from '../service/guest.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 
 @Component({
   selector: 'app-delevery-details',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, SpinnerComponent],
   templateUrl: './delevery-details.component.html',
   styleUrl: './delevery-details.component.css'
 })
@@ -26,6 +27,8 @@ export class DeleveryDetailsComponent {
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   isAuth = this.user.isAuthenticated();
+
+  spinner: boolean = false;
 
   billingDetails = {
     name: '',
@@ -114,7 +117,7 @@ export class DeleveryDetailsComponent {
         icon: "error",
         title: "Missing billing details",
         text: "Please fill out the billing details",
-        position:"center"
+        position: "center"
       });
 
       console.log(this.billingDetails)
@@ -131,7 +134,9 @@ export class DeleveryDetailsComponent {
 
 
     if (this.isAuth) {
+      this.spinner = true;
       this.payment.createOrder(this.checkoutData).subscribe(res => {
+        this.spinner = false;
         if (res.success) {
           // Handle payment success
           console.log(res);
@@ -243,7 +248,7 @@ export class DeleveryDetailsComponent {
     // Payment succeeded
     console.log("Payment succeeded");
     console.log(response);
-
+    this.spinner = true;
     console.log(paymentResponse)
 
     // Verify payment signature
@@ -251,19 +256,23 @@ export class DeleveryDetailsComponent {
 
 
       this.payment.verifySignature(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature, paymentResponse.frameDetails).subscribe(payment => {
+        this.spinner = false;
         Swal.fire({
-          position: "top-end",
+          position: "center",
           icon: "success",
           title: "Payment Successed",
           showConfirmButton: false,
-          timer: 1500
+          timer: 1000
         });
-        this.router.navigateByUrl('/');
+
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1000)
       })
     } else {
       this.guest.verify(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature, paymentResponse.frameDetails).subscribe(payment => {
         Swal.fire({
-          position: "top-end",
+          position: "center",
           icon: "success",
           title: "Payment Successed",
           showConfirmButton: false,

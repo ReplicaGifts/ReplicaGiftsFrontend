@@ -10,7 +10,7 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
 
-  // baseUrl = 'https://replicagiftsbackend.onrender.com';
+  baseUrll = 'http://localhost:3000';
   baseUrl = 'https://replicagiftsbackend.onrender.com';
 
   NoOFCartItem = new BehaviorSubject<number>(0);
@@ -120,7 +120,7 @@ export class CartService {
   deleteGift(f_id: any, gift_id: any) {
     const token: string | null = localStorage.getItem('user');
     let _options = { params: { frameId: f_id, giftId: gift_id }, headers: new HttpHeaders({ 'Authorization': `Bearer ${token ? JSON.parse(token).token : ""}`, 'Content-Type': 'application/json' }) };
-    return this.http.delete(this.baseUrl + "/api/frame/gift", _options)
+    return this.http.delete(this.baseUrll + "/api/frame/gift", _options)
 
   }
 

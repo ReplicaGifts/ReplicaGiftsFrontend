@@ -128,18 +128,21 @@
               </thead>
               <tbody>
                 <tr *ngFor="let order of orders">
-                  <td>{{ order.product.title }}</td>
-                  <td>{{ order.chreatedAt | date }}</td>
-                  <td>{{ order.status ? "Paid" : "Pending" }}</td>
-                  <td *ngIf="order.status">{{ order.deliveryStatus }}</td>
-                  <td *ngIf="!order.status">
-                    <button class="view__order" (click)="nav(order._id)">
-                      Checkout
-                    </button>
-                  </td>
-                  <td>
-                    <i class="bi bi-currency-rupee"></i>{{ order.totalAmount }}
-                  </td>
+                  <ng-container *ngIf="order.product">
+                    <td>{{ order.product.title }}</td>
+                    <td>{{ order.chreatedAt | date }}</td>
+                    <td>{{ order.status ? "Paid" : "Pending" }}</td>
+                    <td *ngIf="order.status">{{ order.deliveryStatus }}</td>
+                    <td *ngIf="!order.status">
+                      <button class="view__order" (click)="nav(order._id)">
+                        Checkout
+                      </button>
+                    </td>
+                    <td>
+                      <i class="bi bi-currency-rupee"></i
+                      >{{ order.totalAmount }}
+                    </td>
+                  </ng-container>
                 </tr>
               </tbody>
             </table>
@@ -163,20 +166,22 @@
               <tbody>
                 <ng-container *ngFor="let order of orders">
                   <tr *ngIf="order.status">
-                    <td>{{ order.product.title }}</td>
-                    <td>{{ order.deliveryStatus }}</td>
-                    <td>
-                      <a
-                        *ngIf="order.tracking_id"
-                        href="https://jabezraja31119979a.trackingmore.org/{{
-                          order.tracking_id
-                        }}?page=tracking-page&mode=iframe"
-                        rou
-                        class="view__order"
-                        >Track</a
-                      >
-                      <p *ngIf="!order.tracking_id">Under Processing</p>
-                    </td>
+                    <ng-container *ngIf="order.product">
+                      <td>{{ order.product.title }}</td>
+                      <td>{{ order.deliveryStatus }}</td>
+                      <td>
+                        <a
+                          *ngIf="order.tracking_id"
+                          href="https://jabezraja31119979a.trackingmore.org/{{
+                            order.tracking_id
+                          }}?page=tracking-page&mode=iframe"
+                          rou
+                          class="view__order"
+                          >Track</a
+                        >
+                        <p *ngIf="!order.tracking_id">Under Processing</p>
+                      </td>
+                    </ng-container>
                   </tr>
                 </ng-container>
               </tbody>
@@ -344,85 +349,87 @@
               </thead>
               <tbody>
                 <tr *ngFor="let w of cartList">
-                  <td>
-                    <h3 class="table__title">
-                      {{ w.productId.title }}
-                      <div *ngIf="w.userWant.gifts.length > 0">
-                        <p style="color: rgb(255, 145, 0)">+</p>
+                  <ng-container *ngIf="w.productId">
+                    <td>
+                      <h3 class="table__title">
+                        {{ w.productId.title }}
+                        <div *ngIf="w.userWant.gifts.length > 0">
+                          <p style="color: rgb(255, 145, 0)">+</p>
 
-                        <table>
-                          <tr *ngFor="let gif of w.userWant.gifts">
-                            <td>{{ gif.gift.name }}</td>
-                            <td>
-                              <input
-                                type="number"
-                                min="1"
-                                [max]="gif.gift.quantity"
-                                [(ngModel)]="gif.quantity"
-                                class="quantity"
-                                (input)="
-                                  updateGift(
-                                    w.userWant._id,
-                                    gif.quantity,
-                                    gif.gift._id,
-                                    w._id
-                                  )
-                                "
-                              />
-                            </td>
-                            <td>
-                              <i
-                                (click)="
-                                  removeGift(
-                                    w.userWant._id,
-                                    gif.gift._id,
-                                    w._id
-                                  )
-                                "
-                                class="fi fi-rs-trash table__trash"
-                              ></i>
-                            </td>
-                          </tr>
-                        </table>
-                      </div>
-                    </h3>
-                  </td>
-                  <td>
-                    <i class="bi bi-currency-rupee"></i>
-                    {{ w.productId.amount }}
-                    <span
-                      *ngIf="w.userWant.gifts.length > 0"
-                      class="table__price"
-                    >
-                      <p style="color: rgb(255, 145, 0)">+</p>
-                      <i class="bi bi-currency-rupee"></i
-                      >{{ giftTotal(w.userWant.gifts) }}</span
-                    >
-                    <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
-                  </td>
-                  <td>
-                    <input
-                      type="number"
-                      [(ngModel)]="w.userWant.quantity"
-                      class="quantity"
-                      min="1"
-                      (input)="
-                        updateQt(w._id, w.userWant.quantity, w.userWant._id)
-                      "
-                    />
-                  </td>
-                  <td>
-                    <span class="subtotal"
-                      ><i class="bi bi-currency-rupee"></i
-                      >{{ w.userWant.totalAmount }}</span
-                    >
-                  </td>
-                  <td>
-                    <i
-                      (click)="remove(w._id)"
-                      class="fi fi-rs-trash table__trash"
-                    ></i>
-                  </td>
+                          <table>
+                            <tr *ngFor="let gif of w.userWant.gifts">
+                              <td>{{ gif.gift.name }}</td>
+                              <td>
+                                <input
+                                  type="number"
+                                  min="1"
+                                  [max]="gif.gift.quantity"
+                                  [(ngModel)]="gif.quantity"
+                                  class="quantity"
+                                  (input)="
+                                    updateGift(
+                                      w.userWant._id,
+                                      gif.quantity,
+                                      gif.gift._id,
+                                      w._id
+                                    )
+                                  "
+                                />
+                              </td>
+                              <td>
+                                <i
+                                  (click)="
+                                    removeGift(
+                                      w.userWant._id,
+                                      gif.gift._id,
+                                      w._id
+                                    )
+                                  "
+                                  class="fi fi-rs-trash table__trash"
+                                ></i>
+                              </td>
+                            </tr>
+                          </table>
+                        </div>
+                      </h3>
+                    </td>
+                    <td>
+                      <i class="bi bi-currency-rupee"></i>
+                      {{ w.productId.amount }}
+                      <span
+                        *ngIf="w.userWant.gifts.length > 0"
+                        class="table__price"
+                      >
+                        <p style="color: rgb(255, 145, 0)">+</p>
+                        <i class="bi bi-currency-rupee"></i
+                        >{{ giftTotal(w.userWant.gifts) }}</span
+                      >
+                      <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
+                    </td>
+                    <td>
+                      <input
+                        type="number"
+                        [(ngModel)]="w.userWant.quantity"
+                        class="quantity"
+                        min="1"
+                        (input)="
+                          updateQt(w._id, w.userWant.quantity, w.userWant._id)
+                        "
+                      />
+                    </td>
+                    <td>
+                      <span class="subtotal"
+                        ><i class="bi bi-currency-rupee"></i
+                        >{{ w.userWant.totalAmount }}</span
+                      >
+                    </td>
+                    <td>
+                      <i
+                        (click)="remove(w._id)"
+                        class="fi fi-rs-trash table__trash"
+                      ></i>
+                    </td>
+                  </ng-container>
                 </tr>
               </tbody>
             </table>
@@ -448,29 +455,33 @@
               </thead>
               <tbody>
                 <tr *ngFor="let wish of wishList">
-                  <td>
-                    <h3 class="table__title">
-                      {{ wish.title }}
-                    </h3>
-                  </td>
-                  <td>
-                    <span class="table__price"
-                      ><i class="bi bi-currency-rupee"></i
-                      >{{ wish.amount }}</span
-                    >
-                  </td>
-                  <td><span class="table__stock">In Stock</span></td>
-                  <td>
-                    <a [routerLink]="['/product', wish._id]" class="active-link"
-                      >Add to Cart</a
-                    >
-                  </td>
-                  <td>
-                    <i
-                      (click)="removeWish(wish._id)"
-                      class="fi fi-rs-trash table__trash"
-                    ></i>
-                  </td>
+                  <ng-container *ngIf="wish">
+                    <td>
+                      <h3 class="table__title">
+                        {{ wish.title }}
+                      </h3>
+                    </td>
+                    <td>
+                      <span class="table__price"
+                        ><i class="bi bi-currency-rupee"></i
+                        >{{ wish.amount }}</span
+                      >
+                    </td>
+                    <td><span class="table__stock">In Stock</span></td>
+                    <td>
+                      <a
+                        [routerLink]="['/product', wish._id]"
+                        class="active-link"
+                        >Add to Cart</a
+                      >
+                    </td>
+                    <td>
+                      <i
+                        (click)="removeWish(wish._id)"
+                        class="fi fi-rs-trash table__trash"
+                      ></i>
+                    </td>
+                  </ng-container>
                 </tr>
               </tbody>
             </table>
