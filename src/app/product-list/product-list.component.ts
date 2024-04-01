@@ -51,7 +51,6 @@ export class ProductListComponent {
     this.product.getNew().subscribe((trending: any) => this.newProduct = trending);
   }
 
-
   nav(id: any) {
     this.router.navigateByUrl(`/product/${id}`)
   }

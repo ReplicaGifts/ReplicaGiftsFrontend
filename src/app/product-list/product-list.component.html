@@ -173,7 +173,7 @@
     <div class="new__container swiper">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of trending; let i = index">
-          <div class="product__item swiper-slide" data-aos="flip-right">
+          <div class="product__item swiper-slide" data-aos="flip-right" >
             <div class="product__banner">
               <a (click)="nav(cate._id)" class="product__images1">
                 <img [src]="cate.image" alt="" class="product__img default" />

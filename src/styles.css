@@ -1,6 +1,7 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Spartan:wght@400;500;600;700&display=swap");
 
+
 /*=============== VARIABLES CSS ===============*/
 
 body {
@@ -1813,7 +1814,7 @@ padding-top: 20px;
 .quantity {
   background-color: hsl(0, 0%, 100%);
   width: 50px !important;
-  padding-block: 0.4rem;
+  padding-block: 0.9rem;
   padding-inline: 0.2rem 0.2rem;
   border-radius: 0.25rem;
   -webkit-border-radius: 0.25rem;
@@ -2064,7 +2065,7 @@ padding-top: 20px;
 }
 
 .table__trash {
-  color: var(--text-color-light);
+  color: red;
   cursor: pointer;
 }
 
@@ -2205,6 +2206,7 @@ input.qtyminus {
   padding: 20px;
   border-radius: 8px;
   background-color: #ffffff;
+ 
 }
 
 .checkout__group .section__title {
@@ -2285,6 +2287,10 @@ input.qtyminus {
 .payment__label {
   font-size: var(--small-font-size);
   user-select: none;
+}
+
+.order__table{
+  overflow: auto !important;
 }
 
 .sidebar {
@@ -2410,6 +2416,7 @@ input.qtyminus {
 /*=============== ACCOUNTS ===============*/
 .accounts__container {
   grid-template-columns: 4fr 8fr;
+  
 }
 
 .account__tabs {
@@ -2419,6 +2426,7 @@ input.qtyminus {
   -moz-border-radius: 0.25rem;
   -ms-border-radius: 0.25rem;
   -o-border-radius: 0.25rem;
+  
 }
 
 .account__tab {
@@ -2450,6 +2458,7 @@ input.qtyminus {
 
 .tab__content {
   border: 1px solid var(--border-color-alt);
+
 }
 
 .tab__header {
@@ -2461,6 +2470,7 @@ input.qtyminus {
 
 .tab__body {
   padding: 1rem;
+ 
 }
 
 .placed__order-table thead tr th {
@@ -2766,6 +2776,9 @@ input.qtyminus {
   .table tbody tr td:nth-child(6) {
     width: 100px;
   }
+
+
+  
 }
 
 @media screen and (max-width: 768px) {
@@ -2777,7 +2790,9 @@ input.qtyminus {
   .showcase__container,
   .footer__container,
   .login-register__container,
-  .details__container {
+  .details__container 
+  
+  {
     grid-template-columns: 100%;
   }
 
@@ -2831,17 +2846,19 @@ input.qtyminus {
     line-height: 30px;
   }
 
-  .placed__order-table th,
+  /* .placed__order-table th,
   .order__table tr th {
-    display: none;
-  }
+    display: block;
+  } */
 
-  .placed__order-table tr td,
+  /* .placed__order-table tr td,
   .order__table tr td,
   .info__table tr th,
   .info__table tr td {
     display: block;
-  }
+  } */
+
+  
 
   .form__group {
     grid-template-columns: 1fr;
@@ -2872,6 +2889,13 @@ input.qtyminus {
     flex-direction: column;
     align-items: center;
   }
+
+
+
+  
+  /* .newTab{
+    display: block !important;
+} */
 
   .product__actions {
     display: none;
