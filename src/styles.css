@@ -381,6 +381,7 @@ input[type=number]::-webkit-outer-spin-button {
 .header__user-actions {
   display: flex;
   align-items: center;
+  z-index: 2;
 }
 
 .nav {
@@ -548,6 +549,7 @@ input[type=number]::-webkit-outer-spin-button {
 .home__container {
   grid-template-columns: 5fr 7fr;
   align-items: center;
+  
 }
 
 .home__subtitle,
@@ -582,6 +584,7 @@ input[type=number]::-webkit-outer-spin-button {
   justify-self: flex-end;
   background-color: #333;
   padding: 10px;
+
 }
 
 .detailscroll {
@@ -2554,7 +2557,7 @@ input.qtyminus {
     height: 100%;
     padding: 1.25rem 2rem;
     background-color: var(--body-color);
-    z-index: 100;
+    z-index:1;
     flex-direction: column;
     align-items: flex-start;
     row-gap: 2rem;
@@ -2962,6 +2965,7 @@ input.qtyminus {
   list-style: none;
   display: inline-block;
   position: relative;
+
 }
 
 /* .nav__link {
@@ -3003,6 +3007,7 @@ input.qtyminus {
 
 .nav__item:hover #dropdown {
   display: block;
+  z-index: 2;
 }
 
 .header__contact {
