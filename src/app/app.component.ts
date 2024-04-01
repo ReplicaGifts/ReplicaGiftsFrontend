@@ -4,6 +4,7 @@ import { Router, RouterOutlet, NavigationStart } from '@angular/router';
 import { FooterComponent } from './partials/footer/footer.component';
 import { HeaderAllComponent } from './partials/header-all/header-all.component';
 import { RouterService } from './service/router.service';
+import AOS from 'aos';
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -30,6 +31,14 @@ export class AppComponent {
   constructor(private router: Router, private routerService: RouterService) { }
 
   ngOnInit(): void {
+
+   AOS.init({
+      duration: 1200,
+      easing: 'ease-in-out',
+      once: true // Animations only occur once
+    });
+    AOS.init();
+
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationStart) {
         this.isRootRoute = (event.url === '/' || event.url.includes('/#contact'));
@@ -37,6 +46,11 @@ export class AppComponent {
         this.admin = this.routerService.isRouteAdmin();
       }
     });
+
+ 
+
+   
+    
   }
   get isAdminRoute() {
     return this.routerService.isRouteAdmin();

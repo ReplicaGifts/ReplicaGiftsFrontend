@@ -40,3 +40,17 @@
     border-top-left-radius: 0.25rem;
     border-top: none;
 } */
+
+
+.tabName{
+    padding-right: 20px;
+   color: black;
+}
+
+
+
+.quantity {
+   
+    padding-block: 0.2rem;
+  
+  }
