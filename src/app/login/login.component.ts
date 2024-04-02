@@ -29,22 +29,30 @@ export class LoginComponent {
     });
   }
 
+  err: boolean | string = false;
+
 
   login() {
     if (this.myForm.valid) {
-      this.auth.login(this.myForm.value).subscribe(user => {
-        Swal.fire({
-          position: "center",
-          icon: "success",
-          title: "Login successed",
-          showConfirmButton: false,
-          timer: 1500
-        });
-        localStorage.setItem('user', JSON.stringify(user));
-        this.auth.isAuthenticated();
+      this.auth.login(this.myForm.value).subscribe((user: any) => {
+        console.log('login:', user);
+        if (user.success) {
+          Swal.fire({
+            position: "center",
+            icon: "success",
+            title: "Login successed",
+            showConfirmButton: false,
+            timer: 1500
+          });
+          localStorage.setItem('user', JSON.stringify(user));
+          this.auth.isAuthenticated();
 
-        this.router.navigate(['']);
+          this.router.navigate(['']);
+        } else {
+          this.err = user.message;
+        }
       }, error => {
+
         console.log(error);
       });
     } else {

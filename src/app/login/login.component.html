@@ -66,7 +66,12 @@
 
 <div
   class="headertop"
-  style="background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif); background-size:cover;padding-bottom: 120px"
+  style="
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+      url(../../assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif);
+    background-size: cover;
+    padding-bottom: 120px;
+  "
 >
   <div
     style="
@@ -102,33 +107,82 @@
           <div class="card">
             <div class="card-body">
               <h2 class="card-title text-center mb-4">Login</h2>
-              <form [formGroup]="myForm" (ngSubmit)="login()" class="needs-validation" novalidate autocomplete="off">
+              <form
+                [formGroup]="myForm"
+                (ngSubmit)="login()"
+                class="needs-validation"
+                novalidate
+                autocomplete="off"
+              >
                 <div class="mb-3">
                   <label for="email">Email Address</label>
-                  <input id="email" type="email" class="form-control" name="email" formControlName="email" [attr.required]="true" autofocus placeholder="Enter your email">
-                  <div *ngIf="myForm.get('email')?.invalid && (myForm.get('email')?.dirty || myForm.get('email')?.touched)" class="invalid-feedback">Enter a valid email address.</div>
+                  <input
+                    id="email"
+                    type="email"
+                    class="form-control"
+                    name="email"
+                    formControlName="email"
+                    [attr.required]="true"
+                    autofocus
+                    placeholder="Enter your email"
+                  />
+                  <div
+                    *ngIf="
+                      myForm.get('email')?.invalid &&
+                      (myForm.get('email')?.dirty ||
+                        myForm.get('email')?.touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    Enter a valid email address.
+                  </div>
                 </div>
                 <div class="mb-3">
                   <label for="password">Password</label>
-                  <input id="password" type="password" class="form-control" name="password" formControlName="password" [attr.required]="true" placeholder="Enter your password">
-                  <div *ngIf="myForm.get('password')?.invalid && (myForm.get('password')?.dirty || myForm.get('password')?.touched)" class="invalid-feedback">Password is required.</div>
+                  <input
+                    id="password"
+                    type="password"
+                    class="form-control"
+                    name="password"
+                    formControlName="password"
+                    [attr.required]="true"
+                    placeholder="Enter your password"
+                  />
+                  <div
+                    *ngIf="
+                      myForm.get('password')?.invalid &&
+                      (myForm.get('password')?.dirty ||
+                        myForm.get('password')?.touched)
+                    "
+                    class="invalid-feedback"
+                  >
+                    Password is required.
+                  </div>
                 </div>
                 <div class="form-check mb-3">
-                  <input type="checkbox" name="remember" id="remember" class="form-check-input">
-                  <label for="remember" class="form-check-label">Remember Me</label>
+                  <input
+                    type="checkbox"
+                    name="remember"
+                    id="remember"
+                    class="form-check-input"
+                  />
+                  <label for="remember" class="form-check-label"
+                    >Remember Me</label
+                  >
                 </div>
+                <p class="text-danger" *ngIf="err">{{ err }}</p>
                 <div class="text-center">
                   <button type="submit" class="btn btn-primary">Login</button>
                 </div>
               </form>
             </div>
             <div class="card-footer text-center">
-              Don't have an account? <a [routerLink]="['/register']">Create Account</a>
+              Don't have an account?
+              <a [routerLink]="['/register']">Create Account</a>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  
 </main>
