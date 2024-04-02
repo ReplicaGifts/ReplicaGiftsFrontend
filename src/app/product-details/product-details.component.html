@@ -50,12 +50,15 @@
             Upload Image
           </button>
 
-          <div style="display: flex; justify-content: space-between">
+          <div
+            style="display: flex; justify-content: space-between"
+            class="me-5"
+          >
             <div class="details__meta">
               <div class="meta__list">
                 <p class="form-label">Select Print Type:</p>
                 <select
-                  id="quantitySelect"
+                  class="form-select"
                   [(ngModel)]="frameDeatails.printType"
                 >
                   <option
@@ -73,7 +76,7 @@
             <div class="details__meta">
               <div class="meta__list">
                 <p class="form-label">Size:</p>
-                <select id="quantitySelect" [(ngModel)]="frameDeatails.size">
+                <select class="form-select" [(ngModel)]="frameDeatails.size">
                   <option
                     *ngFor="let print of data.availablePrintSize"
                     [value]="+print.width + ' x ' + +print.height + ' inche'"
@@ -89,7 +92,7 @@
                 <p class="form-label">Quantity:</p>
                 <input
                   type="number"
-                  class="quantity"
+                  class="form-select-sm"
                   min="1"
                   [(ngModel)]="frameDeatails.quantity"
                 />

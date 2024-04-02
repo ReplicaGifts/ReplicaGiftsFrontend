@@ -46,32 +46,45 @@ export class HeaderAllComponent {
   }
 
   navToCate(id: any) {
+    this.toggle = false;
     this.router.navigateByUrl(`/shop?category=${id}`)
   }
 
   navToLogin() {
+    this.toggle = false;
+
     this.router.navigate(['/login']);
   }
 
   navToProfile() {
+    this.toggle = false;
+
     this.router.navigate(['/profile']);
 
   }
 
   navCart() {
+    this.toggle = false;
+
     this.router.navigate(['/cart']);
   }
 
   navWish() {
+    this.toggle = false;
+
     this.router.navigate(['/wish']);
   }
 
   nav() {
+    this.toggle = false;
+
     this.router.navigate([''])
   }
 
 
   navShop() {
+    this.toggle = false;
+
     this.router.navigate(['/shop']);
   }
 

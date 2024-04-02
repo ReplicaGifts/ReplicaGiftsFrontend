@@ -188,7 +188,9 @@ export class DeleveryDetailsComponent {
         }
       );
     } else {
+      this.spinner = true;
       this.guest.checkout(this.checkoutData).subscribe((res: any) => {
+        this.spinner = false;
         if (res.success) {
           // Handle payment success
           console.log(res);
@@ -283,7 +285,9 @@ export class DeleveryDetailsComponent {
           localStorage.removeItem('cart');
         }
 
-        this.router.navigateByUrl('/');
+        setTimeout(() => {
+          this.router.navigate(['/']);
+        }, 1000)
       })
 
     }

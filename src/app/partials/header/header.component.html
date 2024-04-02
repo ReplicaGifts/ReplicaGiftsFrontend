@@ -78,7 +78,7 @@
           >
         </li>
         <li class="nav__item">
-          <a (click)="navShop()" class="nav__link"
+          <a (click)="navShop(); toggle = false" class="nav__link"
             ><i class="bi bi-shop"></i>Shop</a
           >
         </li>
@@ -88,13 +88,15 @@
           >
           <div id="dropdown" style="z-index: 1000">
             <ng-container *ngFor="let cate of category">
-              <a (click)="navToCate(cate._id)">{{ cate.categoryName }}</a>
+              <a (click)="navToCate(cate._id); toggle = false">{{
+                cate.categoryName
+              }}</a>
             </ng-container>
           </div>
         </li>
 
         <li class="nav__item">
-          <a (click)="navToProfile()" class="nav__link"
+          <a (click)="navToProfile(); toggle = false" class="nav__link"
             ><i class="bi bi-person"></i>My Account</a
           >
         </li>

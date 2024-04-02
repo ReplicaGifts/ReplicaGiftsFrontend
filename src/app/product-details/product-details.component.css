@@ -49,3 +49,11 @@
   justify-content: center;
   align-items: center;
 }
+
+.form-select-sm {
+  border: rgb(200, 200, 200, 0.9) solid 1px;
+  font-size: 1rem;
+  border-radius: 5px;
+  padding: 5px;
+  width: 4rem;
+}

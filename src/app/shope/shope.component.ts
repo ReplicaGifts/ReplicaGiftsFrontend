@@ -27,7 +27,8 @@ export class ShopeComponent implements OnDestroy {
     private router: Router,
     private route: ActivatedRoute,
     private wish: WishService,
-    private user: UserAuthService) { }
+    private user: UserAuthService
+  ) { }
 
   isAuth = this.user.isAuthenticated();
 
