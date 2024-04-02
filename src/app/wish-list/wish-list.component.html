@@ -55,7 +55,7 @@
 </div>
 
 <div
-  *ngIf="wishList.length <= 0"
+  *ngIf="wishList.length <= 0 && showContent"
   class="section--lg container d-flex justify-content-center"
 >
   <div
@@ -70,9 +70,16 @@
       class="img"
     />
     <div class="w-100">
-      <h4>The Your Wish List Is Empty.</h4>
+      <h4>Your Wish List Is Empty.</h4>
     </div>
   </div>
+</div>
+
+<div
+  *ngIf="!showContent"
+  class="section--lg container d-flex justify-content-center my-5"
+>
+  <app-spinner></app-spinner>
 </div>
 
 <!--=============== MAIN ===============-->

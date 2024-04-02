@@ -66,9 +66,8 @@ export class GuestService {
         const newItem = { _id: self.crypto.randomUUID(), productId: product, quantity: +frameDeatails.quantity, userWant: frame, total: +frameDeatails.quantity * +product.amount };
         cart.push(newItem);
         this.setData(cart, 'cart');
+        this.cart.NoOFCartItem.next(cart.length);
 
-
-        this.cart.NoOFCartItem.next(this.getCart.length);
       })
       return true;
     } catch (error) {

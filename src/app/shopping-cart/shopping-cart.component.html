@@ -24,7 +24,14 @@
 </div>
 
 <div
-  *ngIf="cartList.length <= 0"
+  *ngIf="!showContent"
+  class="section--lg container d-flex justify-content-center my-5"
+>
+  <app-spinner></app-spinner>
+</div>
+
+<div
+  *ngIf="cartList.length <= 0 && showContent"
   class="section--lg container d-flex justify-content-center"
 >
   <div
@@ -37,7 +44,7 @@
       class="img"
     />
     <div class="w-100">
-      <h4>The Your Cart Is Empty.</h4>
+      <h4>Your Cart Is Empty.</h4>
       <button [routerLink]="['/shop']" class="btns">Shop Now</button>
     </div>
   </div>
@@ -85,7 +92,7 @@
                 </h3>
               </td>
               <td>
-                <table>
+                <!-- <table>
                   <tr *ngFor="let gif of w.userWant.gifts">
                     <td>{{ gif.gift.name }}</td>
                     <td>
@@ -114,7 +121,29 @@
                       ></i>
                     </td>
                   </tr>
-                </table>
+                </table> -->
+                <div *ngFor="let gif of w.userWant.gifts">
+                  {{ gif.gift.name }} x
+                  <input
+                    type="number"
+                    min="1"
+                    [max]="gif.gift.quantity"
+                    [(ngModel)]="gif.quantity"
+                    class="quantity"
+                    (input)="
+                      updateGift(
+                        w.userWant._id,
+                        gif.quantity,
+                        gif.gift._id,
+                        w._id
+                      )
+                    "
+                  />
+                  <i
+                    (click)="removeGift(w.userWant._id, gif.gift._id, w._id)"
+                    class="fi fi-rs-trash table__trash"
+                  ></i>
+                </div>
               </td>
               <td>
                 <i class="bi bi-currency-rupee"></i> {{ w.productId.amount }}
