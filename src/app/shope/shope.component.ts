@@ -1,4 +1,4 @@
-import { Component, SimpleChanges } from '@angular/core';
+import { Component, OnDestroy, SimpleChanges } from '@angular/core';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../service/category.service';
@@ -9,20 +9,33 @@ import { BehaviorSubject, debounceTime } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { UserAuthService } from '../service/user-auth.service';
 import { GuestService } from '../service/guest.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-shope',
   standalone: true,
-  imports: [StarRatingComponent, CommonModule, FormsModule],
+  imports: [StarRatingComponent, CommonModule, FormsModule, SpinnerComponent],
   templateUrl: './shope.component.html',
   styleUrl: './shope.component.css'
 })
-export class ShopeComponent {
+export class ShopeComponent implements OnDestroy {
 
-  constructor(private categoryService: CategoryService, private product: ProductService, private guest: GuestService,
-    private router: Router, private route: ActivatedRoute, private wish: WishService, private user: UserAuthService) { }
+  constructor(
+    private categoryService: CategoryService,
+    private product: ProductService,
+    private guest: GuestService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private wish: WishService,
+    private user: UserAuthService) { }
 
   isAuth = this.user.isAuthenticated();
+
+  subscribetion: any[] = [];
+
+  count: number = 0;
+
+  spinner: boolean = false;
 
   selectedFilters: any = {
     search: '',
@@ -41,22 +54,23 @@ export class ShopeComponent {
 
   private filterSubject = new BehaviorSubject<any>(this.selectedFilters);
 
-  spinner = false;
-
   check = false;
   pageNo: any[] = [];
   ngOnInit(): void {
 
+    this.spinner = true;
     window.scrollTo({ top: 0, behavior: "instant" })
     // Subscribe to filter changes and debounce the input
-    this.filterSubject.pipe(
+    this.subscribetion.push(this.filterSubject.pipe(
+
       debounceTime(300) // Debounce input to avoid rapid API requests
+
     ).subscribe((filters: any) => {
-
+      this.spinner = true;
       this.getFilteredProduct(filters);
-    });
+    }))
 
-    this.route.queryParams.subscribe(params => {
+    this.subscribetion.push(this.route.queryParams.subscribe(params => {
       let id = params['category'];
 
       if (id) {
@@ -64,19 +78,18 @@ export class ShopeComponent {
         this.check = id;
         this.filterCategory(id);
       }
-
-    });
+    }));
 
     this.loadInitialData();
 
-    this.product.priceRange().subscribe((price: any) => {
+    this.subscribetion.push(this.product.priceRange().subscribe((price: any) => {
       if (price.success) {
         this.ranges = price.ranges;
         // Update discounts array based on fetched data
       }
-    });
+    }));
 
-    this.categoryService.getCategory().subscribe((category: any) => this.categories = category);
+    this.subscribetion.push(this.categoryService.getCategory().subscribe((category: any) => this.categories = category));
   }
 
 
@@ -87,6 +100,8 @@ export class ShopeComponent {
 
       this.selectedFilters.category = category;
     }
+    this.selectedFilters.page = 1;
+
 
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
@@ -99,6 +114,8 @@ export class ShopeComponent {
       this.selectedFilters.min = '';
       this.selectedFilters.max = '';
     }
+    this.selectedFilters.page = 1;
+
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
 
@@ -108,6 +125,8 @@ export class ShopeComponent {
     } else {
       this.selectedFilters.discount = '';
     }
+    this.selectedFilters.page = 1;
+
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
 
@@ -146,7 +165,7 @@ export class ShopeComponent {
 
   addWish(id: any) {
     if (this.isAuth)
-      this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
+      this.subscribetion.push(this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() }));
     else {
 
       this.guest.addToWish(id)
@@ -156,14 +175,23 @@ export class ShopeComponent {
 
 
   getFilteredProduct(selected: any) {
-    this.product.limitedProduct(selected).subscribe((products: any) => {
+    this.subscribetion.push(this.product.limitedProduct(selected).subscribe((products: any) => {
       this.products = products.product;
       console.log(this.products);
       this.pageNo = [];
       for (let i = 0; i < products.total; i++) {
         this.pageNo[i] = i + 1;
       }
-    });
+
+      this.spinner = false;
+      this.count = products.count;
+    }));
+  }
+
+  ngOnDestroy() {
+    this.subscribetion.forEach((s) => {
+      s.unsubscribe();
+    })
   }
 
 }
