@@ -1,7 +1,6 @@
 /*=============== GOOGLE FONTS ===============*/
 @import url("https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Spartan:wght@400;500;600;700&display=swap");
 
-
 /*=============== VARIABLES CSS ===============*/
 
 body {
@@ -12,7 +11,9 @@ body {
   position: fixed;
 
   width: 100vw;
-  height: 50vh;
+  height: 100vh;
+
+  top: 0;
 
   display: flex;
   justify-content: center;
@@ -558,7 +559,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .home__container {
   grid-template-columns: 5fr 7fr;
   align-items: center;
-  
 }
 
 .home__subtitle,
@@ -593,7 +593,6 @@ input[type="number"]::-webkit-outer-spin-button {
   justify-self: flex-end;
   background-color: #333;
   padding: 10px;
-
 }
 
 .detailscroll {
@@ -2209,7 +2208,6 @@ input.qtyminus {
   padding: 20px;
   border-radius: 8px;
   background-color: #ffffff;
- 
 }
 
 .checkout__group .section__title {
@@ -2292,7 +2290,7 @@ input.qtyminus {
   user-select: none;
 }
 
-.order__table{
+.order__table {
   overflow: auto !important;
 }
 
@@ -2419,7 +2417,6 @@ input.qtyminus {
 /*=============== ACCOUNTS ===============*/
 .accounts__container {
   grid-template-columns: 4fr 8fr;
-  
 }
 
 .account__tabs {
@@ -2429,7 +2426,6 @@ input.qtyminus {
   -moz-border-radius: 0.25rem;
   -ms-border-radius: 0.25rem;
   -o-border-radius: 0.25rem;
-  
 }
 
 .account__tab {
@@ -2461,7 +2457,6 @@ input.qtyminus {
 
 .tab__content {
   border: 1px solid var(--border-color-alt);
-
 }
 
 .tab__header {
@@ -2473,7 +2468,6 @@ input.qtyminus {
 
 .tab__body {
   padding: 1rem;
- 
 }
 
 .placed__order-table thead tr th {
@@ -2558,7 +2552,7 @@ input.qtyminus {
     height: 100%;
     padding: 1.25rem 2rem;
     background-color: var(--body-color);
-    z-index:1;
+    z-index: 1;
     flex-direction: column;
     align-items: flex-start;
     row-gap: 2rem;
@@ -2779,9 +2773,6 @@ input.qtyminus {
   .table tbody tr td:nth-child(6) {
     width: 100px;
   }
-
-
-  
 }
 
 @media screen and (max-width: 768px) {
@@ -2793,9 +2784,7 @@ input.qtyminus {
   .showcase__container,
   .footer__container,
   .login-register__container,
-  .details__container 
-  
-  {
+  .details__container {
     grid-template-columns: 100%;
   }
 
@@ -2861,8 +2850,6 @@ input.qtyminus {
     display: block;
   } */
 
-  
-
   .form__group {
     grid-template-columns: 1fr;
   }
@@ -2893,9 +2880,6 @@ input.qtyminus {
     align-items: center;
   }
 
-
-
-  
   /* .newTab{
     display: block !important;
 } */
@@ -2966,7 +2950,6 @@ input.qtyminus {
   list-style: none;
   display: inline-block;
   position: relative;
-
 }
 
 /* .nav__link {

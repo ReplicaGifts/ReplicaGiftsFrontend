@@ -23,6 +23,10 @@
   </div>
 </div>
 
+<div class="spin" *ngIf="spinner">
+  <app-spinner></app-spinner>
+</div>
+
 <main class="main">
   <section class="products container row col-lg-12">
     <!-- <p class="total__products">SELECT YOUR PHOTOS! <span></span></p> -->
@@ -39,12 +43,11 @@
           <a
             class="nav__link"
             style="padding-right: 500px; color: rgb(136, 136, 136)"
-            >Showing {{ products.length }} photos</a
+            >Showing {{ count }} photos</a
           >
         </li>
         <li class="nav__item">
           <a
-            href="#"
             class="nav__link"
             style="padding-right: 20px; color: rgb(136, 136, 136)"
             ><img
