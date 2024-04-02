@@ -6,10 +6,11 @@ import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserAuthService } from '../service/user-auth.service';
 import { GuestService } from '../service/guest.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 @Component({
   selector: 'app-shopping-cart',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, SpinnerComponent],
   templateUrl: './shopping-cart.component.html',
   styleUrl: './shopping-cart.component.css'
 })
@@ -24,6 +25,7 @@ export class ShoppingCartComponent {
 
   isAuth: Boolean = this.user.isAuthenticated();
 
+  showContent = false
 
   ngOnInit() {
     this.total = 0;
@@ -36,6 +38,7 @@ export class ShoppingCartComponent {
     if (this.isAuth) {
 
       this.cart.getCart().subscribe((cart: any) => {
+        this.showContent = true;
         this.cartList = cart;
         if (isDelet) {
           this.total = 0
@@ -54,6 +57,8 @@ export class ShoppingCartComponent {
         console.log(this.total)
       }
       this.cartList = this.guest.getCart();
+      this.showContent = true;
+
       this.cartList.map((cart) => {
         this.total = this.total + cart.userWant.totalAmount;
       })

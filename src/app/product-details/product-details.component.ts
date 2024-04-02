@@ -201,7 +201,7 @@ export class ProductDetailsComponent {
             title: "Item Added to Cart",
             showConfirmButton: false,
             timer: 1500
-          })
+          });
 
           this.frameDeatails = {
             userImage: '',

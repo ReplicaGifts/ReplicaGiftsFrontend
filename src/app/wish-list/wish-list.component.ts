@@ -6,11 +6,12 @@ import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { UserAuthService } from '../service/user-auth.service';
 import { GuestService } from '../service/guest.service';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-wish-list',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, RouterLink, SpinnerComponent],
   templateUrl: './wish-list.component.html',
   styleUrl: './wish-list.component.css'
 })
@@ -21,6 +22,9 @@ export class WishListComponent {
   isAuth = this.user.isAuthenticated();
 
   wishList: any[] = [];
+
+  showContent = false
+
 
   ngOnInit() {
     window.scrollTo({ top: 0, behavior: "instant" })
@@ -33,11 +37,14 @@ export class WishListComponent {
 
       this.wish.getWishList().subscribe((wishList: any) => {
         console.log(wishList);
+        this.showContent = true;
+
         this.wishList = wishList;
         this.wish.noOfWish.next(wishList.length);
       });
     } else {
       this.wishList = this.guest.getWish();
+      this.showContent = true;
       this.wish.noOfWish.next(this.guest.getWish().length);
 
       console.log(this.wishList);
