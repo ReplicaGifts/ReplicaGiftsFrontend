@@ -95,21 +95,23 @@
     </ul>
   </section>
 
-  <section class="login-section">
+  <section class="login-section logpad">
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">
-          <div class="card">
+          <div class="card border-0">
+            <div class="card-header">
+              <h2 class="card-title text-center mb-0">LOGIN</h2>
+            </div>
             <div class="card-body">
-              <h2 class="card-title text-center mb-4">Login</h2>
               <form [formGroup]="myForm" (ngSubmit)="login()" class="needs-validation" novalidate autocomplete="off">
                 <div class="mb-3">
-                  <label for="email">Email Address</label>
+                  <label for="email" class="form-label">Email Address</label>
                   <input id="email" type="email" class="form-control" name="email" formControlName="email" [attr.required]="true" autofocus placeholder="Enter your email">
                   <div *ngIf="myForm.get('email')?.invalid && (myForm.get('email')?.dirty || myForm.get('email')?.touched)" class="invalid-feedback">Enter a valid email address.</div>
                 </div>
                 <div class="mb-3">
-                  <label for="password">Password</label>
+                  <label for="password" class="form-label">Password</label>
                   <input id="password" type="password" class="form-control" name="password" formControlName="password" [attr.required]="true" placeholder="Enter your password">
                   <div *ngIf="myForm.get('password')?.invalid && (myForm.get('password')?.dirty || myForm.get('password')?.touched)" class="invalid-feedback">Password is required.</div>
                 </div>
@@ -118,7 +120,7 @@
                   <label for="remember" class="form-check-label">Remember Me</label>
                 </div>
                 <div class="text-center">
-                  <button type="submit" class="btn btn-primary">Login</button>
+                  <button type="submit" class="btns btn-block">Login</button>
                 </div>
               </form>
             </div>

@@ -839,8 +839,8 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 1px solid var(--border-color);
   width: 30px;
   height: 30px;
-  color: var(--text-color);
-  font-size: 15px;
+  color: var(--text-color-light);
+  font-size: 19px;
   font-weight: 800;
   border-radius: 50%;
   -webkit-border-radius: 50%;
@@ -2237,7 +2237,7 @@ input.qtyminus {
 }
 
 .form-control:focus {
-  border-color: #fea54d;
+  /* border-color: #fea54d; */
   /* Adjust focus */
   outline: 0;
 }
