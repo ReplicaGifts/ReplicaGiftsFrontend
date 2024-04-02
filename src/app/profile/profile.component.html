@@ -356,40 +356,11 @@
                         <div *ngIf="w.userWant.gifts.length > 0">
                           <p style="color: rgb(255, 145, 0)">+</p>
 
-                          <table>
-                            <tr *ngFor="let gif of w.userWant.gifts">
-                              <td>{{ gif.gift.name }}</td>
-                              <td>
-                                <input
-                                  type="number"
-                                  min="1"
-                                  [max]="gif.gift.quantity"
-                                  [(ngModel)]="gif.quantity"
-                                  class="quantity"
-                                  (input)="
-                                    updateGift(
-                                      w.userWant._id,
-                                      gif.quantity,
-                                      gif.gift._id,
-                                      w._id
-                                    )
-                                  "
-                                />
-                              </td>
-                              <td>
-                                <i
-                                  (click)="
-                                    removeGift(
-                                      w.userWant._id,
-                                      gif.gift._id,
-                                      w._id
-                                    )
-                                  "
-                                  class="fi fi-rs-trash table__trash"
-                                ></i>
-                              </td>
-                            </tr>
-                          </table>
+                          <div *ngFor="let gif of w.userWant.gifts">
+                            {{ gif.gift.name }} x {{ gif.quantity }}
+                            <br />
+                            <br />
+                          </div>
                         </div>
                       </h3>
                     </td>

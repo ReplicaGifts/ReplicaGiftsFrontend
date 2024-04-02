@@ -14,3 +14,7 @@
   .icon-hover-danger:hover i {
     color: #dc4c64 !important;
   }
+
+.section__title{
+  padding-top: 20px;
+}

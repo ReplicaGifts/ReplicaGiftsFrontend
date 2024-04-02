@@ -44,17 +44,23 @@ export class DeleveryDetailsComponent {
 
   totalPrice = 0;
 
-  shoppingCart: any;
+  shoppingCart: any[] = [];
 
   product!: Product;
 
-  quantity!: number;
+  quantity: number = 1;
 
   detailId: any;
 
   gifts: any[] = [];
 
   checkoutData: any;
+
+  subTotal: number = 0;
+
+  giftsTotal: number = 0;
+
+
 
   ngOnInit() {
 
@@ -71,8 +77,10 @@ export class DeleveryDetailsComponent {
           if (res.success) {
 
             this.product = res.product;
-            this.quantity = res.quantity;
+            this.subTotal = this.product.amount ?? 1 * res.quantity;
             this.gifts = res.gifts;
+            this.giftsTotal = this.giftTotal(res.gifts ?? []);
+
 
             this.totalPrice = res.total;
             console.log(this.product);
@@ -82,19 +90,14 @@ export class DeleveryDetailsComponent {
         });
       } else {
         if (this.isAuth) {
-          this.cart.getCart().subscribe(res => {
+          this.cart.getCart().subscribe((res: any) => {
             this.shoppingCart = res;
-            this.shoppingCart.map((cart: any) => {
-              this.totalPrice += cart.userWant.totalAmount;
-              this.gifts = cart.userWant.gifts;
-            })
+            this.totalCalc(res);
           });
         } else {
           this.shoppingCart = this.guest.getCart();
-          this.shoppingCart.map((cart: any) => {
-            this.totalPrice += cart.userWant.totalAmount;
-            this.gifts = cart.userWant.gifts;
-          })
+          this.totalCalc(this.shoppingCart);
+
         }
       }
     });
@@ -126,10 +129,12 @@ export class DeleveryDetailsComponent {
 
     if (this.detailId) {
       this.checkoutData = { data: this.billingDetails, frameId: [{ _id: this.detailId }], name: 'Replica Gifts', amount: this.totalPrice, description: "Replica gifts" };
+      this.spinner = true;
 
     } else {
       this.checkoutData = { data: this.billingDetails, frameId: this.shoppingCart.map((cart: any) => cart.userWant), name: 'Replica Gifts', amount: this.totalPrice, description: "Replica gifts" }
       console.log(this.checkoutData)
+      this.spinner = true;
     }
 
 
@@ -273,6 +278,8 @@ export class DeleveryDetailsComponent {
       })
     } else {
       this.guest.verify(response.razorpay_order_id, response.razorpay_payment_id, response.razorpay_signature, paymentResponse.frameDetails).subscribe(payment => {
+        this.spinner = false;
+
         Swal.fire({
           position: "center",
           icon: "success",
@@ -280,6 +287,7 @@ export class DeleveryDetailsComponent {
           showConfirmButton: false,
           timer: 1500
         });
+
 
         if (!this.detailId) {
           localStorage.removeItem('cart');
@@ -291,6 +299,30 @@ export class DeleveryDetailsComponent {
       })
 
     }
+  }
+
+  giftTotal(gifts: any): number {
+    let total = 0;
+    gifts.forEach((element: any) => {
+      total += element.total;
+    });
+
+    return total
+  }
+
+  totalCalc(order: any) {
+    order.forEach((element: any) => {
+      console.log(element);
+      console.log(element.userWant.quantity ?? 1, element.productId.amount)
+      this.subTotal += element.userWant.quantity * element.productId.amount;
+      this.giftsTotal += this.giftTotal(element.userWant.gifts);
+      this.totalPrice += element.userWant.totalAmount;
+    })
+  }
+
+
+  ngOnDestroy() {
+    this.spinner = false;
   }
 
 }

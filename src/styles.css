@@ -18,6 +18,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 10000;
 }
 
 :root {
@@ -1215,10 +1217,10 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 0.75rem;
 }
 
-.product__price1{
-display: flex !important;
-align-items: center;
-justify-content: space-between;
+.product__price1 {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .product__price .new__price {
@@ -2214,7 +2216,7 @@ input.qtyminus {
 }
 
 .checkout__group {
-  padding: 20px;
+  /* padding: 20px; */
   border-radius: 8px;
   background-color: #ffffff;
 }
@@ -2256,7 +2258,7 @@ input.qtyminus {
 }
 
 .order__table thead tr th {
-  color: var(--title-color);
+  color: var(--title-color-);
   font-size: var(--small-font-size);
   background-color: var(--first-color-alt);
 }
@@ -2547,7 +2549,6 @@ input.qtyminus {
   }
   
   .header__user-actions {
-  
     z-index: 1 !important;
   }
 
