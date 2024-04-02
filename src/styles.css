@@ -18,6 +18,8 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+
+  z-index: 10000;
 }
 
 :root {
@@ -1209,10 +1211,10 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 0.75rem;
 }
 
-.product__price1{
-display: flex !important;
-align-items: center;
-justify-content: space-between;
+.product__price1 {
+  display: flex !important;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .product__price .new__price {
@@ -2530,9 +2532,7 @@ input.qtyminus {
     max-width: 1100px;
   }
 
-  
   .header__user-actions {
-  
     z-index: 1 !important;
   }
 
@@ -2837,8 +2837,6 @@ input.qtyminus {
     padding: 1.25rem;
   }
 
-
-
   .pagination {
     column-gap: 0.5rem;
     margin-top: 2.5rem;
@@ -2920,8 +2918,6 @@ input.qtyminus {
   /* .header__user-actions{
     display: block;
   } */
-
-
 
   .header__top {
     display: none;
