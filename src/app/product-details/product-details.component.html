@@ -9,7 +9,7 @@
       <div class="details__group">
         <img [src]="data.image" alt="" class="details__img" />
       </div>
-      <div class="detailscroll">
+      <!-- <div class="detailscroll"> -->
         <div class="details__group">
           <h3 class="details__title">{{ data.title }}</h3>
           <!-- <p class="details__brand">Brand: <span>adidas</span></p> -->
@@ -144,7 +144,7 @@
                       </button>
                     </div> -->
       </div>
-    </div>
+    <!-- </div> -->
     <div class="floating-box" *ngIf="data.frame && img">
       <div>
         <app-frames
@@ -178,7 +178,106 @@
     </div>
   </section>
 
+
+
+
   <section class="new__arrivals container section">
+    <h3 class="section__title" data-aos="fade-right">
+      <span>Make</span> It Special
+    </h3>
+    <div class="new__container swiper">
+      <div class="swiper-wrapper">
+        <ng-container *ngFor="let gift of gifts; let i = index">
+          <div
+            class="product__item swiper-slide"
+            data-aos="flip-right"
+          >
+            <div class="product__banner">
+              <a class="product__images1">
+                <img [src]="gift.thumbnail" alt="" class="product__img default" />
+              </a>
+              <div class="product__actions">
+                <a
+                 
+                  class="action__btn"
+                  aria-label="Add to Wishlist"
+                >
+                  <i class="fa-solid fa-heart"></i>
+                </a>
+              </div>
+            </div>
+
+            <div class="product__content">
+              <span class="product__category">Gifts</span>
+              <a>
+                <h3 class="product__title">{{ gift.name }}</h3>
+              </a>
+              <app-star-rating   
+              ></app-star-rating>
+              <div class="product__price1 flex">
+                <span class="new__price"
+                  ><i class="bi bi-currency-rupee"></i>{{ gift.price }}</span
+                >
+               
+                <span class="new__price" style="float: right;">
+                <input
+                type="number"
+                class="quantity"
+                [(ngModel)]="gift.selected_quantity"
+                [max]="gift.quantity"
+                min="1"
+              /></span>
+
+                <!-- <span>
+                <input
+                type="number"
+                
+              /></span> -->
+
+                <!-- <a
+                  
+                  class="action__btn cart__btn"
+                  aria-label="Add To Cart"
+                >
+                  <i class="fa fa-shopping-cart"></i>
+                </a> -->
+
+              </div>
+              <div style="padding-top: 20px; padding-bottom: 10px;">
+                <button
+                  *ngIf="isGiftSelected(gift._id)"
+                  class="btns2"
+                  (click)="removeGift(gift)"
+                >
+                  Remove
+                </button>
+                <button
+                  *ngIf="!isGiftSelected(gift._id)"
+                  class="btns2"
+                  (click)="addGift(gift)"
+                >
+                  Add
+                </button>
+              </div>
+            </div>
+          </div>
+        </ng-container>
+      </div>
+      <div class="swiper-button-prev">
+        <i class="fa-solid fa-circle-chevron-left"></i>
+      </div>
+      <div class="swiper-button-next">
+        <i class="fa-solid fa-circle-chevron-right"></i>
+      </div>
+    </div>
+  </section>
+
+
+
+
+
+
+  <!-- <section class="new__arrivals container section">
     <h3 class="section__title" data-aos="fade-right">
       <span>Make</span> It Special
     </h3>
@@ -198,11 +297,7 @@
                   class="product__img default"
                 />
               </a>
-              <!-- <div class="product__actions">
-              <a (click)="addWish(gift._id)" class="action__btn" aria-label="Add to Wishlist">
-                <i class="fi fi-rs-heart"></i>
-              </a>
-            </div> -->
+            
             </div>
             <div class="product__content">
               <a>
@@ -246,7 +341,7 @@
         <i class="fi fi-rs-angle-right"></i>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <section id="faq" class="new__arrivals container section">
     <h3 class="section__title" data-aos="fade-right">
@@ -258,7 +353,6 @@
           <p class="form-label">Get Offers:</p>
         </div>
       </div> -->
-
       <div
         class="row justify-content-center"
         data-aos="fade-up"

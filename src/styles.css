@@ -295,6 +295,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border-radius: 15px;
   text-align: center;
   border-bottom: 3px solid #fff;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
 }
 
 .services .icon-box:hover {
@@ -838,8 +839,9 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 1px solid var(--border-color);
   width: 30px;
   height: 30px;
-  color: var(--first-color);
-  font-size: var(--tiny-font-size);
+  color: var(--text-color);
+  font-size: 15px;
+  font-weight: 800;
   border-radius: 50%;
   -webkit-border-radius: 50%;
   -moz-border-radius: 50%;
@@ -1207,10 +1209,11 @@ input[type="number"]::-webkit-outer-spin-button {
   margin-bottom: 0.75rem;
 }
 
-/* .product__price{
-
-padding-top: 20px;
-} */
+.product__price1{
+display: flex !important;
+align-items: center;
+justify-content: space-between;
+}
 
 .product__price .new__price {
   font-size: var(--large-font-size);
@@ -1816,7 +1819,7 @@ padding-top: 20px;
 .quantity {
   background-color: hsl(0, 0%, 100%);
   width: 50px !important;
-  padding-block: 0.9rem;
+  padding-block: 0.2rem;
   padding-inline: 0.2rem 0.2rem;
   border-radius: 0.25rem;
   -webkit-border-radius: 0.25rem;
@@ -2479,7 +2482,7 @@ input.qtyminus {
   border: 1px solid var(--border-color-alt);
   padding: 0.5rem;
   font-size: var(--small-font-size);
-  text-align: left;
+  text-align: center;
 }
 
 .view__order,
@@ -2527,9 +2530,15 @@ input.qtyminus {
     max-width: 1100px;
   }
 
-  .header__top {
-    display: none;
+  
+  .header__user-actions {
+  
+    z-index: 1 !important;
   }
+
+  /* .header__top {
+    display: block;
+  } */
 
   .table__container {
     overflow: auto !important;
@@ -2573,6 +2582,7 @@ input.qtyminus {
     flex-direction: column;
     align-items: flex-start;
     row-gap: 1.5rem;
+    /* z-index: 2; */
   }
 
   .nav__link {
@@ -2827,6 +2837,8 @@ input.qtyminus {
     padding: 1.25rem;
   }
 
+
+
   .pagination {
     column-gap: 0.5rem;
     margin-top: 2.5rem;
@@ -2903,6 +2915,16 @@ input.qtyminus {
   .cart__btn {
     bottom: 1.4rem;
     right: 1.25rem;
+  }
+
+  /* .header__user-actions{
+    display: block;
+  } */
+
+
+
+  .header__top {
+    display: none;
   }
 
   .showcase__item {
