@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { UserAuthService } from '../service/user-auth.service';
 import Swal from 'sweetalert2';
@@ -16,25 +16,22 @@ export class LoginComponent {
 
   show: boolean = false;
 
-  constructor(private auth: UserAuthService, private router: Router, private formBuilder: FormBuilder) { }
+  constructor(private auth: UserAuthService, private router: Router) { }
 
-  myForm!: FormGroup;
+  email = new FormControl('', [Validators.required, Validators.email]);
+  password = new FormControl('', Validators.required);
 
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: "instant" })
-    this.myForm = this.formBuilder.group({
-
-      email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(6)]]
-    });
   }
 
   err: boolean | string = false;
 
 
   login() {
-    if (this.myForm.valid) {
-      this.auth.login(this.myForm.value).subscribe((user: any) => {
+    this.show = true;
+    if (this.email.valid && this.password.valid) {
+      this.auth.login({ email: this.email.value, password: this.password.value }).subscribe((user: any) => {
         console.log('login:', user);
         if (user.success) {
           Swal.fire({
@@ -54,11 +51,6 @@ export class LoginComponent {
       }, error => {
 
         console.log(error);
-      });
-    } else {
-      Swal.fire({
-        icon: "error",
-        title: "Fill required fields",
       });
     }
   }
