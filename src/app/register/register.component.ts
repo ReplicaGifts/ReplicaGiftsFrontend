@@ -75,6 +75,9 @@ export class RegisterComponent {
         } else {
           this.err = data.message;
         }
+      }, err => {
+
+        this.err = "Enter valid email address"
       })
     else
       this.err = "Please fill all required fields"
