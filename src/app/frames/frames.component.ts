@@ -1,5 +1,5 @@
 import { NgIf } from '@angular/common';
-import { Component, ElementRef, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { fabric } from 'fabric';
 import html2canvas from 'html2canvas';
 
@@ -15,6 +15,10 @@ export class FramesComponent {
   @Input()
   frameSrc!: string; // Replace with the path to your frame image
 
+  @Input() edit: boolean = false;
+  @Input() save: boolean = false;
+  @Input() reset: boolean = false;
+
   @Output() file = new EventEmitter<any>();
   @Output() image = new EventEmitter<any>();
 
@@ -28,7 +32,24 @@ export class FramesComponent {
 
   hide: boolean = false;
 
-  edit: boolean = false;
+  ngOnChanges(changes: SimpleChanges) {
+    if (changes['save']) {
+      if (this.save) {
+
+
+        this.captureScreenshot();
+        console.log('Saving screenshot')
+      }
+    }
+    if (changes['reset']) {
+      if (this.reset) {
+        this.reset = false;
+        this.canvas1Context.clear();
+        this.hide = false;
+
+      }
+    }
+  }
 
   canvasWidth: number = 0;
   canvasHeight: number = 0;
@@ -132,6 +153,7 @@ export class FramesComponent {
   }
 
   captureScreenshot() {
+    this.save = false;
     const elementToCapture = this.elementRef.nativeElement.querySelector('#canvas-container');
 
     setTimeout(() => {
@@ -152,6 +174,7 @@ export class FramesComponent {
 
           }, 'image/png'); // Specify the MIME type of the image (e.g., 'image/png')
         });
+
     }, 500)
   }
 }

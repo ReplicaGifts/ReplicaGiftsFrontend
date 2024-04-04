@@ -15,6 +15,9 @@
             [frameSrc]="data.frame"
             (image)="addFile($event)"
             (file)="addCaputue($event)"
+            [edit]="edit"
+            [save]="save"
+            [reset]="reset"
           ></app-frames>
         </div>
       </div>
@@ -53,8 +56,29 @@
           </div>
         </div>
 
-        <button *ngIf="data.frame" class="btns w-100" (click)="img = true">
+        <button
+          *ngIf="data.frame && !img"
+          class="btns w-100 my-3"
+          (click)="img = true"
+        >
           Upload Image
+        </button>
+        <button
+          *ngIf="data.frame && img && !edit"
+          class="btns w-100 my-3"
+          (click)="edit = true"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="data.frame && img && edit"
+          class="btns w-100 my-3"
+          (click)="save = true; edit = false"
+        >
+          Save
+        </button>
+        <button *ngIf="img" class="btns w-100 my-3" (click)="reset = true">
+          Reset
         </button>
 
         <div style="display: flex; justify-content: space-between" class="me-5">

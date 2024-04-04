@@ -59,7 +59,8 @@ export class ProductDetailsComponent {
 
   spinner: boolean = false;
 
-
+  edit = false;
+  save = false;
 
   gifts: any = [];
 
@@ -77,6 +78,8 @@ export class ProductDetailsComponent {
     this.selectedGifts.splice(i, 1);
     console.log(this.selectedGifts)
   }
+
+  reset = false;
 
   data: Product = {
     title: '',
@@ -194,6 +197,8 @@ export class ProductDetailsComponent {
   }
 
   addCaputue(balb: any) {
+    this.save = false;
+
     this.frameDeatails.frame = balb.file;
   }
 
@@ -225,6 +230,8 @@ export class ProductDetailsComponent {
             frame: '' as any
 
           };
+
+          this.img = false;
         });
       } else {
         if (this.guest.addToCart(this.frameDeatails, this.data, this.selectedGifts)) {
@@ -249,6 +256,8 @@ export class ProductDetailsComponent {
 
             quantity: 1,
           }
+          this.img = false;
+
 
         } else {
           this.spinner = false;
@@ -259,6 +268,7 @@ export class ProductDetailsComponent {
           //     title: "Oops...",
           //     text: "Fill the required fields",
           //   });
+
         }
 
 

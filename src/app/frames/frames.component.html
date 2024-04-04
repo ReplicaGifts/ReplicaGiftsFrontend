@@ -37,11 +37,5 @@
       > Sorry, your browser doesn't support canvas technology.
     </canvas>
   </div>
-  <button *ngIf="!edit" class="btn" (click)="edit = !edit">Edit</button>
-
-  <button *ngIf="edit" class="btn" (click)="edit = !edit; captureScreenshot()">
-    Save
-  </button>
-
   <!-- <button class="btn" (click)="captureScreenshot()">Download</button> -->
 </section>
