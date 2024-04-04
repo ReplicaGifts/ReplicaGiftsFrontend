@@ -100,7 +100,14 @@
     </ul>
   </section>
 
-  <section class="login-section logpad">
+  <section class="login-section logpad position-relative">
+    <div
+      *ngIf="spinner"
+      class="position-absolute w-100 h-100 d-flex justify-content-center align-items-center"
+      style="z-index: 10000"
+    >
+      <app-spinner></app-spinner>
+    </div>
     <div class="container">
       <div class="row justify-content-center">
         <div class="col-md-6">

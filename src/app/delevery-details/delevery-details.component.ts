@@ -61,8 +61,13 @@ export class DeleveryDetailsComponent {
   giftsTotal: number = 0;
 
 
+  err: any = false;
+
 
   ngOnInit() {
+    this.spinner = true;
+    window.scrollTo({ top: 0, behavior: "instant" })
+
 
     this.totalPrice = 0;
     this.route.params.pipe(
@@ -74,6 +79,8 @@ export class DeleveryDetailsComponent {
         this.cart.getFrame(this.detailId).pipe(
           takeUntil(this.unsubscribe$)
         ).subscribe((res) => {
+          this.spinner = false;
+
           if (res.success) {
 
             this.product = res.product;
@@ -92,10 +99,14 @@ export class DeleveryDetailsComponent {
         if (this.isAuth) {
           this.cart.getCart().subscribe((res: any) => {
             this.shoppingCart = res;
+            this.spinner = false;
+
             this.totalCalc(res);
           });
         } else {
           this.shoppingCart = this.guest.getCart();
+          this.spinner = false;
+
           this.totalCalc(this.shoppingCart);
 
         }
@@ -103,9 +114,12 @@ export class DeleveryDetailsComponent {
     });
 
     this.Profile.getAddress().subscribe((res: any) => {
-      if (res.success) {
+      if (res.success && 'name' in res.data) {
+        console.log(res);
         this.billingDetails = res.data
       }
+      this.spinner = false;
+
     });
 
 
@@ -114,141 +128,137 @@ export class DeleveryDetailsComponent {
 
 
   checkout() {
+    console.log(this.billingDetails);
+    if (this.billingDetails.name === '' || this.billingDetails.email === '' || this.billingDetails.address === '' || this.billingDetails.state === '' || this.billingDetails.country === '' || this.billingDetails.city === '' || this.billingDetails.phone === '' || this.billingDetails.postcode === '') {
+      console.log('Please')
+      this.err = "Please fill all required fields";
+      window.scrollTo({ top: 150, behavior: "smooth" })
 
-    if (this.billingDetails.name === '' || this.billingDetails.email === '' || this.billingDetails.address === '' || this.billingDetails.state === '' || this.billingDetails.country === '' || this.billingDetails.city === '') {
-      Swal.fire({
-        icon: "error",
-        title: "Missing billing details",
-        text: "Please fill out the billing details",
-        position: "center"
-      });
-
-      console.log(this.billingDetails)
       return;
-    }
-
-    if (this.detailId) {
-      this.checkoutData = { data: this.billingDetails, frameId: [{ _id: this.detailId }], name: 'Replica Gifts', amount: this.totalPrice, description: "Replica gifts" };
-      this.spinner = true;
-
     } else {
-      this.checkoutData = { data: this.billingDetails, frameId: this.shoppingCart.map((cart: any) => cart.userWant), name: 'Replica Gifts', amount: this.totalPrice, description: "Replica gifts" }
-      console.log(this.checkoutData)
-      this.spinner = true;
+
+      if (this.detailId) {
+        this.checkoutData = { data: this.billingDetails, frameId: [{ _id: this.detailId }], name: 'Replica Gifts', amount: this.totalPrice, description: "Replica gifts" };
+        this.spinner = true;
+
+      } else {
+        this.checkoutData = { data: this.billingDetails, frameId: this.shoppingCart.map((cart: any) => cart.userWant), name: 'Replica Gifts', amount: this.totalPrice, description: "Replica gifts" }
+        console.log(this.checkoutData)
+        this.spinner = true;
+      }
+
+
+      if (this.isAuth) {
+        this.spinner = true;
+        this.payment.createOrder(this.checkoutData).subscribe(res => {
+          this.spinner = false;
+          if (res.success) {
+            // Handle payment success
+            console.log(res);
+            let options = {
+              "key": res.key_id,
+              "amount": `${res.amount}`,
+              "currency": "INR",
+              "name": res.product_name,
+              "description": res.description,
+              "image": "https://dummyimage.com/600x400/000/fff",
+              "order_id": res.order_id,
+              "handler": (response: any) => {
+                this.handlePaymentSuccess(response, res);
+              },
+
+              "prefill": {
+                "contact": res.contact,
+                "name": res.name,
+                "email": res.email
+              },
+              "notes": {
+                "description": res.description
+              },
+              "theme": {
+                "color": "#2300a3"
+              }
+            };
+
+
+            this.payment.initializeRazorpay(options);
+            this.payment.openPayment()
+
+
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: res.msg,
+            });
+          }
+        },
+          error => {
+            console.error(error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "An error occurred",
+            });
+          }
+        );
+      } else {
+        this.spinner = true;
+        this.guest.checkout(this.checkoutData).subscribe((res: any) => {
+          this.spinner = false;
+          if (res.success) {
+            // Handle payment success
+            console.log(res);
+            let options = {
+              "key": res.key_id,
+              "amount": `${res.amount}`,
+              "currency": "INR",
+              "name": res.product_name,
+              "description": res.description,
+              "image": "https://dummyimage.com/600x400/000/fff",
+              "order_id": res.order_id,
+              "handler": (response: any) => {
+                this.handlePaymentSuccess(response, res);
+              },
+
+              "prefill": {
+                "contact": res.contact,
+                "name": res.name,
+                "email": res.email
+              },
+              "notes": {
+                "description": res.description
+              },
+              "theme": {
+                "color": "#2300a3"
+              }
+            };
+
+
+            this.payment.initializeRazorpay(options);
+            this.payment.openPayment()
+
+
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: res.msg,
+            });
+          }
+        },
+          error => {
+            console.error(error);
+            Swal.fire({
+              icon: "error",
+              title: "Oops...",
+              text: "An error occurred",
+            });
+          }
+        );
+      }
+
     }
-
-
-    if (this.isAuth) {
-      this.spinner = true;
-      this.payment.createOrder(this.checkoutData).subscribe(res => {
-        this.spinner = false;
-        if (res.success) {
-          // Handle payment success
-          console.log(res);
-          let options = {
-            "key": res.key_id,
-            "amount": `${res.amount}`,
-            "currency": "INR",
-            "name": res.product_name,
-            "description": res.description,
-            "image": "https://dummyimage.com/600x400/000/fff",
-            "order_id": res.order_id,
-            "handler": (response: any) => {
-              this.handlePaymentSuccess(response, res);
-            },
-
-            "prefill": {
-              "contact": res.contact,
-              "name": res.name,
-              "email": res.email
-            },
-            "notes": {
-              "description": res.description
-            },
-            "theme": {
-              "color": "#2300a3"
-            }
-          };
-
-
-          this.payment.initializeRazorpay(options);
-          this.payment.openPayment()
-
-
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: res.msg,
-          });
-        }
-      },
-        error => {
-          console.error(error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "An error occurred",
-          });
-        }
-      );
-    } else {
-      this.spinner = true;
-      this.guest.checkout(this.checkoutData).subscribe((res: any) => {
-        this.spinner = false;
-        if (res.success) {
-          // Handle payment success
-          console.log(res);
-          let options = {
-            "key": res.key_id,
-            "amount": `${res.amount}`,
-            "currency": "INR",
-            "name": res.product_name,
-            "description": res.description,
-            "image": "https://dummyimage.com/600x400/000/fff",
-            "order_id": res.order_id,
-            "handler": (response: any) => {
-              this.handlePaymentSuccess(response, res);
-            },
-
-            "prefill": {
-              "contact": res.contact,
-              "name": res.name,
-              "email": res.email
-            },
-            "notes": {
-              "description": res.description
-            },
-            "theme": {
-              "color": "#2300a3"
-            }
-          };
-
-
-          this.payment.initializeRazorpay(options);
-          this.payment.openPayment()
-
-
-        } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: res.msg,
-          });
-        }
-      },
-        error => {
-          console.error(error);
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "An error occurred",
-          });
-        }
-      );
-    }
-
-
   }
 
   handlePaymentSuccess(response: any, paymentResponse: any) {

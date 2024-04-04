@@ -4,17 +4,20 @@ import { FormBuilder, FormControl, FormGroup, FormsModule, ReactiveFormsModule, 
 import { Router, RouterLink } from '@angular/router';
 import { UserAuthService } from '../service/user-auth.service';
 import Swal from 'sweetalert2';
+import { SpinnerComponent } from '../spinner/spinner.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, RouterLink, SpinnerComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
 
   show: boolean = false;
+
+  spinner = false;
 
   constructor(private auth: UserAuthService, private router: Router) { }
 
@@ -29,9 +32,12 @@ export class LoginComponent {
 
 
   login() {
+    this.spinner = true;
     this.show = true;
     if (this.email.valid && this.password.valid) {
       this.auth.login({ email: this.email.value, password: this.password.value }).subscribe((user: any) => {
+        this.spinner = false;
+
         console.log('login:', user);
         if (user.success) {
           Swal.fire({
@@ -49,6 +55,7 @@ export class LoginComponent {
           this.err = user.message;
         }
       }, error => {
+        this.spinner = false;
 
         console.log(error);
       });

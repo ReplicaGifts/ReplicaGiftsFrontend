@@ -1,16 +1,15 @@
-.card-header{
-    background-color: rgb(50, 50, 50);
-    color: white !important;
+.card-header {
+  background-color: rgb(50, 50, 50);
+  color: white !important;
 }
 
-.card-header h2{
-
-    color: white !important;
+.card-header h2 {
+  color: white !important;
 }
 
-.card-footer{
-    border: none;
-    background-color: white;
+.card-footer {
+  border: none;
+  background-color: white;
 }
 
 .card-footer a{

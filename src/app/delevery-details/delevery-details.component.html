@@ -42,6 +42,11 @@
 
   <!--=============== CHECKOUT ===============-->
 
+
+ 
+
+
+
   <section class="checkout">
     <div class="checkout__container container grid">
       <div class="checkout__group">
@@ -57,7 +62,11 @@
             <label class="control-label"> First name </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.name ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
+              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -80,7 +89,10 @@
             <label class="control-label"> Email </label>
             <input
               type="email"
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.email ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -97,7 +109,10 @@
             <label class="control-label"> City </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.city ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -109,7 +124,10 @@
             <label class="control-label"> Phone </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.phone ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -131,7 +149,10 @@
             <label class="control-label"> Street Address </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.address ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -142,7 +163,10 @@
           <div class="new required col-md-12">
             <label class="control-label"> State </label>
             <input
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.state ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
               id="inputName"
               required="required"
               [(ngModel)]="billingDetails.state"
@@ -158,7 +182,10 @@
             <label class="control-label"> Country </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.country ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -174,7 +201,10 @@
             <label class="control-label"> Postcode </label>
             <input
               type="text"
-              class="form-control"
+              class="form-control {{
+                err && !billingDetails.postcode ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -187,6 +217,7 @@
             <input type="text" class="form-control" id="inputPhone" placeholder="">
           </div> -->
         </div>
+        <p class="text-danger" *ngIf="err">{{ err }}</p>
       </div>
       <!-- <div class="checkout__group">
         <h3 class="section__title">Cart Totals</h3>
@@ -273,12 +304,25 @@
       </div> -->
 
       <!-- cart + summary -->
+   
+
+
+
+
+
+
+
+
+   
+
+
+
       <section class="">
         <div class="">
           <div class="row">
             <!-- cart -->
 
-            <h3 class="section__title">Cart Totals</h3>
+            <!-- <h3 class="section__title">Cart Totals</h3>
             <div class="checkout__group col-lg-9">
               <table class="order__table">
                 <thead>
@@ -350,17 +394,63 @@
                       >
                     </td>
                   </tr>
-                  <!-- <tr>
-                    <td>
-                      <span class="order__grand-total"></span>
-                    </td>
-              
-                  </tr> -->
+                 
                 </tbody>
               </table>
               <div class="payment__methods"></div>
-              <!-- <button (click)="checkout()" class="btns btn--md">Place Order</button> -->
+             
+            </div> -->
+
+            <div
+            class="tab__content col-lg-9"
+            content
+            id="orders"
+          >
+            <h3 class="tab__header">Your Cart</h3>
+            <div class="tab__body">
+              <table class="placed__order-table">
+                <thead>
+                  <tr>
+                    <th>Name</th>
+                    <th>Price</th>
+           
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container  *ngFor="let prod of shoppingCart">
+                  <tr *ngIf="shoppingCart">
+                    
+                      <td>
+                        <h3 class="table__title">
+                          {{ prod.productId.title }} x {{ prod.quantity }}
+                          <ng-container *ngIf="prod.userWant.gifts.length > 0">
+                            <p style="color: rgb(255, 145, 0); font-size: 18px">
+                              +
+                            </p>
+                            <ul class="list-unstyled">
+                              <li *ngFor="let gif of prod.userWant.gifts">
+                                {{ gif.gift.name }} x {{ gif.quantity }}
+                              </li>
+                            </ul>
+                          </ng-container>
+                        </h3>
+                      </td>
+                      <td>
+                        <span class="table__price"
+                          ><i class="bi bi-currency-rupee"></i
+                          >{{ prod.userWant.totalAmount }}</span
+                        >
+                      </td>
+                
+                   
+                  </tr>
+                </ng-container>
+                </tbody>
+              </table>
             </div>
+          </div>
+
+
 
             <div class="col-lg-3">
               <div class="card border">
@@ -412,6 +502,12 @@
         </div>
       </section>
       <!-- cart + summary -->
+
+
+
+
+
+      
     </div>
   </section>
 </main>

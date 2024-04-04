@@ -43,7 +43,6 @@ export class FramesComponent {
   constructor(private elementRef: ElementRef) { }
 
   ngOnInit() {
-    window.scrollTo({ top: 800, behavior: "smooth" })
 
     const overlayImage = new Image();
     overlayImage.src = this.frameSrc;
