@@ -278,99 +278,93 @@
           <div class="row">
             <!-- cart -->
 
-
             <h3 class="section__title">Cart Totals</h3>
-   <div class="checkout__group col-lg-9">
-        
-        <table class="order__table">
-          <thead>
-            <tr>
-              <th>Product</th>
-              <th>Product Name</th>
-              <th>Total</th>
-            </tr>
-          </thead>
-          <tbody>
-            <ng-container *ngFor="let prod of shoppingCart">
-              <tr *ngIf="shoppingCart">
-                <td>
-                  <img
-                    [src]="prod.productId.image"
-                    class="order__img"
-                    alt=""
-                    srcset=""
-                  />
-                </td>
-                <td>
-                  <h3 class="table__title">
-                    {{ prod.productId.title }} x {{ prod.quantity }}
-                    <ng-container *ngIf="prod.userWant.gifts.length > 0">
-                      <p style="color: rgb(255, 145, 0); font-size: 18px">+</p>
-                      <ul class="list-unstyled">
-                        <li *ngFor="let gif of prod.userWant.gifts">
-                          {{ gif.gift.name }} x {{ gif.quantity }}
-                        </li>
-                      </ul>
-                    </ng-container>
-                  </h3>
-                </td>
-                <td>
-                  <span class="table__price"
-                    ><i class="bi bi-currency-rupee"></i
-                    >{{ prod.userWant.totalAmount }}</span
-                  >
-                </td>
-              </tr>
-            </ng-container>
-            <tr *ngIf="product">
-              <td>
-                <img [src]="product.image" alt="" class="order__img" />
-              </td>
-              <td>
-                <h3 class="table__title">
-                  {{ product.title }} x {{ quantity }}
-                  <ng-container *ngIf="gifts.length > 0">
-                    <p style="color: rgb(255, 145, 0); font-size: 18px">+</p>
-
-                    <ul class="list-unstyled">
-                      <li *ngFor="let gif of gifts">
-                        {{ gif.gift.name }} x {{ gif.quantity }}
-                      </li>
-                    </ul>
+            <div class="checkout__group col-lg-9">
+              <table class="order__table">
+                <thead>
+                  <tr>
+                    <th>Product</th>
+                    <th>Product Name</th>
+                    <th>Total</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <ng-container *ngFor="let prod of shoppingCart">
+                    <tr *ngIf="shoppingCart">
+                      <td>
+                        <img
+                          [src]="prod.productId.image"
+                          class="order__img"
+                          alt=""
+                          srcset=""
+                        />
+                      </td>
+                      <td>
+                        <h3 class="table__title">
+                          {{ prod.productId.title }} x {{ prod.quantity }}
+                          <ng-container *ngIf="prod.userWant.gifts.length > 0">
+                            <p style="color: rgb(255, 145, 0); font-size: 18px">
+                              +
+                            </p>
+                            <ul class="list-unstyled">
+                              <li *ngFor="let gif of prod.userWant.gifts">
+                                {{ gif.gift.name }} x {{ gif.quantity }}
+                              </li>
+                            </ul>
+                          </ng-container>
+                        </h3>
+                      </td>
+                      <td>
+                        <span class="table__price"
+                          ><i class="bi bi-currency-rupee"></i
+                          >{{ prod.userWant.totalAmount }}</span
+                        >
+                      </td>
+                    </tr>
                   </ng-container>
-                </h3>
-                <p class="table__quantity"></p>
-              </td>
-              <td>
-                <span class="table__price"
-                  ><i class="bi bi-currency-rupee"></i>{{ totalPrice }}</span
-                >
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <span class="order__grand-total"></span>
-              </td>
-              <!-- <td><span class="order__subtitle">Total</span></td>
-              <td>
-                <span class="order__grand-total"
-                  ><i class="bi bi-currency-rupee"></i>{{ totalPrice }}</span
-                >
-              </td> -->
-            </tr>
-          </tbody>
-        </table>
-        <div class="payment__methods"></div>
-        <!-- <button (click)="checkout()" class="btns btn--md">Place Order</button> -->
-      </div>
+                  <tr *ngIf="product">
+                    <td>
+                      <img [src]="product.image" alt="" class="order__img" />
+                    </td>
+                    <td>
+                      <h3 class="table__title">
+                        {{ product.title }} x {{ quantity }}
+                        <ng-container *ngIf="gifts.length > 0">
+                          <p style="color: rgb(255, 145, 0); font-size: 18px">
+                            +
+                          </p>
 
+                          <ul class="list-unstyled">
+                            <li *ngFor="let gif of gifts">
+                              {{ gif.gift.name }} x {{ gif.quantity }}
+                            </li>
+                          </ul>
+                        </ng-container>
+                      </h3>
+                      <p class="table__quantity"></p>
+                    </td>
+                    <td>
+                      <span class="table__price"
+                        ><i class="bi bi-currency-rupee"></i
+                        >{{ totalPrice }}</span
+                      >
+                    </td>
+                  </tr>
+                  <!-- <tr>
+                    <td>
+                      <span class="order__grand-total"></span>
+                    </td>
+              
+                  </tr> -->
+                </tbody>
+              </table>
+              <div class="payment__methods"></div>
+              <!-- <button (click)="checkout()" class="btns btn--md">Place Order</button> -->
+            </div>
 
-          
             <div class="col-lg-3">
-        
               <div class="card border">
                 <div class="card-body">
-          
                   <div class="d-flex justify-content-between">
                     <p class="mb-2">Sub Total:</p>
                     <p class="mb-2">

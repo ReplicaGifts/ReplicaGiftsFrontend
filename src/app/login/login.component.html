@@ -110,7 +110,6 @@
             </div>
             <div class="card-body">
               <form
-                [formGroup]="myForm"
                 (ngSubmit)="login()"
                 class="needs-validation"
                 novalidate
@@ -123,20 +122,24 @@
                     type="email"
                     class="form-control"
                     name="email"
-                    formControlName="email"
+                    [formControl]="email"
                     [attr.required]="true"
                     autofocus
                     placeholder="Enter your email"
+                    (input)="err = false"
+                    
                   />
                   <div
-                    *ngIf="
-                      myForm.get('email')?.invalid &&
-                      (myForm.get('email')?.dirty ||
-                        myForm.get('email')?.touched)
-                    "
-                    class="invalid-feedback"
+                    *ngIf="show && email.hasError('email')"
+                    class="text-danger"
                   >
                     Enter a valid email address.
+                  </div>
+                  <div
+                    *ngIf="show && email.hasError('required')"
+                    class="text-danger"
+                  >
+                    Please fill your registered email address.
                   </div>
                 </div>
                 <div class="mb-3">
@@ -146,21 +149,19 @@
                     type="password"
                     class="form-control"
                     name="password"
-                    formControlName="password"
+                    [formControl]="password"
                     [attr.required]="true"
                     placeholder="Enter your password"
+                    (input)="err = false"
                   />
                   <div
-                    *ngIf="
-                      myForm.get('password')?.invalid &&
-                      (myForm.get('password')?.dirty ||
-                        myForm.get('password')?.touched)
-                    "
-                    class="invalid-feedback"
+                    *ngIf="show && password.hasError('required')"
+                    class="text-danger"
                   >
                     Password is required.
                   </div>
                 </div>
+                <a [routerLink]="['/forgot-password']">Forgot Password?</a>
                 <div class="form-check mb-3">
                   <input
                     type="checkbox"

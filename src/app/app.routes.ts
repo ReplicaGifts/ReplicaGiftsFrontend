@@ -15,6 +15,7 @@ import { TearmsAndConditionComponent } from './tearms-and-condition/tearms-and-c
 import { PrivacyPaclicyComponent } from './privacy-paclicy/privacy-paclicy.component';
 import { OrderViewComponent } from './order-view/order-view.component';
 import { FramesComponent } from './frames/frames.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
 
@@ -33,5 +34,6 @@ export const routes: Routes = [
     { path: 'terms', component: TearmsAndConditionComponent },
     { path: 'frames', component: FramesComponent },
     { path: 'privacy-policy', component: PrivacyPaclicyComponent },
+    { path: 'forgot-password', component: ForgotPasswordComponent },
 
 ];

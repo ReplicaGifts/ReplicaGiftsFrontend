@@ -357,6 +357,7 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
+
 }
 
 .header__contact span:first-child {
@@ -1629,6 +1630,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .logpad {
   padding-bottom: 80px;
+  
 }
 
 .products {
@@ -1788,7 +1790,7 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .details__img {
   display: block;
-  width: 100%;
+  width: 550px;
   height: 550px;
   transition: transform 0.5s;
   /* padding-right: 80px; */
@@ -2069,7 +2071,8 @@ input[type="number"]::-webkit-outer-spin-button {
 
 .table__title,
 .table__stock {
-  color: var(--text-color);
+  /* color: var(--text-color); */
+  color: #666666;
 }
 
 .table__description {
@@ -2265,6 +2268,7 @@ input.qtyminus {
 
 .order__img {
   width: 80px;
+  height: 90px;
 }
 
 .table__quantity,
@@ -3084,6 +3088,7 @@ input.qtyminus {
   align-items: center;
   justify-content: center;
   font-size: 0;
+
   /* margin-left: -8%; */
 }
 

@@ -45,4 +45,25 @@ export class UserAuthService {
     return this.http.post('https://replicagiftsbackend.onrender.com/api/admin/contact', data, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
   }
 
+  otp(email: string) {
+    return this.http.post('https://replicagiftsbackend.onrender.com/api/mail/forgot-password', { email }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+
+  }
+
+  verifyOtp(email: string, otp: number) {
+    return this.http.post('https://replicagiftsbackend.onrender.com/api/mail/verify-otp', { email, otp }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+
+  }
+
+  resetPassword(email: string, password: string) {
+
+    return this.http.put('https://replicagiftsbackend.onrender.com/api/users/reset-password', { email, password }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+
+  }
+
+  veryProfile(email: any) {
+    return this.http.post('https://replicagiftsbackend.onrender.com/api/mail/verify-email', { email }, { headers: new HttpHeaders({ 'Content-Type': 'application/json' }) })
+
+  }
+
 }
