@@ -106,6 +106,7 @@ export class ProductDetailsComponent {
 
   ngOnInit(): void {
     window.scrollTo({ top: 0, behavior: "instant" })
+    this.spinner = true;
 
     this.route.params.pipe(
       takeUntil(this.unsubscribe$)
@@ -116,6 +117,8 @@ export class ProductDetailsComponent {
         this.productService.getProduct(this.productId).pipe(
           takeUntil(this.unsubscribe$)
         ).subscribe((res: Product) => {
+          this.spinner = false;
+
           this.data = res;
           this.frameDeatails = {
             userImage: '',
@@ -127,10 +130,12 @@ export class ProductDetailsComponent {
           }
           this.giftservice.getGifts().subscribe((items: any) => {
             this.gifts = items.map((item: any) => { item['selected_quantity'] = 1; return item });
+            this.spinner = false;
             console.log(this.gifts)
           });
 
           this.category.getcategoryById(this.data.category._id).subscribe((category: any) => {
+            this.spinner = false;
             this.relatedProduct = category;
           })
           console.log(this.data);
@@ -146,7 +151,43 @@ export class ProductDetailsComponent {
     return this.selectedGifts.some(g => g.gift.toString() === giftId.toString());
   }
 
+  buyNw = false;
+  addCrt = false;
 
+  active(btn: any) {
+    if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
+
+      if (this.data.userImage) {
+        console.log(this.data.userImage)
+        if (this.frameDeatails.userImage === '') {
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You forgot to upload your image",
+            position: 'center',
+          });
+          return;
+        }
+      }
+      if (btn === 'cart') {
+        this.addCrt = true;
+      } else {
+        this.buyNw = true;
+      }
+      setTimeout(() => {
+        window.productContainer();
+        window.imgGallery();
+      }, 100);
+    } else {
+      Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "You forgot to upload your image",
+        position: 'center',
+      });
+      return;
+    }
+  }
 
   addFile(e: any) {
     this.frameDeatails.userImage = e.target.files[0];
@@ -157,19 +198,9 @@ export class ProductDetailsComponent {
   }
 
   addCart(id: any) {
-    if (this.data.userImage) {
-      console.log(this.data.userImage)
-      if (this.frameDeatails.userImage === '') {
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "You forgot to upload your image",
-          position: 'center',
-        });
-        return;
-      }
-    }
+
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
+      this.spinner = true;
       if (this.isAuth) {
         this.cart.addFrame(this.frameDeatails, this.selectedGifts, id).subscribe((dat: any) => {
           console.log(dat);
@@ -182,6 +213,9 @@ export class ProductDetailsComponent {
               showConfirmButton: false,
               timer: 1500
             });
+            this.spinner = false;
+            this.addCrt = false;
+            this.buyNw = false;
           });
           this.frameDeatails = {
             userImage: '',
@@ -194,6 +228,7 @@ export class ProductDetailsComponent {
         });
       } else {
         if (this.guest.addToCart(this.frameDeatails, this.data, this.selectedGifts)) {
+          this.spinner = false;
 
           Swal.fire({
             position: "center",
@@ -202,6 +237,9 @@ export class ProductDetailsComponent {
             showConfirmButton: false,
             timer: 1500
           });
+
+          this.addCrt = false;
+          this.buyNw = false;
 
           this.frameDeatails = {
             userImage: '',
@@ -213,21 +251,27 @@ export class ProductDetailsComponent {
           }
 
         } else {
-          Swal.fire({
-            icon: "error",
-            title: "Oops...",
-            text: "Fill the required fields",
-          });
+          this.spinner = false;
+          this.addCrt = false;
+          this.buyNw = false;
+          //   Swal.fire({
+          //     icon: "error",
+          //     title: "Oops...",
+          //     text: "Fill the required fields",
+          //   });
         }
 
 
       }
     } else {
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Fill the required fields",
-      });
+      this.spinner = false;
+      this.addCrt = false;
+      this.buyNw = false;
+      // Swal.fire({
+      //   icon: "error",
+      //   title: "Oops...",
+      //   text: "Fill the required fields",
+      // });
 
     }
   }
@@ -236,17 +280,7 @@ export class ProductDetailsComponent {
   buyNow(id: any) {
     this.spinner = true;
 
-    if (this.data.userImage) {
-      if (this.frameDeatails.userImage === '') {
-        this.spinner = false;
-        Swal.fire({
-          icon: "error",
-          title: "Oops...",
-          text: "You forgot to upload your image",
-        });
-        return;
-      }
-    }
+
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
 
       if (this.isAuth) {
@@ -265,12 +299,13 @@ export class ProductDetailsComponent {
       }
     } else {
       this.spinner = false;
-
-      Swal.fire({
-        icon: "error",
-        title: "Oops...",
-        text: "Fill the required fields",
-      });
+      this.addCrt = false;
+      this.buyNw = false;
+      // Swal.fire({
+      //   icon: "error",
+      //   title: "Oops...",
+      //   text: "Fill the required fields",
+      // });
     }
   }
 

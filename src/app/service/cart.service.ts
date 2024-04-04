@@ -10,7 +10,7 @@ export class CartService {
   constructor(private http: HttpClient) { }
 
 
-  // baseUrll = 'http://localhost:3000';
+  // baseUrl = 'http://localhost:3000';
   baseUrl = 'https://replicagiftsbackend.onrender.com';
 
   NoOFCartItem = new BehaviorSubject<number>(0);
