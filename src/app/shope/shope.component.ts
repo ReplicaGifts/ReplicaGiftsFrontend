@@ -1,4 +1,4 @@
-import { Component, OnDestroy, SimpleChanges } from '@angular/core';
+import { Component, ElementRef, HostListener, OnDestroy, ViewChild } from '@angular/core';
 import { StarRatingComponent } from '../star-rating/star-rating.component';
 import { CommonModule } from '@angular/common';
 import { CategoryService } from '../service/category.service';
@@ -20,6 +20,35 @@ import { SpinnerComponent } from '../spinner/spinner.component';
 })
 export class ShopeComponent implements OnDestroy {
 
+  private scrollInterval: any;
+  private scrollAmount = 200; // Adjust the scroll amount as needed
+
+  @HostListener('window:keydown', ['$event'])
+  handleKeyPress(event: KeyboardEvent) {
+    // Check if the pressed key is the up or down arrow key
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      // Prevent default behavior to avoid page scrolling
+      event.preventDefault();
+
+      // Start scrolling
+      if (!this.scrollInterval) {
+        this.scrollInterval = setInterval(() => {
+          window.scrollBy(0, event.key === 'ArrowUp' ? -this.scrollAmount : this.scrollAmount);
+        }, 150); // Adjust the interval as needed
+      }
+    }
+  }
+
+  @HostListener('window:keyup', ['$event'])
+  handleKeyUp(event: KeyboardEvent) {
+    // Check if the released key is the up or down arrow key
+    if (event.key === 'ArrowUp' || event.key === 'ArrowDown') {
+      // Stop scrolling
+      clearInterval(this.scrollInterval);
+      this.scrollInterval = null;
+    }
+  }
+
   constructor(
     private categoryService: CategoryService,
     private product: ProductService,
@@ -29,6 +58,12 @@ export class ShopeComponent implements OnDestroy {
     private wish: WishService,
     private user: UserAuthService
   ) { }
+
+  @ViewChild('targetElement') targetElement!: ElementRef<HTMLElement>;
+
+  setFocus() {
+    this.targetElement.nativeElement.focus();
+  }
 
   isAuth = this.user.isAuthenticated();
 
@@ -68,6 +103,8 @@ export class ShopeComponent implements OnDestroy {
 
     ).subscribe((filters: any) => {
       this.spinner = true;
+
+      this.setFocus()
       this.getFilteredProduct(filters);
     }))
 
@@ -161,7 +198,7 @@ export class ShopeComponent implements OnDestroy {
 
   nav(id: any) {
 
-    this.router.navigateByUrl(`/product/${id}`)
+    this.router.navigateByUrl('/product/${id}')
   }
 
   addWish(id: any) {

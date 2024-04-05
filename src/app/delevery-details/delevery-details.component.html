@@ -58,7 +58,7 @@
             <input type="text" class="form-control" id="inputName" placeholder="" required="required">
           </div> -->
 
-          <div class="new required col-md-6">
+          <div class="new required col-md-12">
             <label class="control-label"> First name </label>
             <input
               type="text"
@@ -74,53 +74,27 @@
             />
           </div>
 
-          <!-- <div class="new required col-md-6">
+          <!-- <div class="new required col-md-12">
             <label class='control-label'>
               Last name
             </label>
             <input type="text" class="form-control" id="inputName" placeholder="" required="required">
           </div> -->
-          <!-- <div class="new required col-md-6">
+          <!-- <div class="new required col-md-12">
             <label for="inputEmail" class="form-label">Email</label>
             <input type="email" class="form-control" id="inputEmail" placeholder="">
           </div> -->
 
-          <div class="new required col-md-6">
-            <label class="control-label"> Email </label>
-            <input
-              type="email"
-              class="form-control {{
-                err && !billingDetails.email ? 'is-invalid' : ''
-              }}"
-              (click)="err = false"
-              id="inputName"
-              placeholder=""
-              required="required"
-              [(ngModel)]="billingDetails.email"
-            />
-          </div>
+       
 
-          <!-- <div class="new required col-md-6">
+          <!-- <div class="new required col-md-12">
             <label for="inputCity" class="form-label">City</label>
             <input type="text" class="form-control" id="inputCity" placeholder="">
           </div> -->
 
-          <div class="new required col-md-6">
-            <label class="control-label"> City </label>
-            <input
-              type="text"
-              class="form-control {{
-                err && !billingDetails.city ? 'is-invalid' : ''
-              }}"
-              (click)="err = false"
-              id="inputName"
-              placeholder=""
-              required="required"
-              [(ngModel)]="billingDetails.city"
-            />
-          </div>
+       
 
-          <div class="new required col-md-6">
+          <div class="new required col-md-12">
             <label class="control-label"> Phone </label>
             <input
               type="text"
@@ -135,7 +109,24 @@
             />
           </div>
 
-          <!-- <div class="new required col-md-6">
+          <div class="new required col-md-12">
+            <label class="control-label"> Email </label>
+            <input
+              type="email"
+              class="form-control {{
+                err && !billingDetails.email ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
+              id="inputName"
+              placeholder=""
+              required="required"
+              [(ngModel)]="billingDetails.email"
+            />
+          </div>
+
+
+
+          <!-- <div class="new required col-md-12">
             <label for="inputCountry" class="form-label">Country</label>
             <input type="text" class="form-control" id="inputCountry" placeholder="">
           </div> -->
@@ -161,37 +152,60 @@
           </div>
 
           <div class="new required col-md-12">
-            <label class="control-label"> State </label>
-            <input
-              class="form-control {{
-                err && !billingDetails.state ? 'is-invalid' : ''
-              }}"
-              (click)="err = false"
-              id="inputName"
-              required="required"
-              [(ngModel)]="billingDetails.state"
-            />
-            <!-- <option value="">Select a state</option>
-              <option value="Alabama">Alabama</option>
-              <option value="Alaska">Alaska</option> -->
-            <!-- Add more options for other states -->
-            <!-- </select> -->
-          </div>
-
-          <div class="new required col-md-12">
-            <label class="control-label"> Country </label>
+            <label class="control-label"> City </label>
             <input
               type="text"
               class="form-control {{
-                err && !billingDetails.country ? 'is-invalid' : ''
+                err && !billingDetails.city ? 'is-invalid' : ''
               }}"
               (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
-              [(ngModel)]="billingDetails.country"
+              [(ngModel)]="billingDetails.city"
             />
           </div>
+
+          <div class="new required col-md-12">
+            <label class="control-label"> State </label>
+            <select 
+                class="form-control {{
+                    err && !billingDetails.state ? 'is-invalid' : ''
+                }}"
+                (click)="err = false"
+                id="inputName"
+                required
+                [(ngModel)]="billingDetails.state">
+                <option value="">Select State</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="TN">Tamilnadu</option>
+                <!-- Add more options as needed -->
+            </select>
+        </div>
+        
+
+        <div class="new required col-md-12">
+          <label class="control-label"> Country </label>
+          <select 
+              class="form-control {{
+                  err && !billingDetails.country ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
+              id="inputName"
+              required
+              [(ngModel)]="billingDetails.country">
+              <option value="">Select Country</option>
+              <option value="">Select Country</option>
+              <option value="USA">United States</option>
+              <option value="Canada">Canada</option>
+              <option value="UK">United Kingdom</option>
+              <option value="Australia">Australia</option>
+              <!-- Add more options as needed -->
+          </select>
+      </div>
+      
           <!-- <div class="new required col-md-6">
             <label for="inputPostcode" class="form-label">Postcode</label>
             <input type="text" class="form-control" id="inputPostcode" placeholder="">
@@ -457,21 +471,21 @@
                       <i class="bi bi-currency-rupee"></i>{{ subTotal }}
                     </p>
                   </div>
-                  <br />
+                  <br/>
                   <div class="d-flex justify-content-between">
                     <p class="mb-2">Gift Total:</p>
                     <p class="mb-2">
                       <i class="bi bi-currency-rupee"></i>{{ giftsTotal }}
                     </p>
                   </div>
-                  <br />
+                  <br/>
                   <div class="d-flex justify-content-between">
                     <p class="mb-2">Total price:</p>
                     <p class="mb-2">
                       <i class="bi bi-currency-rupee"></i>{{ totalPrice }}
                     </p>
                   </div>
-                  <br />
+                  <br/>
                   <div class="d-flex justify-content-between">
                     <p class="mb-2">Shipping:</p>
                     <p class="mb-2 text-success">Free</p>
@@ -484,7 +498,7 @@
                       <i class="bi bi-currency-rupee"></i>{{ totalPrice }}
                     </p>
                   </div>
-                  <br />
+                  <br/>
                   <div class="mt-3">
                     <button (click)="checkout()" class="btns2">
                       Place Order

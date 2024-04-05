@@ -227,6 +227,19 @@
                   </td>
                 </tr>
                 <tr>
+                  <td>Phone</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.phone }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.phone"
+                    />
+                  </td>
+                </tr>
+                <tr>
                   <td>Email</td>
                   <td *ngIf="user?.billingDetails?.address && !edit">
                     {{ user.billingDetails.email }}
@@ -236,6 +249,20 @@
                       type="text"
                       class="form-control"
                       [(ngModel)]="billingDetails.email"
+                    />
+                  </td>
+                </tr>
+               
+                <tr>
+                  <td>Address</td>
+                  <td *ngIf="user?.billingDetails?.address && !edit">
+                    {{ user.billingDetails.address }}
+                  </td>
+                  <td *ngIf="!user?.billingDetails || edit">
+                    <input
+                      type="text"
+                      class="form-control"
+                      [(ngModel)]="billingDetails.address"
                     />
                   </td>
                 </tr>
@@ -249,19 +276,6 @@
                       type="text"
                       class="form-control"
                       [(ngModel)]="billingDetails.city"
-                    />
-                  </td>
-                </tr>
-                <tr>
-                  <td>Address</td>
-                  <td *ngIf="user?.billingDetails?.address && !edit">
-                    {{ user.billingDetails.address }}
-                  </td>
-                  <td *ngIf="!user?.billingDetails || edit">
-                    <input
-                      type="text"
-                      class="form-control"
-                      [(ngModel)]="billingDetails.address"
                     />
                   </td>
                 </tr>
@@ -304,19 +318,7 @@
                     />
                   </td>
                 </tr>
-                <tr>
-                  <td>Phone</td>
-                  <td *ngIf="user?.billingDetails?.address && !edit">
-                    {{ user.billingDetails.phone }}
-                  </td>
-                  <td *ngIf="!user?.billingDetails || edit">
-                    <input
-                      type="text"
-                      class="form-control"
-                      [(ngModel)]="billingDetails.phone"
-                    />
-                  </td>
-                </tr>
+               
               </tbody>
             </table>
             <a

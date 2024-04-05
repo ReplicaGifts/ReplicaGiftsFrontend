@@ -127,7 +127,7 @@
             class="checkboxsyle"
             name="discount"
             (change)="applyDiscount($event, dis)"
-          />{{ dis }}% Off or More
+          />10% Off or More
         </li>
       </ul>
 
@@ -150,7 +150,7 @@
       </ul> -->
     </div>
 
-    <div class="products__container grid col-lg-9">
+    <div class="products__container grid col-lg-9" #targetElement>
       <div
         *ngFor="let product of products; let i = index"
         class="product__item"
