@@ -1785,7 +1785,8 @@ input[type="number"]::-webkit-outer-spin-button {
 .details__group {
   padding: 10px;
   position: relative;
-  overflow: hidden;
+  overflow-y: scroll;
+  height: 550px;
 }
 
 .details__img {

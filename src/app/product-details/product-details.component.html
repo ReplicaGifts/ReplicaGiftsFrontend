@@ -15,9 +15,6 @@
             [frameSrc]="data.frame"
             (image)="addFile($event)"
             (file)="addCaputue($event)"
-            [edit]="edit"
-            [save]="save"
-            [reset]="reset"
           ></app-frames>
         </div>
       </div>
@@ -56,29 +53,8 @@
           </div>
         </div>
 
-        <button
-          *ngIf="data.frame && !img"
-          class="btns w-100 my-3"
-          (click)="img = true"
-        >
+        <button *ngIf="data.frame" class="btns w-100" (click)="img = true">
           Upload Image
-        </button>
-        <button
-          *ngIf="data.frame && img && !edit"
-          class="btns w-100 my-3"
-          (click)="edit = true"
-        >
-          Edit
-        </button>
-        <button
-          *ngIf="data.frame && img && edit"
-          class="btns w-100 my-3"
-          (click)="save = true; edit = false"
-        >
-          Save
-        </button>
-        <button *ngIf="img" class="btns w-100 my-3" (click)="reset = true">
-          Reset
         </button>
 
         <div style="display: flex; justify-content: space-between" class="me-5">
@@ -185,7 +161,6 @@
       </div>
    -->
 
-   
   <section class="details__tab container mb-5">
     <div class="detail__tabs">
       <span class="detail__tab active-tab" data-target="#info">
@@ -226,7 +201,8 @@
                   <img
                     [src]="gift.thumbnail"
                     alt=""
-                    class="product__img default"/>
+                    class="product__img default"
+                  />
                 </a>
                 <div class="product__actions">
                   <a class="action__btn" aria-label="Add to Wishlist">
@@ -234,6 +210,7 @@
                   </a>
                 </div>
               </div>
+
               <div class="product__content">
                 <span class="product__category">Gifts</span>
                 <a>

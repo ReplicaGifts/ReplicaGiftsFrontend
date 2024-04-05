@@ -398,14 +398,14 @@
                 </tbody>
               </table>
               <div class="payment__methods"></div>
-             
             </div> -->
+
+
 
             <div
             class="tab__content col-lg-9"
             content
-            id="orders"
-          >
+            id="orders">
             <h3 class="tab__header">Your Cart</h3>
             <div class="tab__body">
               <table class="placed__order-table">
@@ -413,13 +413,11 @@
                   <tr>
                     <th>Name</th>
                     <th>Price</th>
-           
                   </tr>
                 </thead>
                 <tbody>
                   <ng-container  *ngFor="let prod of shoppingCart">
                   <tr *ngIf="shoppingCart">
-                    
                       <td>
                         <h3 class="table__title">
                           {{ prod.productId.title }} x {{ prod.quantity }}
@@ -441,8 +439,6 @@
                           >{{ prod.userWant.totalAmount }}</span
                         >
                       </td>
-                
-                   
                   </tr>
                 </ng-container>
                 </tbody>
