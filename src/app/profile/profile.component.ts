@@ -86,9 +86,10 @@ export class ProfileComponent {
 
   addAddress() {
     console.log(this.proPic)
-    this.profile.addAddress(this.billingDetails, this.proPic).subscribe(response => {
+    this.profile.addAddress(this.billingDetails, this.proPic).subscribe((response: any) => {
 
       console.log(response);
+      this.user.billingDetails = response;
     }, err => { console.log(err) });
   }
 

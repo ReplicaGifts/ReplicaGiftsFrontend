@@ -151,9 +151,18 @@ export class GuestService {
 
   addToWish(product: any): boolean {
     try {
-      const wish = this.getData('wish');
-      const newItem = { ...product };
-      wish.push(newItem);
+      let wish = this.getData('wish');
+
+      const index = wish.findIndex((w: any) => w._id === product._id);
+      if (index !== -1) {
+        // Product already exists in the wishlist, remove it
+        wish.splice(index, 1);
+      } else {
+        // Product does not exist in the wishlist, add it
+        const newItem = { ...product };
+        wish.push(newItem);
+      }
+
       this.setData(wish, 'wish');
       return true;
     } catch (error) {
