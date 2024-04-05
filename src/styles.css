@@ -714,6 +714,10 @@ input[type="number"]::-webkit-outer-spin-button {
   color: var(--first-color);
 }
 
+.btns2 i{
+  padding-right: 5px;
+}
+
 .btns:hover {
   background-color: transparent;
   color: var(--first-color);
@@ -2554,7 +2558,7 @@ input.qtyminus {
   }
   
   .header__user-actions {
-    z-index: 1 !important;
+    z-index: 0 !important;
   }
 
   /* .header__top {
@@ -2636,7 +2640,7 @@ input.qtyminus {
   }
 
   .nav__close {
-    font-size: var(--h1-font-size);
+    font-size: var(--h3-font-size);
     margin-right: 10px;
   }
 
