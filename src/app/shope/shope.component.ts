@@ -10,6 +10,7 @@ import { FormsModule } from '@angular/forms';
 import { UserAuthService } from '../service/user-auth.service';
 import { GuestService } from '../service/guest.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-shope',
@@ -200,7 +201,7 @@ export class ShopeComponent implements OnDestroy {
 
   nav(id: any) {
 
-    this.router.navigateByUrl('/product/${id}')
+    this.router.navigateByUrl(`/product/${id}`)
   }
 
   addWish(id: any) {
@@ -212,6 +213,25 @@ export class ShopeComponent implements OnDestroy {
       this.guest.addToWish(id)
       this.wish.noOfWish.next(this.guest.getWish().length)
     }
+
+    if (id.like) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Item Added to Wishlist",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Item Removed from Wishlist",
+        showConfirmButton: false,
+        timer: 1000
+      });
+    }
+
   }
 
 

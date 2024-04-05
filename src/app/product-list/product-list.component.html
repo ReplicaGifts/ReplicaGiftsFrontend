@@ -122,7 +122,9 @@
                 class="action__btn {{
                   cate.like ? 'text-bg-danger text-danger ' : ''
                 }}"
-                aria-label="Add to Wishlist"
+              [attr.aria-label]="
+              cate.like ? 'Remove from Wishlist' : 'Add to Wishlist'
+            "
               >
                   <i class="fa-solid fa-heart"></i>
                 </a>
@@ -188,7 +190,9 @@
                 class="action__btn {{
                   cate.like ? 'text-bg-danger text-danger ' : ''
                 }}"
-                aria-label="Add to Wishlist"
+                [attr.aria-label]="
+                cate.like ? 'Remove from Wishlist' : 'Add to Wishlist'
+              "
               >
                   <i class="fa-solid fa-heart"></i>
                 </a>
@@ -251,7 +255,9 @@
                   class="action__btn {{
                     cate.like ? 'text-bg-danger text-danger ' : ''
                   }}"
-                  aria-label="Add to Wishlist"
+          [attr.aria-label]="
+          cate.like ? 'Remove from Wishlist' : 'Add to Wishlist'
+        "
                 >
                   <i class="fa-solid fa-heart"></i>
                 </a>

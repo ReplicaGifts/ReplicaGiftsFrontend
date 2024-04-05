@@ -89,34 +89,48 @@ export class ProductListComponent {
   }
 
   nav(id: any) {
-    this.router.navigateByUrl('/product/${id}')
+    this.router.navigateByUrl(`/product/${id}`)
   }
 
   navToShop() {
-    this.router.navigateByUrl('/shop')
+    this.router.navigateByUrl(`/shop`)
 
   }
 
   addWish(id: any) {
     id.like = !id.like;
+
     if (this.isAuth) {
       this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
-
     }
-
 
 
     else {
       this.guest.addToWish(id)
-
       this.wish.noOfWish.next(this.guest.getWish().length);
     }
 
-
+    if (id.like) {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Item Added to Wishlist",
+        showConfirmButton: false,
+        timer: 500
+      });
+    } else {
+      Swal.fire({
+        position: "center",
+        icon: "success",
+        title: "Item Removed from Wishlist",
+        showConfirmButton: false,
+        timer: 500
+      });
+    }
   }
-
+  
   navToCategory(id: any) {
-    this.router.navigateByUrl('/shop?category=${id}')
+    this.router.navigateByUrl(`/shop?category=${id}`)
 
   }
 

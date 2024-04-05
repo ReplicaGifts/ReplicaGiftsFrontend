@@ -169,7 +169,9 @@
             <a
               (click)="addWish(product)"
               class="action__btn"
-              aria-label="Add to Wishlist"
+              [attr.aria-label]="
+              product.like ? 'Remove from Wishlist' : 'Add to Wishlist'
+            "
             >
             <i
             class="fa-solid fa-heart {{
