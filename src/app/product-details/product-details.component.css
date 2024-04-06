@@ -19,6 +19,23 @@
   overflow: scroll !important;
 } */
 
+.product__item {
+  /* border: 1px solid var(--border-color); */
+  height: 100%;
+  padding: 15px;
+  border-radius: 1.5rem;
+  transition: all 0.2s var(--transition);
+  -webkit-border-radius: 1.5rem;
+  -moz-border-radius: 1.5rem;
+  -ms-border-radius: 1.5rem;
+  -o-border-radius: 1.5rem;
+  -webkit-transition: all 0.2s var(--transition);
+  -moz-transition: all 0.2s var(--transition);
+  -ms-transition: all 0.2s var(--transition);
+  -o-transition: all 0.2s var(--transition);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
 .product__img {
   vertical-align: middle;
   transition: all 1.5s var(--transition);
