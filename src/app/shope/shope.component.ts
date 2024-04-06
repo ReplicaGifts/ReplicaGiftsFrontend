@@ -80,13 +80,13 @@ export class ShopeComponent implements OnDestroy {
     search: '',
     page: 1,
     sort: "noOfPerchases",
-    order: -1
+    order: -1,
   };
+
   categories: any[] = [];
   ranges: number[] = [];
   discounts: number[] = [10, 20, 30, 40, 50];
   products: any[] = [];
-
   selectedSort: number = 0;
 
   sort = [{ name: "Popularity", order: -1, q: "noOfPerchases" }, { name: "What's new", order: -1, q: "createdAt" }, { name: "Price: low to high", order: 1, q: "amount" }, { name: "Price: high to low", order: -1, q: "amount" }, { name: "A to Z", order: 1, q: "title" }, { name: "Z to A", order: -1, q: "title" }, { name: "Customer Rating", order: -1, q: "totalrating" }]
@@ -202,6 +202,36 @@ export class ShopeComponent implements OnDestroy {
   nav(id: any) {
 
     this.router.navigateByUrl(`/product/${id}`)
+  }
+
+  getVisiblePageNumbers(): number[] {
+    const currentPage = this.selectedFilters.page;
+    const totalPages = this.pageNo.length;
+    const visiblePages: number[] = [];
+
+    // Add the selected page
+    if (currentPage !== 1 && currentPage !== 10) {
+
+      visiblePages.push(currentPage);
+    }
+
+    // Add adjacent pages around the selected page
+    let leftPage = currentPage - 1;
+    let rightPage = currentPage + 1;
+
+    // If selected page is not the first page, add adjacent pages on the left
+    while (leftPage > 1 && visiblePages.length < 3) {
+      visiblePages.unshift(leftPage);
+      leftPage--;
+    }
+
+    // If selected page is not the last page, add adjacent pages on the right
+    while (rightPage < totalPages && visiblePages.length < 5) {
+      visiblePages.push(rightPage);
+      rightPage++;
+    }
+
+    return visiblePages;
   }
 
   addWish(id: any) {

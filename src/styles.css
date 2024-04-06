@@ -1289,10 +1289,11 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 .action__btn:hover {
-  background-color: var(--first-color);
-  border-color: var(--first-color);
-  color: var(--body-color);
+  /* background-color: var(--first-color); */
+  border-color: var(--first-color-alt);
+  color: var(--first-color);
 }
+
 
 /*=============== DEALS ===============*/
 .deals__container {

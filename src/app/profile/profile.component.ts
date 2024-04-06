@@ -17,6 +17,7 @@ import { GuestService } from '../service/guest.service';
   templateUrl: './profile.component.html',
   styleUrl: './profile.component.css'
 })
+
 export class ProfileComponent {
 
   constructor(private userService: UserAuthService, private profile: ProfileService, private auth: UserAuthService,
@@ -24,12 +25,16 @@ export class ProfileComponent {
 
   user: any = { username: '' }
 
-
   isAuth = this.userService.isAuthenticated();
 
   edit: boolean = false;
 
   display: any = "dashboard";
+
+  err: any = false;
+  emailerr: any = false;
+  phnerr: any = false;
+  posterr: any = false;
 
   changeDisplay(name: any) {
     this.display = name;
@@ -83,13 +88,63 @@ export class ProfileComponent {
     }
   }
 
-  addAddress() {
-    console.log(this.proPic)
-    this.profile.addAddress(this.billingDetails, this.proPic).subscribe((response: any) => {
+  validateNumber(event: KeyboardEvent): void {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+    }
+  }
 
-      console.log(response);
-      this.user.billingDetails = response;
-    }, err => { console.log(err) });
+  isValidEmail(email: string): boolean {
+    // Regular expression for validating email format
+    const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return emailPattern.test(email);
+  }
+
+
+addAddress() {
+    // Reset error messages
+    this.phnerr = '';
+    this.emailerr = '';
+    this.posterr = '';
+
+    if (this.billingDetails.name === '' || !this.isValidEmail(this.billingDetails.email) || this.billingDetails.address === '' || this.billingDetails.state === '' || this.billingDetails.country === '' || this.billingDetails.city === '' || this.billingDetails.phone.length < 10 || this.billingDetails.postcode.length < 6) {
+      console.log('Please')
+      this.err = "Please fill all required fields";
+      // window.scrollTo({ top: 150, behavior: "smooth" })/
+
+      // Check phone number
+      if (this.billingDetails.phone.length < 10) {
+        this.phnerr = "Enter a 10-digit phone number";
+      }
+
+      // Check email
+      if (!this.isValidEmail(this.billingDetails.email)) {
+        this.emailerr = "Please enter a valid email address";
+      }
+
+      // Check postcode
+      if (this.billingDetails.postcode.length < 6) {
+        this.posterr = "Please enter a valid 6-digit postcode";
+      }
+
+      return;
+
+    } else {
+
+      console.log(this.proPic);
+      this.profile.addAddress(this.billingDetails, this.proPic).subscribe(
+        (response: any) => {
+          this.edit = false;
+          console.log(response);
+          this.user.billingDetails = response;
+        },
+        err => {
+          console.log(err);
+        }
+      );
+    }
   }
 
   nav(id: any) {
@@ -165,7 +220,6 @@ export class ProfileComponent {
         this.total = this.total + cart.userWant.totalAmount;
       })
     }
-
   }
   remove(id: any) {
     Swal.fire({

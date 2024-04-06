@@ -42,11 +42,6 @@
 
   <!--=============== CHECKOUT ===============-->
 
-
- 
-
-
-
   <section class="checkout">
     <div class="checkout__container container grid">
       <div class="checkout__group">
@@ -66,7 +61,6 @@
                 err && !billingDetails.name ? 'is-invalid' : ''
               }}"
               (click)="err = false"
-              (click)="err = false"
               id="inputName"
               placeholder=""
               required="required"
@@ -85,16 +79,12 @@
             <input type="email" class="form-control" id="inputEmail" placeholder="">
           </div> -->
 
-       
-
           <!-- <div class="new required col-md-12">
             <label for="inputCity" class="form-label">City</label>
             <input type="text" class="form-control" id="inputCity" placeholder="">
           </div> -->
 
-       
-
-          <div class="new required col-md-12">
+          <!-- <div class="new required col-md-12">
             <label class="control-label"> Phone </label>
             <input
               type="text"
@@ -107,6 +97,26 @@
               required="required"
               [(ngModel)]="billingDetails.phone"
             />
+          </div> -->
+          <div class="new required col-md-12">
+            <label class="control-label"> Phone </label>
+            <div class="input-group mb-3">
+              <!-- <input type="text" class="form-control" placeholder="Username" aria-label="Username" aria-describedby="basic-addon1"> -->
+              <input
+                type="text"
+                class="form-control {{
+                  err && billingDetails.phone.length < 10 ? 'is-invalid' : ''
+                }}"
+                (click)="err = false"
+                id="inputName"
+                placeholder="0000000000"
+                (keypress)="validateNumber($event)"
+                required="required"
+                [(ngModel)]="billingDetails.phone"
+                maxlength="10"
+                minlength="10"
+              />
+            </div>
           </div>
 
           <div class="new required col-md-12">
@@ -114,7 +124,9 @@
             <input
               type="email"
               class="form-control {{
-                err && !billingDetails.email ? 'is-invalid' : ''
+                err && !this.isValidEmail(this.billingDetails.email)
+                  ? 'is-invalid'
+                  : ''
               }}"
               (click)="err = false"
               id="inputName"
@@ -123,8 +135,6 @@
               [(ngModel)]="billingDetails.email"
             />
           </div>
-
-
 
           <!-- <div class="new required col-md-12">
             <label for="inputCountry" class="form-label">Country</label>
@@ -166,74 +176,40 @@
             />
           </div>
 
-
-
+          <div class="new required col-md-12">
+            <label class="control-label"> Country </label>
+            <input
+              class="form-control {{
+                err && !billingDetails.country ? 'is-invalid' : ''
+              }}"
+              disabled="true"
+              (click)="err = false"
+              id="inputName"
+              required="required"
+              [(ngModel)]="billingDetails.country"
+            />
+          </div>
 
           <div class="new required col-md-12">
             <label class="control-label"> State </label>
-            <select 
-                class="form-control {{
-                    err && !billingDetails.state ? 'is-invalid' : ''
-                }}"
-                (click)="err = false"
-                id="inputName"
-                required="required"
-                [(ngModel)]="billingDetails.state">
-                <option value="">Select State</option>
-                <option value="Andhra Pradesh">Andhra Pradesh</option>
-                <option value="Arunachal Pradesh">Arunachal Pradesh</option>
-                <option value="Assam">Assam</option>
-                <option value="Bihar">Bihar</option>
-                <option value="Chhattisgarh">Chhattisgarh</option>
-                <option value="Goa">Goa</option>
-                <option value="Gujarat">Gujarat</option>
-                <option value="Haryana">Haryana</option>
-                <option value="Himachal Pradesh">Himachal Pradesh</option>
-                <option value="Jammu and Kashmir">Jammu and Kashmir</option>
-                <option value="Jharkhand">Jharkhand</option>
-                <option value="Karnataka">Karnataka</option>
-                <option value="Kerala">Kerala</option>
-                <option value="Madhya Pradesh">Madhya Pradesh</option>
-                <option value="Maharashtra">Maharashtra</option>
-                <option value="Manipur">Manipur</option>
-                <option value="Meghalaya">Meghalaya</option>
-                <option value="Mizoram">Mizoram</option>
-                <option value="Nagaland">Nagaland</option>
-                <option value="Odisha">Odisha</option>
-                <option value="Punjab">Punjab</option>
-                <option value="Rajasthan">Rajasthan</option>
-                <option value="Sikkim">Sikkim</option>
-                <option value="Tamil Nadu">Tamil Nadu</option>
-                <option value="Telangana">Telangana</option>
-                <option value="Tripura">Tripura</option>
-                <option value="Uttarakhand">Uttarakhand</option>
-                <option value="Uttar Pradesh">Uttar Pradesh</option>
-                <option value="West Bengal">West Bengal</option>
-                <option value="Andaman and Nicobar Islands">Andaman and Nicobar Islands</option>
-                <option value="Chandigarh">Chandigarh</option>
-                <option value="Dadra and Nagar Haveli and Daman and Diu">Dadra and Nagar Haveli and Daman and Diu</option>
-                <option value="Delhi">Delhi</option>
-                <option value="Lakshadweep">Lakshadweep</option>
-                <option value="Puducherry">Puducherry</option>
-                
-                <!-- Add more options as needed -->
-            </select>
-        </div>
-        
+            <select
+              class="form-control {{
+                err && !billingDetails.state ? 'is-invalid' : ''
+              }}"
+              (click)="err = false"
+              id="inputName"
+              required="required"
+              [(ngModel)]="billingDetails.state"
+            >
+              <option value="">Select State</option>
+              <option *ngFor="let state of states" [value]="state">
+                {{ state }}
+              </option>
 
-        <div class="new required col-md-12">
-          <label class="control-label"> Country </label>
-          <input
-            class="form-control {{
-              err && !billingDetails.country ? 'is-invalid' : ''
-            }}"
-            (click)="err = false"
-            id="inputName"
-            required="required"
-            [(ngModel)]="billingDetails.country"
-          />
-        </div>
-      
+              <!-- Add more options as needed -->
+            </select>
+          </div>
+
           <!-- <div class="new required col-md-6">
             <label for="inputPostcode" class="form-label">Postcode</label>
             <input type="text" class="form-control" id="inputPostcode" placeholder="">
@@ -244,12 +220,14 @@
             <input
               type="text"
               class="form-control {{
-                err && !billingDetails.postcode ? 'is-invalid' : ''
+                err && billingDetails.postcode.length < 6 ? 'is-invalid' : ''
               }}"
-              (click)="err = false"
+              (keypress)="validateNumber($event)"
               id="inputName"
               placeholder=""
-              required="required"
+              maxlength="6"
+              minlength="6"
+              required
               [(ngModel)]="billingDetails.postcode"
             />
           </div>
@@ -346,20 +324,8 @@
       </div> -->
 
       <!-- cart + summary -->
-   
 
-
-
-
-
-
-
-
-   
-
-
-
-      <section class="" style="padding-top: 30px;">
+      <section class="" style="padding-top: 30px">
         <div class="">
           <div class="row">
             <!-- cart -->
@@ -442,55 +408,77 @@
               <div class="payment__methods"></div>
             </div> -->
 
-
-
-            <div
-            class="tab__content col-lg-9"
-            content
-            id="orders">
-            <h4 class="tab__header">Your Cart</h4>
-            <div class="tab__body">
-              <table class="placed__order-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Price</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <ng-container  *ngFor="let prod of shoppingCart">
-                  <tr *ngIf="shoppingCart">
-                      <td>
-                        <h3 class="table__title">
-                          {{ prod.productId.title }} x {{ prod.quantity }}
-                          <ng-container *ngIf="prod.userWant.gifts.length > 0">
-                            <p style="color: rgb(255, 145, 0); font-size: 18px">
-                              +
-                            </p>
-                            <ul class="list-unstyled">
-                              <li *ngFor="let gif of prod.userWant.gifts">
-                                {{ gif.gift.name }} x {{ gif.quantity }}
-                              </li>
-                            </ul>
-                          </ng-container>
-                        </h3>
-                      </td>
-                      <td>
-                        <span class="table__price"
-                          ><i class="bi bi-currency-rupee"></i
-                          >{{ prod.userWant.totalAmount }}</span
-                        >
-                      </td>
-                  </tr>
-                </ng-container>
-                </tbody>
-              </table>
+            <div class="tab__content col-lg-9" content id="orders">
+              <h4 class="tab__header">Your Cart</h4>
+              <div class="tab__body">
+                <table class="placed__order-table">
+                  <thead>
+                    <tr>
+                      <th>Name</th>
+                      <th>Price</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <ng-container *ngFor="let prod of shoppingCart">
+                      <tr *ngIf="shoppingCart">
+                        <td>
+                          <h3 class="table__title">
+                            {{ prod.productId.title }} x {{ quantity }}
+                            <ng-container *ngIf="gifts.length > 0">
+                              <p
+                                style="color: rgb(255, 145, 0); font-size: 18px"
+                              >
+                                +
+                              </p>
+                              <ul class="list-unstyled">
+                                <li *ngFor="let gif of gifts">
+                                  {{ gif.gift.name }} x {{ gif.quantity }}
+                                </li>
+                              </ul>
+                            </ng-container>
+                          </h3>
+                        </td>
+                        <td>
+                          <span class="table__price"
+                            ><i class="bi bi-currency-rupee"></i
+                            >{{ prod.userWant.totalAmount }}</span
+                          >
+                        </td>
+                      </tr>
+                    </ng-container>
+                    <ng-container *ngIf="product">
+                      <tr>
+                        <td>
+                          <h3 class="table__title">
+                            {{ product.title }} x {{ quantity }}
+                            <ng-container *ngIf="gifts.length > 0">
+                              <p
+                                style="color: rgb(255, 145, 0); font-size: 18px"
+                              >
+                                +
+                              </p>
+                              <ul class="list-unstyled">
+                                <li *ngFor="let gif of gifts">
+                                  {{ gif.gift.name }} x {{ gif.quantity }}
+                                </li>
+                              </ul>
+                            </ng-container>
+                          </h3>
+                        </td>
+                        <td>
+                          <span class="table__price"
+                            ><i class="bi bi-currency-rupee"></i
+                            >{{ totalPrice }}</span
+                          >
+                        </td>
+                      </tr>
+                    </ng-container>
+                  </tbody>
+                </table>
+              </div>
             </div>
-          </div>
 
-
-
-            <div class="col-lg-3" style="padding-left: 20px;">
+            <div class="col-lg-3" style="padding-left: 20px">
               <div class="card border">
                 <div class="card-body">
                   <div class="d-flex justify-content-between">
@@ -499,21 +487,21 @@
                       <i class="bi bi-currency-rupee"></i>{{ subTotal }}
                     </p>
                   </div>
-                  <br/>
+                  <br />
                   <div class="d-flex justify-content-between">
                     <p class="mb-2">Gift Total:</p>
                     <p class="mb-2">
                       <i class="bi bi-currency-rupee"></i>{{ giftsTotal }}
                     </p>
                   </div>
-                  <br/>
+                  <br />
                   <div class="d-flex justify-content-between">
                     <p class="mb-2">Total price:</p>
                     <p class="mb-2">
                       <i class="bi bi-currency-rupee"></i>{{ totalPrice }}
                     </p>
                   </div>
-                  <br/>
+                  <br />
                   <div class="d-flex justify-content-between">
                     <p class="mb-2">Shipping:</p>
                     <p class="mb-2 text-success">Free</p>
@@ -526,7 +514,7 @@
                       <i class="bi bi-currency-rupee"></i>{{ totalPrice }}
                     </p>
                   </div>
-                  <br/>
+                  <br />
                   <div class="mt-3">
                     <button (click)="checkout()" class="btns2">
                       Place Order
@@ -540,12 +528,6 @@
         </div>
       </section>
       <!-- cart + summary -->
-
-
-
-
-
-      
     </div>
   </section>
 </main>

@@ -213,20 +213,65 @@
     <div class="d-flex justify-content-center w-100 my-5 ms-lg-5">
       <ng-container>
         <button
+          *ngIf="selectedFilters.page > 1"
           class="btns3 btn-link"
-          (click)="selectedFilters.page = 1; applySearch()"
+          (click)="
+            selectedFilters.page = selectedFilters.page - 1; applySearch()
+          "
         >
-        <i class="bi bi-arrow-left"></i>
+          <i class="bi bi-arrow-left"></i>
         </button>
-        <button
-          class=" btns3 {{
-            selectedFilters.page === i + 1 ? 'active' : 'btn-link'
-          }}"
-          *ngFor="let _ of pageNo; let i = index"
-          (click)="selectedFilters.page = _; applySearch()"
-        >
-          {{ i + 1 }}
-        </button>
+
+        <!-- Display page numbers -->
+        <ng-container *ngIf="pageNo.length <= 5">
+          <!-- If total pages are 5 or less, display all page numbers -->
+          <button
+            class="btns3"
+            [class.active]="selectedFilters.page === page"
+            *ngFor="let page of pageNo"
+            (click)="selectedFilters.page = page; applySearch()"
+          >
+            {{ page }}
+          </button>
+        </ng-container>
+
+        <ng-container *ngIf="pageNo.length > 5">
+          <!-- Display first page -->
+          <button
+            class="btns3"
+            [class.active]="selectedFilters.page === 1"
+            (click)="selectedFilters.page = 1; applySearch()"
+          >
+            1
+          </button>
+
+          <!-- Display ellipsis if necessary -->
+          <span *ngIf="selectedFilters.page > 3">...</span>
+
+          <!-- Display pages around the selected page -->
+          <ng-container *ngFor="let page of getVisiblePageNumbers()">
+            <button
+              class="btns3"
+              [class.active]="selectedFilters.page === page"
+              (click)="selectedFilters.page = page; applySearch()"
+            >
+              {{ page }}
+            </button>
+          </ng-container>
+
+          <!-- Display ellipsis if necessary -->
+          <span *ngIf="selectedFilters.page < pageNo.length - 2">...</span>
+
+          <!-- Display last page -->
+          <button
+            class="btns3"
+            [class.active]="selectedFilters.page === pageNo.length"
+            (click)="selectedFilters.page = pageNo.length; applySearch()"
+          >
+            {{ pageNo.length }}
+          </button>
+        </ng-container>
+
         <button
           *ngIf="selectedFilters.page < pageNo.length"
           class="btns3 btn-link"

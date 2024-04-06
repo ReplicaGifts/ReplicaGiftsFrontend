@@ -42,6 +42,9 @@ export class DeleveryDetailsComponent {
   }
 
 
+  
+
+
   totalPrice = 0;
 
   shoppingCart: any[] = [];
@@ -62,6 +65,44 @@ export class DeleveryDetailsComponent {
 
 
   err: any = false;
+
+  states = [
+    'Andhra Pradesh',
+    'Arunachal Pradesh',
+    'Assam',
+    'Bihar',
+    'Chhattisgarh',
+    'Goa',
+    'Gujarat',
+    'Haryana',
+    'Himachal Pradesh',
+    'Jammu and Kashmir',
+    'Jharkhand',
+    'Karnataka',
+    'Kerala',
+    'Madhya Pradesh',
+    'Maharashtra',
+    'Manipur',
+    'Meghalaya',
+    'Mizoram',
+    'Nagaland',
+    'Odisha',
+    'Punjab',
+    'Rajasthan',
+    'Sikkim',
+    'Tamil Nadu',
+    'Telangana',
+    'Tripura',
+    'Uttarakhand',
+    'Uttar Pradesh',
+    'West Bengal',
+    'Andaman and Nicobar Islands',
+    'Chandigarh',
+    'Dadra and Nagar Haveli and Daman and Diu',
+    'Delhi',
+    'Lakshadweep',
+    'Puducherry'
+  ];
 
 
   ngOnInit() {
@@ -125,11 +166,23 @@ export class DeleveryDetailsComponent {
 
   }
 
+  validateNumber(event: KeyboardEvent): void {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+    }
+  }
 
+  isValidEmail(email: string): boolean {
+    // Regular expression for validating email format
+    const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+    return emailPattern.test(email);
+  }
 
   checkout() {
     console.log(this.billingDetails);
-    if (this.billingDetails.name === '' || this.billingDetails.email === '' || this.billingDetails.address === '' || this.billingDetails.state === '' || this.billingDetails.country === '' || this.billingDetails.city === '' || this.billingDetails.phone === '' || this.billingDetails.postcode === '') {
+    if (this.billingDetails.name === '' || !this.isValidEmail(this.billingDetails.email) || this.billingDetails.address === '' || this.billingDetails.state === '' || this.billingDetails.country === '' || this.billingDetails.city === '' || this.billingDetails.phone.length < 10 || this.billingDetails.postcode.length < 6) {
       console.log('Please')
       this.err = "Please fill all required fields";
       window.scrollTo({ top: 150, behavior: "smooth" })
