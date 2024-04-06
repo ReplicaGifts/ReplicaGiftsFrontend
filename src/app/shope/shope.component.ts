@@ -85,7 +85,7 @@ export class ShopeComponent implements OnDestroy {
 
   categories: any[] = [];
   ranges: number[] = [];
-  discounts: number[] = [10, 20, 30, 40, 50];
+  discounts: { min: number, max: number }[] = [{ min: 10, max: 20 }, { min: 20, max: 30 }, { min: 30, max: 40 }, { min: 40, max: 100 }];
   products: any[] = [];
   selectedSort: number = 0;
 
@@ -160,9 +160,10 @@ export class ShopeComponent implements OnDestroy {
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
 
-  applyDiscount(e: any, discount: number) {
+  applyDiscount(e: any, min: number, max: number) {
     if (e.target.checked) {
-      this.selectedFilters.discount = discount;
+      this.selectedFilters.discountMin = min;
+      this.selectedFilters.discountMax = max;
     } else {
       this.selectedFilters.discount = '';
     }

@@ -195,7 +195,7 @@
       <div class="new__container swiper">
         <div class="swiper-wrapper">
           <ng-container *ngFor="let gift of gifts; let i = index">
-            <div class="product__item swiper-slide" >
+            <div class="product__item swiper-slide" *ngIf="gift.quantity > 0">
               <div class="product__banner">
                 <a class="product__images1">
                   <img
@@ -276,7 +276,7 @@
           Add To Cart
         </button>
         <button *ngIf="buyNw" (click)="buyNow(data._id)" class="btns">
-          Add To Cart
+          Buy Now
         </button>
       </div>
     </section>
