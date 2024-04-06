@@ -57,7 +57,7 @@
             />SORT</a
           >
 
-          <a (click)="applySort(0)" class="nav__link">Popularities</a>
+          <a (click)="applySort(0)" class="nav__link">{{this.sort[selectedSort].name ? this.sort[selectedSort].name : 'Popularities'}}</a>
           <div id="dropdown">
             <a (click)="applySort(0)">Popularities</a>
             <a (click)="applySort(1)">What's New</a>

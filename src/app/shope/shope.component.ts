@@ -89,7 +89,7 @@ export class ShopeComponent implements OnDestroy {
 
   selectedSort: number = 0;
 
-  sort = [{ name: "Papularity", order: -1, q: "noOfPerchases" }, { name: "What's new", order: -1, q: "createdAt" }, { name: "Price: low to high", order: 1, q: "amount" }, { name: "Price: high to low", order: -1, q: "amount" }, { name: "A to Z", order: 1, q: "title" }, { name: "Z to A", order: -1, q: "title" }, { name: "Customer Rating", order: -1, q: "totalrating" }]
+  sort = [{ name: "Popularity", order: -1, q: "noOfPerchases" }, { name: "What's new", order: -1, q: "createdAt" }, { name: "Price: low to high", order: 1, q: "amount" }, { name: "Price: high to low", order: -1, q: "amount" }, { name: "A to Z", order: 1, q: "title" }, { name: "Z to A", order: -1, q: "title" }, { name: "Customer Rating", order: -1, q: "totalrating" }]
 
   private filterSubject = new BehaviorSubject<any>(this.selectedFilters);
 
@@ -184,7 +184,7 @@ export class ShopeComponent implements OnDestroy {
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
   applySort(sort: any) {
-    console.log(sort);
+    this.selectedSort = sort
     this.selectedFilters.sort = this.sort[sort].q;
     this.selectedFilters.order = this.sort[sort].order;
 

@@ -42,7 +42,7 @@ export class ProfileComponent {
     name: '',
     email: '',
     city: '',
-    country: '',
+    country: 'India',
     address: '',
     postcode: '',
     phone: '',
@@ -60,7 +60,6 @@ export class ProfileComponent {
     this.getCart()
     this.getw()
     window.scrollTo({ top: 0, behavior: "instant" })
-
   }
 
   get() {
