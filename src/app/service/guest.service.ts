@@ -95,6 +95,7 @@ export class GuestService {
 
     return this.http.post(this.baseUrl + '/api/guest/add-frame', formData);
   }
+
   getCart(): any {
     return this.getData('cart');
   }
@@ -137,7 +138,6 @@ export class GuestService {
         if (item._id === id) {
           item.quantity = data.frame.quantity;
           item.userWant = data.frame;
-
         }
 
         return item
@@ -148,6 +148,8 @@ export class GuestService {
     })
 
   }
+
+
 
   addToWish(product: any): boolean {
     try {
@@ -162,7 +164,6 @@ export class GuestService {
         const newItem = { ...product };
         wish.push(newItem);
       }
-
       this.setData(wish, 'wish');
       return true;
     } catch (error) {
@@ -170,6 +171,8 @@ export class GuestService {
       return false;
     }
   }
+
+
 
   getWish(): any {
     return this.getData('wish');

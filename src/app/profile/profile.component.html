@@ -35,6 +35,7 @@
   </section>
 
   <!--=============== ACCOUNTS ===============-->
+
   <section class="accounts section--lg">
     <div class="accounts__container container grid">
       <div class="account__tabs">
@@ -436,16 +437,14 @@
                     <td>
                       <span class="table__price"
                         ><i class="bi bi-currency-rupee"></i
-                        >{{ wish.amount }}</span
-                      >
+                        >{{ wish.amount }}</span>
                     </td>
                     <td><span class="table__stock">In Stock</span></td>
                     <td>
                       <a
                         [routerLink]="['/product', wish._id]"
                         class="active-link"
-                        >Add to Cart</a
-                      >
+                        >Add to Cart</a>
                     </td>
                     <td>
                       <i

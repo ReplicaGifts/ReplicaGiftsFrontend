@@ -39,6 +39,7 @@ export class ProductListComponent {
   categories: any[] = [];
 
   trending: any[] = [];
+
   newProduct: any[] = [];
 
   wishList: any[] = [];
@@ -94,7 +95,6 @@ export class ProductListComponent {
 
   navToShop() {
     this.router.navigateByUrl(`/shop`)
-
   }
 
   addWish(id: any) {
@@ -103,7 +103,6 @@ export class ProductListComponent {
     if (this.isAuth) {
       this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
     }
-
 
     else {
       this.guest.addToWish(id)
@@ -118,7 +117,8 @@ export class ProductListComponent {
         showConfirmButton: false,
         timer: 500
       });
-    } else {
+    }
+    else {
       Swal.fire({
         position: "center",
         icon: "success",
@@ -128,7 +128,7 @@ export class ProductListComponent {
       });
     }
   }
-  
+
   navToCategory(id: any) {
     this.router.navigateByUrl(`/shop?category=${id}`)
 
