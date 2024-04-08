@@ -68,14 +68,14 @@
         >
           <i class="fi fi-rs-marker"></i> My Profile
         </p>
-        <p
+        <!-- <p
           (click)="changeDisplay('cart')"
           class="account__tab {{ display === 'cart' ? 'active-tab' : '' }}"
           data-target="#cart"
         >
           <i class="fi fi-rs-cart-shopping-fast"></i>
           My Shopping Cart
-        </p>
+        </p> -->
         <p
           (click)="changeDisplay('wish')"
           class="account__tab {{ display === 'wish' ? 'active-tab' : '' }}"
@@ -409,7 +409,7 @@
             <a class="btns" *ngIf="edit" (click)="addAddress()">Save</a>
           </div>
         </div>
-        <div
+        <!-- <div
           class="tab__content {{ display === 'cart' ? 'active-tab' : '' }}"
           content
           id="orders"
@@ -452,7 +452,7 @@
                         <i class="bi bi-currency-rupee"></i
                         >{{ giftTotal(w.userWant.gifts) }}</span
                       >
-                      <!-- <span class="table__price">${{ w.productId.amount }}</span> -->
+           
                     </td>
                     <td>
                       <input
@@ -482,7 +482,7 @@
               </tbody>
             </table>
           </div>
-        </div>
+        </div> -->
 
         <div
           class="tab__content {{ display === 'wish' ? 'active-tab' : '' }}"
