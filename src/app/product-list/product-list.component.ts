@@ -16,6 +16,7 @@ declare global {
   interface Window {
     imgGallery: () => void;
     productContainer: () => void;
+    categoryContainer: () => void;
     // Declare other functions here...
   }
 }
@@ -47,10 +48,13 @@ export class ProductListComponent {
   isAuth = this.user.isAuthenticated();
 
   ngOnInit() {
-
     window.productContainer();
+    window.categoryContainer();
     window.scrollTo({ top: 0, behavior: "instant" })
-    this.category.getCategory().subscribe((category: any) => this.categories = category);
+    this.category.getCategory().subscribe((category: any) => {
+      this.categories = category
+    });
+    window.categoryContainer();
     this.product.getTrending().subscribe((trending: any) => {
       this.trending = trending
       this.get(trending);
@@ -60,7 +64,10 @@ export class ProductListComponent {
       this.get(trending);
     });
 
-
+    setTimeout(() => {
+      window.productContainer();
+      window.categoryContainer();
+    }, 5000)
 
   }
 

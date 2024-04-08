@@ -109,8 +109,7 @@
           <div
             *ngFor="let cate of newProduct; let i = index"
             class="product__item swiper-slide"
-            data-aos="flip-right"
-            data-aos="flip-right"
+            
           >
             <div class="product__banner">
               <a (click)="nav(cate._id)" class="product__images1">
@@ -178,7 +177,7 @@
     <div class="new__container swiper" data-aos="fade-right">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of trending; let i = index">
-          <div class="product__item swiper-slide" data-aos="flip-right">
+          <div class="product__item swiper-slide">
             <div class="product__banner">
               <a (click)="nav(cate._id)" class="product__images1">
                 <img [src]="cate.image" alt="" class="product__img default" />
@@ -244,7 +243,7 @@
     <div class="new__container swiper" data-aos="fade-left">
       <div class="swiper-wrapper">
         <ng-container *ngFor="let cate of trending; let i = index">
-          <div class="product__item swiper-slide" data-aos="flip-right">
+          <div class="product__item swiper-slide">
             <div class="product__banner">
               <a (click)="nav(cate._id)" class="product__images1">
                 <img [src]="cate.image" alt="" class="product__img default" />

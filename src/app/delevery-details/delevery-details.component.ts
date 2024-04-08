@@ -123,9 +123,9 @@ export class DeleveryDetailsComponent {
           this.spinner = false;
 
           if (res.success) {
-
+this.quantity = res.quantity;
             this.product = res.product;
-            this.subTotal = this.product.amount ?? 1 * res.quantity;
+            this.subTotal = res.total;
             this.gifts = res.gifts;
             this.giftsTotal = this.giftTotal(res.gifts ?? []);
 
@@ -175,7 +175,7 @@ export class DeleveryDetailsComponent {
 
   isValidEmail(email: string): boolean {
     // Regular expression for validating email format
-    const emailPattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|COM)$/;;
 
     return emailPattern.test(email);
   }
