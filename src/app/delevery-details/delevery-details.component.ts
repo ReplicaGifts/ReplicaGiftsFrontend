@@ -34,7 +34,7 @@ export class DeleveryDetailsComponent {
     name: '',
     email: '',
     city: '',
-    country: '',
+    country: 'India',
     address: '',
     postcode: '',
     phone: '',

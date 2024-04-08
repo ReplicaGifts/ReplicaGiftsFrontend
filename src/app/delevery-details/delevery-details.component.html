@@ -415,63 +415,76 @@
                   <thead>
                     <tr>
                       <th>Name</th>
-                      <th>Price</th>
+                      <th>Quantity</th>
+                      <th>Gifts</th>
+                      <th>Gifts Quantity</th>
+                      <th>Total</th>
                     </tr>
                   </thead>
                   <tbody>
                     <ng-container *ngFor="let prod of shoppingCart">
-                      <tr *ngIf="shoppingCart">
-                        <td>
+                      <tr *ngIf="prod.userWant.gifts.length > 0; else noGifts">
+                        <td [rowSpan]="prod.userWant.gifts.length">
                           <h3 class="table__title">
-                            {{ prod.productId.title }} x {{ quantity }}
-                            <ng-container *ngIf="gifts.length > 0">
-                              <p
-                                style="color: rgb(255, 145, 0); font-size: 18px"
-                              >
-                                +
-                              </p>
-                              <ul class="list-unstyled">
-                                <li *ngFor="let gif of gifts">
-                                  {{ gif.gift.name }} x {{ gif.quantity }}
-                                </li>
-                              </ul>
-                            </ng-container>
+                            {{ prod.productId.title }}
                           </h3>
                         </td>
-                        <td>
-                          <span class="table__price"
-                            ><i class="bi bi-currency-rupee"></i
-                            >{{ prod.userWant.totalAmount }}</span
-                          >
+                        <td [rowSpan]="prod.userWant.gifts.length">
+                          {{ prod.userWant.quantity }}
+                        </td>
+                        <td>{{ prod.userWant.gifts[0].gift.name }}</td>
+                        <td>{{ prod.userWant.gifts[0].quantity }}</td>
+                        <td [rowSpan]="prod.userWant.gifts.length">
+                          <h3 class="table__title">
+                            {{ prod.userWant.totalAmount }}
+                          </h3>
                         </td>
                       </tr>
+                      <tr *ngFor="let gif of prod.userWant.gifts.slice(1)">
+                        <td>{{ gif.gift.name }}</td>
+                        <td>{{ gif.quantity }}</td>
+                      </tr>
+                      <ng-template #noGifts>
+                        <tr>
+                          <td>{{ prod.productId.title }}</td>
+                          <td>{{ prod.userWant.quantity }}</td>
+                          <td>No gifts</td>
+                          <td>-</td>
+                          <td>{{ prod.userWant.totalAmount }}</td>
+                        </tr>
+                      </ng-template>
                     </ng-container>
                     <ng-container *ngIf="product">
-                      <tr>
-                        <td>
+                      <tr *ngIf="gifts.length > 0; else noGifts">
+                        <td [rowSpan]="gifts.length">
                           <h3 class="table__title">
-                            {{ product.title }} x {{ quantity }}
-                            <ng-container *ngIf="gifts.length > 0">
-                              <p
-                                style="color: rgb(255, 145, 0); font-size: 18px"
-                              >
-                                +
-                              </p>
-                              <ul class="list-unstyled">
-                                <li *ngFor="let gif of gifts">
-                                  {{ gif.gift.name }} x {{ gif.quantity }}
-                                </li>
-                              </ul>
-                            </ng-container>
+                            {{ product.title }}
                           </h3>
                         </td>
-                        <td>
-                          <span class="table__price"
-                            ><i class="bi bi-currency-rupee"></i
-                            >{{ totalPrice }}</span
-                          >
+                        <td [rowSpan]="gifts.length">
+                          {{ quantity }}
+                        </td>
+                        <td>{{ gifts[0].gift.name }}</td>
+                        <td>{{ gifts[0].quantity }}</td>
+                        <td [rowSpan]="gifts.length">
+                          <h3 class="table__title">
+                            {{ totalPrice }}
+                          </h3>
                         </td>
                       </tr>
+                      <tr *ngFor="let gif of gifts.slice(1)">
+                        <td>{{ gif.gift.name }}</td>
+                        <td>{{ gif.quantity }}</td>
+                      </tr>
+                      <ng-template #noGifts>
+                        <tr>
+                          <td>{{ product.title }}</td>
+                          <td>{{ quantity }}</td>
+                          <td>No gifts</td>
+                          <td>-</td>
+                          <td>{{ totalPrice }}</td>
+                        </tr>
+                      </ng-template>
                     </ng-container>
                   </tbody>
                 </table>
