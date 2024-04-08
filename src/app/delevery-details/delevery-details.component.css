@@ -25,16 +25,16 @@
 }
 
 .tab__body{
-  text-align: left;
+  text-align: center;
 }
 
 .placed__order-table th{
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
 }
 
 .placed__order-table tbody td{
-  text-align: left;
+  text-align: center;
   padding-left: 20px;
 }
 
