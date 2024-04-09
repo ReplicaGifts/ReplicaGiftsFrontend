@@ -4,7 +4,7 @@
 /*=============== VARIABLES CSS ===============*/
 
 body {
-  overflow-x: hidden;
+  overflow-x: hidden !important;
 }
 
 .spin {
@@ -345,6 +345,21 @@ input[type="number"]::-webkit-outer-spin-button {
 /*=============== HEADER & NAV ===============*/
 
 .headertop {
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+    url(./assets/assets/img/empty-black-wall-with-blank-frame-it_853451-299.avif);
+    background-size: cover;
+    padding-bottom: 120px;
+}
+
+.headertopname{
+      padding-top: 100px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 50px;
+      font-weight: 800;
+      letter-spacing: 1px;
 }
 
 .header__top {
@@ -388,6 +403,9 @@ input[type="number"]::-webkit-outer-spin-button {
 .header__top-action:hover {
   color: var(--first-color);
 }
+
+
+
 
 .nav,
 .nav__menu,
@@ -2523,9 +2541,16 @@ input.qtyminus {
   font-size: var(--small-font-size);
 }
 
+#btnshide{
+  display: none;
+}
+
 /*=============== BREAKPOINTS ===============*/
 /* For large devices */
 @media screen and (max-width: 1400px) {
+
+
+
   .container {
     max-width: 1120px;
   }
@@ -2533,8 +2558,6 @@ input.qtyminus {
   .table__container {
     overflow: auto !important;
   }
-
-
 
   .products__container,
   .showcase__container {
@@ -2722,6 +2745,7 @@ input.qtyminus {
   }
 }
 
+
 /* For medium devices */
 @media screen and (max-width: 992px) {
   .container {
@@ -2756,6 +2780,8 @@ input.qtyminus {
 
   .home__img {
     justify-self: center;
+    background-color: #333;
+  padding: 10px;
   }
 
   .btn {
@@ -2818,9 +2844,30 @@ input.qtyminus {
   .table tbody tr td:nth-child(6) {
     width: 100px;
   }
+
+
+  .headertop {
+
+    padding-bottom: 60px !important;
 }
 
+  .headertopname{
+      padding-top: 50px !important;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: 1px;
+}
+
+
+}
+
+
 @media screen and (max-width: 768px) {
+
   .container {
     max-width: 570px;
   }
@@ -2852,16 +2899,27 @@ input.qtyminus {
 
   .prodBut{
     display: flex;
-
   }
 
   .product__img{
-    height: 370px !important;
+    /* height: 370px !important; */
   }
 
-  /* .home__img {
-    max-width: 300px;
-  } */
+.home__content {
+  order: 2; 
+  padding: 0px;
+}
+
+.home__img {
+  order: 1; 
+  padding: 0px;
+}
+
+.home__img {
+  background-color: #333;
+
+}
+
 }
 
 .table__container {
@@ -2869,8 +2927,14 @@ input.qtyminus {
   /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
 }
 
+
 /* For small devices */
 @media screen and (max-width: 576px) {
+
+  .nav {
+   background-color: var(--first-color-alt);
+  }
+
   .category__item {
     padding-bottom: 1rem;
   }
@@ -2996,7 +3060,6 @@ input.qtyminus {
 
   }
 
-
   .header__top {
     display: none;
   }
@@ -3033,16 +3096,17 @@ input.qtyminus {
     /* box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); */
   }
 
-  /* .home__img {
-    display: none;
-  } */
+  .home__img {
+    background-color: #333;
+    padding: 10px;
+  }
 
   .header__search {
     max-width: 270px;
   }
 }
 
-.nav__item {
+  .nav__item {
   list-style: none;
   display: inline-block;
   position: relative;
@@ -3106,14 +3170,6 @@ input.qtyminus {
 .header__alert-news {
   margin-left: -80%;
 }
-
-/* .header__alert-news span{
- padding: 5px;
-  }
-  .header__alert-news i{
-    padding: 5px;
-    font-size: 20px;
-     } */
 
 #one {
   margin-left: 10%;
