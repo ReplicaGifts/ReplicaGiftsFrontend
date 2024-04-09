@@ -63,14 +63,35 @@
         >
           Upload Image
         </button>
-        <button
-          *ngIf="data.frame && img && !edit"
-          class="btns w-100 my-3"
-          (click)="edit = true"
-        >
-          Edit
-        </button>
-        <button
+    
+
+        <div id="btnshide" class="prodBut">
+          <div class="details__action">
+            <button
+            *ngIf="data.frame && img && !edit" 
+            class="btns btn--sm"
+            (click)="edit = true"
+          >
+            Edit
+          </button>
+            <!-- <input type="number" class="quantity" value="3" /> -->
+            <button *ngIf="data.frame && img && edit"
+           
+            (click)="save = true; edit = false" class="btns btn--sm">
+            Save
+            </button>
+            <!-- <a href="#" class="details__action-btn">
+              <i class="fi fi-rs-heart"></i>
+            </a> -->
+          </div>
+          <div class="details__action">
+            <!-- <input type="number" class="quantity" value="3" /> -->
+            <button *ngIf="img" (click)="reset = true" class="btns1 btn--sm">Reset Image</button>
+          </div>
+        </div>
+
+
+        <!-- <button
           *ngIf="data.frame && img && edit"
           class="btns w-100 my-3"
           (click)="save = true; edit = false"
@@ -79,7 +100,7 @@
         </button>
         <button *ngIf="img" class="btns w-100 my-3" (click)="reset = true">
           Reset
-        </button>
+        </button> -->
 
         <div style="display: flex; justify-content: space-between" class="me-5">
           <div class="details__meta">

@@ -29,6 +29,8 @@ function imgGallery() {
 
 imgGallery();
 
+
+
 function categoryContainer() {
 
   /=============== SWIPER CATEGORIES ===============/
@@ -166,9 +168,6 @@ document.addEventListener('DOMContentLoaded', () => {
     }));
   }
 
-  /**
-   * Mobile nav toggle
-   */
   const mobileNavShow = document.querySelector('.mobile-nav-show');
   const mobileNavHide = document.querySelector('.mobile-nav-hide');
 
@@ -203,9 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
   });
 
-  /**
-   * Toggle mobile nav dropdowns
-   */
+
+
   const navDropdowns = document.querySelectorAll('.navbar .dropdown > a');
 
   navDropdowns.forEach(el => {
@@ -238,6 +236,10 @@ document.addEventListener('DOMContentLoaded', () => {
   /**
    * Init swiper slider with 1 slide at once in desktop view
    */
+
+
+
+  
   new Swiper('.slides-1', {
     speed: 600,
     loop: true,
@@ -255,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
     },
-
 
   });
 
