@@ -66,11 +66,9 @@ export class ProductDetailsComponent {
 
   selectedGifts: { gift: string, quantity: number, total: Number }[] = [];
 
-
   addGift(gift: any) {
 
     this.selectedGifts.push({ gift: gift._id, quantity: gift.selected_quantity, total: gift.price * gift.selected_quantity })
-
   }
 
   removeGift(gift: any) {

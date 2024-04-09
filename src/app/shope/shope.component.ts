@@ -7,18 +7,21 @@ import { WishService } from '../service/wish.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, debounceTime } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { HeaderComponent } from '../partials/header/header.component';
 import { UserAuthService } from '../service/user-auth.service';
 import { GuestService } from '../service/guest.service';
 import { SpinnerComponent } from '../spinner/spinner.component';
 import Swal from 'sweetalert2';
 
+
 @Component({
   selector: 'app-shope',
   standalone: true,
-  imports: [StarRatingComponent, CommonModule, FormsModule, SpinnerComponent],
+  imports: [StarRatingComponent, CommonModule, FormsModule, SpinnerComponent, HeaderComponent],
   templateUrl: './shope.component.html',
   styleUrl: './shope.component.css'
 })
+
 export class ShopeComponent implements OnDestroy {
 
   private scrollInterval: any;
@@ -71,6 +74,10 @@ export class ShopeComponent implements OnDestroy {
   subscribetion: any[] = [];
 
   count: number = 0;
+
+  searchMenu: any[] = [];
+
+  searchText: any;
 
   spinner: boolean = false;
 
@@ -192,7 +199,19 @@ export class ShopeComponent implements OnDestroy {
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
 
+  navtoproduct() {
+    console.log();
+    let id = this.searchMenu.find(f => f.title === this.searchText);
+    this.router.navigateByUrl(`/product/${id._id}`)
+  }
 
+
+  search() {
+    this.product.limitedProduct({ search: this.searchText, limit: 10 }).subscribe((data: any) => {
+      console.log(data.product)
+      this.searchMenu = data.product;
+    });
+  }
 
   loadInitialData() {
     // Load initial data when the component initializes
@@ -265,6 +284,7 @@ export class ShopeComponent implements OnDestroy {
 
   }
 
+  
 
   getFilteredProduct(selected: any) {
     this.subscribetion.push(this.product.limitedProduct(selected).subscribe((products: any) => {
@@ -310,5 +330,8 @@ export class ShopeComponent implements OnDestroy {
       s.unsubscribe();
     })
   }
+
+
+  
 
 }
