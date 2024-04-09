@@ -15,6 +15,9 @@
             [frameSrc]="data.frame"
             (image)="addFile($event)"
             (file)="addCaputue($event)"
+            [edit]="edit"
+            [save]="save"
+            [reset]="reset"
           ></app-frames>
         </div>
       </div>
@@ -35,8 +38,8 @@
         <a class="short__description" style="color: rgb(106, 106, 106)">
           {{ data.category.categoryName }}
         </a>
-        <br/>
-        <br/>
+        <br />
+        <br />
         <a class="form-label" style="color: rgb(57, 57, 57)"> Description: </a>
         <a class="short__description" style="color: rgb(106, 106, 106)">
           {{ data.description }}
@@ -53,8 +56,29 @@
           </div>
         </div>
 
-        <button *ngIf="data.frame" class="btns w-100" (click)="img = true">
+        <button
+          *ngIf="data.frame && !img"
+          class="btns w-100 my-3"
+          (click)="img = true"
+        >
           Upload Image
+        </button>
+        <button
+          *ngIf="data.frame && img && !edit"
+          class="btns w-100 my-3"
+          (click)="edit = true"
+        >
+          Edit
+        </button>
+        <button
+          *ngIf="data.frame && img && edit"
+          class="btns w-100 my-3"
+          (click)="save = true; edit = false"
+        >
+          Save
+        </button>
+        <button *ngIf="img" class="btns w-100 my-3" (click)="reset = true">
+          Reset
         </button>
 
         <div style="display: flex; justify-content: space-between" class="me-5">
@@ -100,7 +124,7 @@
             </div>
           </div>
         </div>
-        
+
         <div class="prodBut">
           <div class="details__action">
             <!-- <input type="number" class="quantity" value="3" /> -->
@@ -150,20 +174,20 @@
                       data-bs-parent="#faqlist"
                     >
                       <div class="accordion-body">
-                        Terms & Conditions Code is valid for the first time buyers
-                        only Code can be used one time per user only A minimum order
-                        value of ₹699 is required to be eligible for this offer Max
-                        discount of ₹100 can be availed Discount is not applicable on
-                        shipping fees Offer is not applicable on gold & silver items,
-                        electronics and gift cards Offer is for a limited time period
-                        only & can be modified or discontinued without prior
-                        intimation Offer cannot be clubbed with any other ongoing
-                        offers or codes
+                        Terms & Conditions Code is valid for the first time
+                        buyers only Code can be used one time per user only A
+                        minimum order value of ₹699 is required to be eligible
+                        for this offer Max discount of ₹100 can be availed
+                        Discount is not applicable on shipping fees Offer is not
+                        applicable on gold & silver items, electronics and gift
+                        cards Offer is for a limited time period only & can be
+                        modified or discontinued without prior intimation Offer
+                        cannot be clubbed with any other ongoing offers or codes
                       </div>
                     </div>
                   </div>
                   <!-- # Faq item-->
-      
+
                   <div class="accordion-item">
                     <h3 class="accordion-header">
                       <button
@@ -181,19 +205,19 @@
                       data-bs-parent="#faqlist"
                     >
                       <div class="accordion-body">
-                        Terms & Conditions A minimum order value of ₹599 is required
-                        to be eligible for this offer Max discount of ₹200 can be
-                        availed Cashback is valid upto 90 days Discount is not
-                        applicable on shipping fees Offer is not applicable on gold &
-                        silver items, electronics and gift cards Offer is for a
-                        limited time period only & can be modified or discontinued
-                        without prior intimation Offer cannot be clubbed with any
-                        other ongoing offers or codes
+                        Terms & Conditions A minimum order value of ₹599 is
+                        required to be eligible for this offer Max discount of
+                        ₹200 can be availed Cashback is valid upto 90 days
+                        Discount is not applicable on shipping fees Offer is not
+                        applicable on gold & silver items, electronics and gift
+                        cards Offer is for a limited time period only & can be
+                        modified or discontinued without prior intimation Offer
+                        cannot be clubbed with any other ongoing offers or codes
                       </div>
                     </div>
                   </div>
                   <!-- # Faq item-->
-      
+
                   <div class="accordion-item">
                     <h3 class="accordion-header">
                       <button
@@ -211,26 +235,28 @@
                       data-bs-parent="#faqlist"
                     >
                       <div class="accordion-body">
-                        Terms & Conditions Get 5% cashback up to INR 750 on your first
-                        transaction on Simpl A minimum order value of INR 749 is
-                        required to be eligible for this offer Offer valid once per
-                        user on Simpl, during the offer period Offer is valid only for
-                        New Users to Simpl Offer valid from 1st March to 31st March
-                        2024 No coupon code is required Eligible cashback amount and
-                        details will reflect in the user's Simpl account, within 5
-                        minutes of a successful transaction The eligible amount will
-                        be credited to a user’s Simpl account post settlement of the
-                        current dues Cashback will be cancelled in case of full
-                        refunds or cancellation of orders To check your transaction
-                        history and cashback amount, download the Simpl App available
-                        on Google Play Store & the App store Happy to assist you with
-                        further concerns. Please write to help&#64;getsimpl.com. Or
-                        chat with the Simpl team on the Simpl app
+                        Terms & Conditions Get 5% cashback up to INR 750 on your
+                        first transaction on Simpl A minimum order value of INR
+                        749 is required to be eligible for this offer Offer
+                        valid once per user on Simpl, during the offer period
+                        Offer is valid only for New Users to Simpl Offer valid
+                        from 1st March to 31st March 2024 No coupon code is
+                        required Eligible cashback amount and details will
+                        reflect in the user's Simpl account, within 5 minutes of
+                        a successful transaction The eligible amount will be
+                        credited to a user’s Simpl account post settlement of
+                        the current dues Cashback will be cancelled in case of
+                        full refunds or cancellation of orders To check your
+                        transaction history and cashback amount, download the
+                        Simpl App available on Google Play Store & the App store
+                        Happy to assist you with further concerns. Please write
+                        to help&#64;getsimpl.com. Or chat with the Simpl team on
+                        the Simpl app
                       </div>
                     </div>
                   </div>
                   <!-- # Faq item-->
-      
+
                   <div class="accordion-item">
                     <h3 class="accordion-header">
                       <button
@@ -239,7 +265,8 @@
                         data-bs-toggle="collapse"
                         data-bs-target="#faq-content-4"
                       >
-                        Get upto 15% cashback on a transaction with Mobikwik wallet!
+                        Get upto 15% cashback on a transaction with Mobikwik
+                        wallet!
                       </button>
                     </h3>
                     <div
@@ -248,10 +275,11 @@
                       data-bs-parent="#faqlist"
                     >
                       <div class="accordion-body">
-                        Terms & Conditions Get upto 15% cashback on a transaction with
-                        Mobikwik wallet! Transaction to be done through Mobikwik
-                        wallet only. Offer can be availed on a minimum transaction of
-                        INR 800/- Validity till 29th February 2024.
+                        Terms & Conditions Get upto 15% cashback on a
+                        transaction with Mobikwik wallet! Transaction to be done
+                        through Mobikwik wallet only. Offer can be availed on a
+                        minimum transaction of INR 800/- Validity till 29th
+                        February 2024.
                       </div>
                     </div>
                   </div>
@@ -262,7 +290,7 @@
           </div>
         </section>
       </div>
-      
+
       <!--
                       <a>
                         <h3 class="product__title">{{ gift.name }}</h3>
@@ -425,13 +453,7 @@
           Buy Now
         </button>
       </div>
-
-      
     </section>
-
-
-
-    
   </div>
 
   <!-- <section class="new__arrivals container section">
