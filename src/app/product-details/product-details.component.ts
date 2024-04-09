@@ -201,7 +201,7 @@ export class ProductDetailsComponent {
   }
 
   addCart(id: any) {
-
+    this.save = true;
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {
       this.spinner = true;
       if (this.isAuth) {
@@ -287,6 +287,7 @@ export class ProductDetailsComponent {
 
   buyNow(id: any) {
     this.spinner = true;
+    this.save = true;
 
 
     if (this.frameDeatails.printType !== '' && this.frameDeatails.size !== '') {

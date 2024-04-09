@@ -1,12 +1,5 @@
-<div
-  class="headertop"
-   
->
-  <div class="headertopname"
-     
-  >
-    My Account
-  </div>
+<div class="headertop">
+  <div class="headertopname">My Account</div>
 </div>
 
 <!--=============== MAIN ===============-->
@@ -158,7 +151,10 @@
                       <td>{{ order.deliveryStatus }}</td>
                       <td>
                         <a
-                          *ngIf="order.tracking_id"
+                          *ngIf="
+                            order.tracking_id &&
+                            order.deliveryStatus !== 'Delivered'
+                          "
                           href="https://jabezraja31119979a.trackingmore.org/{{
                             order.tracking_id
                           }}?page=tracking-page&mode=iframe"
@@ -167,6 +163,12 @@
                           >Track</a
                         >
                         <p *ngIf="!order.tracking_id">Under Processing</p>
+                        <p
+                          *ngIf="order.deliveryStatus === 'Delivered'"
+                          class="text-success"
+                        >
+                          {{ order.deliveryStatus }} Successfully
+                        </p>
                       </td>
                     </ng-container>
                   </tr>
