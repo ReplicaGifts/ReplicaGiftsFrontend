@@ -13,7 +13,13 @@
     </div>
   </div>
 
-  <div id="canvas-container">
+  <div
+    id="canvas-container"
+    (mousemove)="edit = true"
+    (mouseenter)="edit = true"
+    (mouseover)="edit = true"
+    (mouseleave)="edit = false; captureScreenshot()"
+  >
     <img
       [src]="frameSrc"
       id="overLay"
@@ -24,13 +30,15 @@
     <canvas
       #canvas1
       id="canvas1"
-      [width]="canvasWidth"
-      [height]="canvasHeight"
+      class="{{ edit ? 'opacity' : '' }}"
+      width="500"
+      height="600"
       [style.backgroundColor]="'transparent'"
       (mousedown)="mouseDownHandler($event)"
       (mousemove)="mouseMoveHandler($event)"
       (mouseup)="mouseUpHandler($event)"
       (mouseenter)="mouseEnterHandler()"
+      (mouseleave)="captureScreenshot()"
       tabindex="1"
       style="position: absolute; top: 0; left: 0"
     >
