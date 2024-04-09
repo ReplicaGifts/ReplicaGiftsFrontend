@@ -1,12 +1,5 @@
-<div
-  class="headertop"
-   
->
-  <div class="headertopname"
-     
-  >
-    My Account
-  </div>
+<div class="headertop">
+  <div class="headertopname">My Account</div>
 </div>
 
 <!--=============== MAIN ===============-->
@@ -170,7 +163,10 @@
                           >Track</a
                         >
                         <p *ngIf="!order.tracking_id">Under Processing</p>
-                        <p *ngIf="order.deliveryStatus === 'Delivered'">
+                        <p
+                          *ngIf="order.deliveryStatus === 'Delivered'"
+                          class="text-success"
+                        >
                           {{ order.deliveryStatus }} Successfully
                         </p>
                       </td>
