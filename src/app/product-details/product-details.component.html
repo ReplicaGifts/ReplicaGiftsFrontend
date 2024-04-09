@@ -65,10 +65,10 @@
         </button>
     
 
-        <div class="prodBut">
+        <div id="btnshide" class="prodBut">
           <div class="details__action">
             <button
-            *ngIf="data.frame && img && !edit" id="btnshide"
+            *ngIf="data.frame && img && !edit" 
             class="btns btn--sm"
             (click)="edit = true"
           >
@@ -77,7 +77,7 @@
             <!-- <input type="number" class="quantity" value="3" /> -->
             <button *ngIf="data.frame && img && edit"
            
-            (click)="save = true; edit = false" id="btnshide" class="btns btn--sm">
+            (click)="save = true; edit = false" class="btns btn--sm">
             Save
             </button>
             <!-- <a href="#" class="details__action-btn">
@@ -86,7 +86,7 @@
           </div>
           <div class="details__action">
             <!-- <input type="number" class="quantity" value="3" /> -->
-            <button *ngIf="img" (click)="reset = true" id="btnshide" class="btns1 btn--sm">Reset Image</button>
+            <button *ngIf="img" (click)="reset = true" class="btns1 btn--sm">Reset Image</button>
           </div>
         </div>
 
