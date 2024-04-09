@@ -172,6 +172,8 @@ export class FramesComponent {
 
             this.file.emit(data);
 
+            console.log("saved")
+
           }, 'image/png'); // Specify the MIME type of the image (e.g., 'image/png')
         });
 
