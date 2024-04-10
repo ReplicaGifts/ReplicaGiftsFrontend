@@ -10,6 +10,7 @@
     transition: background-color 0.3s, color 0.3s;
     margin: 5px;
     text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.6);
   }
 
   .btns3:hover {

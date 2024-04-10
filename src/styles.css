@@ -339,7 +339,9 @@ input[type="number"]::-webkit-outer-spin-button {
   color: #2282ff;
 }
 
+
 /*=============== HEADER & NAV ===============*/
+
 
 .headertop {
     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
@@ -369,7 +371,6 @@ input[type="number"]::-webkit-outer-spin-button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-
 }
 
 .header__contact span:first-child {
@@ -400,7 +401,6 @@ input[type="number"]::-webkit-outer-spin-button {
 .header__top-action:hover {
   color: var(--first-color);
 }
-
 
 
 
@@ -619,7 +619,10 @@ input[type="number"]::-webkit-outer-spin-button {
   height: 500px;
 }
 
+
 /*=============== BUTTONS ===============*/
+
+
 .btn {
   display: inline-block;
   background-color: var(--first-color);
@@ -861,7 +864,7 @@ input[type="number"]::-webkit-outer-spin-button {
   border: 1px solid var(--border-color);
   width: 30px;
   height: 30px;
-  color: var(--text-color-light);
+  color: var(--text-color);
   font-size: 19px;
   font-weight: 800;
   border-radius: 50%;
@@ -945,6 +948,7 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /*=============== PRODUCTS ===============*/
+
 .tab__btns {
   display: flex;
   flex-wrap: wrap;
@@ -1412,11 +1416,13 @@ input[type="number"]::-webkit-outer-spin-button {
 }
 
 /*=============== NEW ARRIVALS ===============*/
+
 .new__arrivals {
   overflow: hidden;
 }
 
 /*=============== SHOWCASE ===============*/
+
 .showcase__container {
   grid-template-columns: repeat(4, 1fr);
 }
@@ -3246,7 +3252,7 @@ color: rgb(255, 89, 0) ;
   color: #2d405f;
   text-align: center;
   box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
-  padding: 30px 0 30px 0;
+  padding: 43px 0 43px 0;
   background: #fff;
 }
 
@@ -3273,7 +3279,7 @@ color: rgb(255, 89, 0) ;
 .contact .php-email-form {
   box-shadow: 0 0 30px rgba(214, 215, 216, 0.6);
   padding: 26px;
-  /* background: #fff; */
+ 
 }
 
 .contact .php-email-form .error-message {

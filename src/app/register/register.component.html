@@ -2,9 +2,7 @@
   class="headertop"
    
 >
-  <div class="headertopname"
-     
->
+  <div class="headertopname">
     Register
   </div>
 </div>
@@ -106,6 +104,7 @@
                   </button>
                 </div>
               </form>
+              <div class="text-center">
               <button
                 *ngIf="showotp"
                 (click)="check()"
@@ -122,6 +121,7 @@
               >
                 Get OTP
               </button>
+            </div>
             </div>
             <div class="card-footer text-center">
               Already have an account? <a [routerLink]="['/login']">Login</a>

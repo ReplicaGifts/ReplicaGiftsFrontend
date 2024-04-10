@@ -99,7 +99,7 @@
         <div class="col-md-6">
           <div class="card border-0">
             <div class="card-header">
-              <h2 class="card-title text-center mb-0">LOGIN</h2>
+              <h4 class="card-title text-center mb-0">LOGIN</h4>
             </div>
             <div class="card-body">
               <form
@@ -154,8 +154,8 @@
                     Password is required.
                   </div>
                 </div>
-                <a [routerLink]="['/forgot-password']">Forgot Password?</a>
-                <div class="form-check mb-3">
+                <div class="row" style="display: flex; align-items: center; justify-content: space-between;">
+                <div class="form-check mb-3 col-lg-6">
                   <input
                     type="checkbox"
                     name="remember"
@@ -165,6 +165,8 @@
                   <label for="remember" class="form-check-label"
                     >Remember Me</label
                   >
+                </div>
+                <div class="mb-3 col-lg-6"> <a [routerLink]="['/forgot-password']">Forgot Password?</a></div>
                 </div>
                 <p class="text-danger" *ngIf="err">{{ err }}</p>
                 <div class="text-center">
