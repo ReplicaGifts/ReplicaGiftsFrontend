@@ -140,20 +140,35 @@
       </ul>
       <hr />
       <h3>Discount Range</h3>
+     
+
+
+    
+
       <ul class="category-list">
+        <li>
+          <input
+            type="radio"
+            class="checkboxsyle"
+            name="discount"
+            (change)="applyDiscount($event, null, null)"/> No Discount
+        </li>
         <li *ngFor="let dis of discounts">
           <input
             type="radio"
             class="checkboxsyle"
             name="discount"
-            (change)="applyDiscount($event, dis.min, dis.max)"
-          />{{
+            (change)="applyDiscount($event, dis.min, dis.max)"/>{{
             dis.max !== 100
               ? "" + dis.min + "% Off to " + dis.max + "% Off"
               : "" + dis.min + "% Off or More"
           }}
         </li>
       </ul>
+      
+      
+      
+      
 
       <!-- <hr />
       <h3>Review Range</h3>

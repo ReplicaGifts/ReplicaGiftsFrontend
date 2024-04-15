@@ -69,6 +69,10 @@ export class ShopeComponent implements OnDestroy {
     this.targetElement.nativeElement.focus();
   }
 
+
+
+
+
   isAuth = this.user.isAuthenticated();
 
   subscribetion: any[] = [];
@@ -167,17 +171,41 @@ export class ShopeComponent implements OnDestroy {
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
 
-  applyDiscount(e: any, min: number, max: number) {
+  // applyDiscount(e: any, min: number, max: number) {
+  //   if (e.target.checked) {
+  //     this.selectedFilters.discountMin = min;
+  //     this.selectedFilters.discountMax = max;
+  //   } else {
+  //     this.selectedFilters.discount = '';
+  //   }
+  //   this.selectedFilters.page = 1;
+
+  //   this.filterSubject.next(this.selectedFilters); // Trigger filter update
+  // }
+
+
+  applyDiscount(e: any, min: number | null, max: number | null) {
     if (e.target.checked) {
-      this.selectedFilters.discountMin = min;
-      this.selectedFilters.discountMax = max;
+      if (min !== null && max !== null) {
+        this.selectedFilters.discountMin = min;
+        this.selectedFilters.discountMax = max;
+      } else {
+        // Handle no discount case
+        // For example, reset the applied discount
+        this.selectedFilters.discountMin = null;
+        this.selectedFilters.discountMax = null;
+        this.selectedFilters.discount = 'No Discount';
+      }
     } else {
       this.selectedFilters.discount = '';
     }
+    
     this.selectedFilters.page = 1;
-
+  
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
+  
+
 
   applyRating(e: any, rating: number) {
     if (e.target.checked) {
@@ -218,6 +246,8 @@ export class ShopeComponent implements OnDestroy {
     this.getFilteredProduct(this.selectedFilters);
   }
 
+
+  
 
   nav(id: any) {
 
