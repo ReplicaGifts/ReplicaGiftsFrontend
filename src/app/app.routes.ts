@@ -2,38 +2,63 @@ import { Routes } from '@angular/router';
 
 
 import { ProductListComponent } from './product-list/product-list.component';
-import { ProductDetailsComponent } from './product-details/product-details.component';
-import { LoginComponent } from './login/login.component';
-import { ProfileComponent } from './profile/profile.component';
-import { ShoppingCartComponent } from './shopping-cart/shopping-cart.component';
-import { WishListComponent } from './wish-list/wish-list.component';
-import { DeleveryDetailsComponent } from './delevery-details/delevery-details.component';
-import { ShopeComponent } from './shope/shope.component';
 
-import { RegisterComponent } from './register/register.component';
-import { TearmsAndConditionComponent } from './tearms-and-condition/tearms-and-condition.component';
-import { PrivacyPaclicyComponent } from './privacy-paclicy/privacy-paclicy.component';
-import { OrderViewComponent } from './order-view/order-view.component';
-import { FramesComponent } from './frames/frames.component';
-import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 export const routes: Routes = [
 
 
     { path: '', component: ProductListComponent },
-    { path: 'product/:id', component: ProductDetailsComponent },
-    { path: 'login', component: LoginComponent },
-    { path: 'register', component: RegisterComponent },
-    { path: 'profile', component: ProfileComponent },
-    { path: 'cart', component: ShoppingCartComponent },
-    { path: 'wish', component: WishListComponent },
-    { path: 'shop', component: ShopeComponent },
-    { path: 'buy-now/:id', component: DeleveryDetailsComponent },
-    { path: 'check-out', component: DeleveryDetailsComponent },
-    { path: 'order-view/:id', component: OrderViewComponent },
-    { path: 'terms', component: TearmsAndConditionComponent },
-    { path: 'frames', component: FramesComponent },
-    { path: 'privacy-policy', component: PrivacyPaclicyComponent },
-    { path: 'forgot-password', component: ForgotPasswordComponent },
+    {
+        path: 'product/:id', loadComponent: () => import('./product-details/product-details.component')
+            .then(c => c.ProductDetailsComponent)
+    },
+    {
+        path: 'login', loadComponent: () => import('./login/login.component')
+            .then(c => c.LoginComponent)
+    },
+    {
+        path: 'register', loadComponent: () => import('./register/register.component')
+            .then(c => c.RegisterComponent)
+    },
+    {
+        path: 'profile', loadComponent: () => import('./profile/profile.component')
+            .then(c => c.ProfileComponent)
+    },
+    {
+        path: 'wish', loadComponent: () => import('./wish-list/wish-list.component')
+            .then(c => c.WishListComponent)
+    },
+    {
+        path: 'shop', loadComponent: () => import('./shope/shope.component')
+            .then(c => c.ShopeComponent)
+    },
+    {
+        path: 'buy-now/:id', loadComponent: () => import('./delevery-details/delevery-details.component')
+            .then(c => c.DeleveryDetailsComponent)
+    },
+    {
+        path: 'check-out', loadComponent: () => import('./delevery-details/delevery-details.component')
+            .then(c => c.DeleveryDetailsComponent)
+    },
+    {
+        path: 'order-view/:id', loadComponent: () => import('./order-view/order-view.component')
+            .then(c => c.OrderViewComponent)
+    },
+    {
+        path: 'terms', loadComponent: () => import('./tearms-and-condition/tearms-and-condition.component')
+            .then(c => c.TearmsAndConditionComponent)
+    },
+    {
+        path: 'frames', loadComponent: () => import('./frames/frames.component')
+            .then(c => c.FramesComponent)
+    },
+    {
+        path: 'privacy-policy', loadComponent: () => import('./privacy-paclicy/privacy-paclicy.component')
+            .then(c => c.PrivacyPaclicyComponent)
+    },
+    {
+        path: 'forgot-password', loadComponent: () => import('./forgot-password/forgot-password.component')
+            .then(c => c.ForgotPasswordComponent)
+    },
 
 ];
