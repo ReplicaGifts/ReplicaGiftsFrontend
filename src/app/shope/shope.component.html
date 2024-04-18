@@ -1,12 +1,5 @@
-<div
-  class="headertop"
-   
->
-  <div class="headertopname"
-     
-  >
-    Shopping Products
-  </div>
+<div class="headertop">
+  <div class="headertopname">Shopping Products</div>
 </div>
 
 <div class="spin" *ngIf="spinner">
@@ -14,8 +7,6 @@
 </div>
 
 <main class="main">
-
-
   <section class="products container row col-lg-12">
     <!-- <p class="total__products">SELECT YOUR PHOTOS! <span></span></p> -->
 
@@ -25,71 +16,80 @@
         </div> -->
     <!-- <p class="header__alert-news">
         </p> -->
-        <div>
-      
-          <div class="nav__list" style="display: flex; align-items: center; justify-content: space-between; padding-top: 15px; padding-bottom: 15px; padding-left: 15px; padding-right: 15px; border-radius: 50px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); margin-bottom: 30px;">
-            
-            <div class="header__search" data-aos="fade-left">
-              <input
-                type="text"
-                placeholder="Search Photos..."
-                class="form__input"
-                [(ngModel)]="searchText"
-                (input)="search()"
-                (change)="navtoproduct()"
-                list="filterOptions"
-              />
-              <datalist id="filterOptions">
-            
-                <option *ngFor="let filter of searchMenu">
-                  {{ filter.title }}
-                </option>
-              </datalist>
-              <button class="search__btns">
-                <img
-                  src="../.././../assets/assets/img/search-icon.svg"
-                  alt="search icon"
-                />
-              </button>
-            </div>
+    <div>
+      <div
+        class="nav__list"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          padding-top: 15px;
+          padding-bottom: 15px;
+          padding-left: 15px;
+          padding-right: 15px;
+          border-radius: 50px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          margin-bottom: 30px;
+        "
+      >
+        <div class="header__search" data-aos="fade-left">
+          <input
+            type="text"
+            placeholder="Search Photos..."
+            class="form__input"
+            [(ngModel)]="searchText"
+            (input)="search()"
+            (change)="navtoproduct()"
+            list="filterOptions"
+          />
+          <datalist id="filterOptions">
+            <option *ngFor="let filter of searchMenu">
+              {{ filter.title }}
+            </option>
+          </datalist>
+          <button class="search__btns">
+            <img
+              src="../.././../assets/assets/img/search-icon.svg"
+              alt="search icon"
+            />
+          </button>
+        </div>
 
-            <div class="nav__item">
-              <a
-                class="nav__link"
-                style=" color: rgb(136, 136, 136)"
-                >Showing {{ count }} photos</a
-              >
-            </div>
-      
-            
-      
-            
-            <div class="nav__item">
-              <a
-                class="nav__link"
-                style="padding-right: 20px; color: rgb(136, 136, 136)"
-                ><img
-                  src="../../assets/assets/img/sort-descending-6609.svg"
-                  alt=""
-                  style="padding-right: 6px"
-                />SORT</a
-              >
-      
-              <a (click)="applySort(0)" class="nav__link">{{this.sort[selectedSort].name ? this.sort[selectedSort].name : 'Popularities'}}</a>
-              <div id="dropdown">
-                <a (click)="applySort(0)">Popularities</a>
-                <a (click)="applySort(1)">What's New</a>
-                <a (click)="applySort(2)">Price: low to high</a>
-                <a (click)="applySort(3)">Price: high to low</a>
-                <a (click)="applySort(4)">A to Z</a>
-                <a (click)="applySort(5)">Z to A</a>
-                <a (click)="applySort(6)">Customer Rating</a>
-              </div>
-            </div>
+        <div class="nav__item">
+          <a class="nav__link" style="color: rgb(136, 136, 136)"
+            >Showing {{ count }} photos</a
+          >
+        </div>
+
+        <div class="nav__item">
+          <a
+            class="nav__link"
+            style="padding-right: 20px; color: rgb(136, 136, 136)"
+            ><img
+              src="../../assets/assets/img/sort-descending-6609.svg"
+              alt=""
+              style="padding-right: 6px"
+            />SORT</a
+          >
+
+          <a (click)="applySort(0)" class="nav__link">{{
+            this.sort[selectedSort].name
+              ? this.sort[selectedSort].name
+              : "Popularities"
+          }}</a>
+          <div id="dropdown">
+            <a (click)="applySort(0)">Popularities</a>
+            <a (click)="applySort(1)">What's New</a>
+            <a (click)="applySort(2)">Price: low to high</a>
+            <a (click)="applySort(3)">Price: high to low</a>
+            <a (click)="applySort(4)">A to Z</a>
+            <a (click)="applySort(5)">Z to A</a>
+            <a (click)="applySort(6)">Customer Rating</a>
           </div>
         </div>
-       
-   
+      </div>
+    </div>
+
     <div class="sidebar col-lg-3">
       <h3>
         <img
@@ -140,10 +140,6 @@
       </ul>
       <hr />
       <h3>Discount Range</h3>
-     
-
-
-    
 
       <ul class="category-list">
         <li>
@@ -151,24 +147,23 @@
             type="radio"
             class="checkboxsyle"
             name="discount"
-            (change)="applyDiscount($event, null, null)"/> All
+            (change)="applyDiscount($event, null, null)"
+          />
+          All
         </li>
         <li *ngFor="let dis of discounts">
           <input
             type="radio"
             class="checkboxsyle"
             name="discount"
-            (change)="applyDiscount($event, dis.min, dis.max)"/>{{
+            (change)="applyDiscount($event, dis.min, dis.max)"
+          />{{
             dis.max !== 100
               ? "" + dis.min + "% Off to " + dis.max + "% Off"
               : "" + dis.min + "% Off or More"
           }}
         </li>
       </ul>
-      
-      
-      
-      
 
       <!-- <hr />
       <h3>Review Range</h3>
@@ -209,14 +204,18 @@
               (click)="addWish(product)"
               class="action__btn"
               [attr.aria-label]="
-              product.like ? 'Remove from Wishlist' : 'Add to Wishlist'
-            "
+                wishlist.includes(product._id)
+                  ? 'Remove from Wishlist'
+                  : 'Add to Wishlist'
+              "
             >
-            <i
-            class="fa-solid fa-heart {{
-              product.like ? 'text-bg-danger text-danger ' : ''
-            }}"
-          ></i>
+              <i
+                class="fa-solid fa-heart {{
+                  wishlist.includes(product._id)
+                    ? 'text-bg-danger text-danger '
+                    : ''
+                }}"
+              ></i>
             </a>
           </div>
         </div>

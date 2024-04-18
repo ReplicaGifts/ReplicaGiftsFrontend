@@ -23,9 +23,6 @@
     </div>
   </section>
 
-
-  
-
   <section class="categories container section">
     <h3 class="section__title" data-aos="fade-right">
       <span>Popular</span> Categories
@@ -64,22 +61,25 @@
           <div
             *ngFor="let cate of newProduct; let i = index"
             class="product__item swiper-slide"
-            
           >
             <div class="product__banner">
               <a (click)="nav(cate._id)" class="product__images1">
-                <img [src]="cate.image" alt="" class="product__img default"/>
+                <img [src]="cate.image" alt="" class="product__img default" />
               </a>
               <div class="product__actions">
                 <a
-                (click)="addWish(cate)"
-                class="action__btn {{
-                  cate.like ? 'text-bg-danger text-danger ' : ''
-                }}"
-              [attr.aria-label]="
-              cate.like ? 'Remove from Wishlist' : 'Add to Wishlist'
-            "
-              >
+                  (click)="addWish(cate)"
+                  class="action__btn {{
+                    wishList.includes(cate._id)
+                      ? 'text-bg-danger text-danger '
+                      : ''
+                  }}"
+                  [attr.aria-label]="
+                    wishList.includes(cate._id)
+                      ? 'Remove from Wishlist'
+                      : 'Add to Wishlist'
+                  "
+                >
                   <i class="fa-solid fa-heart"></i>
                 </a>
               </div>
@@ -140,14 +140,18 @@
               </a>
               <div class="product__actions">
                 <a
-                (click)="addWish(cate)"
-                class="action__btn {{
-                  cate.like ? 'text-bg-danger text-danger ' : ''
-                }}"
-                [attr.aria-label]="
-                cate.like ? 'Remove from Wishlist' : 'Add to Wishlist'
-              "
-              >
+                  (click)="addWish(cate)"
+                  class="action__btn {{
+                    wishList.includes(cate._id)
+                      ? 'text-bg-danger text-danger '
+                      : ''
+                  }}"
+                  [attr.aria-label]="
+                    wishList.includes(cate._id)
+                      ? 'Remove from Wishlist'
+                      : 'Add to Wishlist'
+                  "
+                >
                   <i class="fa-solid fa-heart"></i>
                 </a>
               </div>
@@ -191,8 +195,6 @@
     </div>
   </section>
 
-
-
   <section class="new__arrivals container section">
     <h3 class="section__title" data-aos="fade-left">
       <span>Best</span> Seller
@@ -209,10 +211,15 @@
                 <a
                   (click)="addWish(cate)"
                   class="action__btn {{
-                    cate.like ? 'text-bg-danger text-danger ' : ''
+                    wishList.includes(cate._id)
+                      ? 'text-bg-danger text-danger '
+                      : ''
                   }}"
-          [attr.aria-label]="
-          cate.like ? 'Remove from Wishlist' : 'Add to Wishlist'"
+                  [attr.aria-label]="
+                    wishList.includes(cate._id)
+                      ? 'Remove from Wishlist'
+                      : 'Add to Wishlist'
+                  "
                 >
                   <i class="fa-solid fa-heart"></i>
                 </a>
@@ -301,7 +308,9 @@
             </div>
             <h4 class="title"><a>Best Quality</a></h4>
             <p class="description">
-              A high-quality image frame enhances and preserves the visual appeal of your cherished memories or artwork. luxury of preserving your memories with the finest quality image frame.
+              A high-quality image frame enhances and preserves the visual
+              appeal of your cherished memories or artwork. luxury of preserving
+              your memories with the finest quality image frame.
             </p>
           </div>
         </div>
@@ -323,7 +332,9 @@
             </div>
             <h4 class="title"><a>Best Price</a></h4>
             <p class="description">
-              Whether adorning your home, office, or gifting to loved ones, our affordable image frame delivers unbeatable value without compromising on style or functionality. 
+              Whether adorning your home, office, or gifting to loved ones, our
+              affordable image frame delivers unbeatable value without
+              compromising on style or functionality.
             </p>
           </div>
         </div>
@@ -346,7 +357,9 @@
             </div>
             <h4 class="title"><a href="">Customer Support</a></h4>
             <p class="description">
-              The primary goals of customer support include resolving customer issues promptly and efficiently, providing accurate information and guidance, and ensuring a positive customer experience.
+              The primary goals of customer support include resolving customer
+              issues promptly and efficiently, providing accurate information
+              and guidance, and ensuring a positive customer experience.
             </p>
           </div>
         </div>
@@ -368,7 +381,9 @@
             </div>
             <h4 class="title"><a href="">Easy Order</a></h4>
             <p class="description">
-              Your order is now complete, and you can sit back and relax while we take care of the rest. Our dedicated team will process your order promptly and ensure it reaches you in perfect condition.
+              Your order is now complete, and you can sit back and relax while
+              we take care of the rest. Our dedicated team will process your
+              order promptly and ensure it reaches you in perfect condition.
             </p>
           </div>
         </div>
@@ -618,7 +633,7 @@
             </div> -->
             <p class="text-danger">{{ err }}</p>
             <div class="text-center">
-            <a (click)="contactAdmin()" class="btns">Submit</a>
+              <a (click)="contactAdmin()" class="btns">Submit</a>
             </div>
           </form>
         </div>

@@ -57,11 +57,9 @@ export class ProductListComponent {
     window.categoryContainer();
     this.product.getTrending().subscribe((trending: any) => {
       this.trending = trending
-      this.get(trending);
     });
     this.product.getNew().subscribe((trending: any) => {
       this.newProduct = trending
-      this.get(trending);
     });
 
     setTimeout(() => {
@@ -69,32 +67,20 @@ export class ProductListComponent {
       window.categoryContainer();
     }, 5000)
 
+    this.get()
   }
 
-  get(product: any) {
+  get() {
     if (this.isAuth) {
       this.wish.getWishList().subscribe((wishList: any) => {
-        this.wishList = wishList;
-        this.setLike(wishList.map((wish: any) => wish._id), product);
-
+        this.wishList = wishList.map((wish: any) => wish._id);
       })
     } else {
-      this.wishList = this.guest.getWish()
-      this.setLike(this.wishList.map((wish: any) => wish._id), product);
+      this.wishList = this.guest.getWish().map((wish: any) => wish._id)
     }
   }
 
-  setLike(wish: any[], product: any[]) {
-    product.forEach(((product: any) => {
-      if ('_id' in product) {
-        if (wish.includes(product._id.toString())) {
-          product['like'] = true;
-        } else {
-          product['like'] = false;
-        }
-      }
-    }))
-  }
+
 
   nav(id: any) {
     this.router.navigateByUrl(`/product/${id}`)
@@ -108,12 +94,13 @@ export class ProductListComponent {
     id.like = !id.like;
 
     if (this.isAuth) {
-      this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() });
+      this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish(); this.get() });
     }
 
     else {
       this.guest.addToWish(id)
       this.wish.noOfWish.next(this.guest.getWish().length);
+      this.get()
     }
 
     if (id.like) {

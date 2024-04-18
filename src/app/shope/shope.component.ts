@@ -142,6 +142,7 @@ export class ShopeComponent implements OnDestroy {
     }));
 
     this.subscribetion.push(this.categoryService.getCategory().subscribe((category: any) => this.categories = category));
+    this.getWish();
   }
 
 
@@ -199,12 +200,12 @@ export class ShopeComponent implements OnDestroy {
     } else {
       this.selectedFilters.discount = '';
     }
-    
+
     this.selectedFilters.page = 1;
-  
+
     this.filterSubject.next(this.selectedFilters); // Trigger filter update
   }
-  
+
 
 
   applyRating(e: any, rating: number) {
@@ -247,7 +248,17 @@ export class ShopeComponent implements OnDestroy {
   }
 
 
-  
+  getWish() {
+    if (this.isAuth) {
+      this.wish.getWishList().subscribe((wishList: any) => {
+        this.wishlist = wishList.map((wish: any) => wish._id);
+      })
+    } else {
+      this.wishlist = this.guest.getWish().map((wish: any) => wish._id);
+    }
+  }
+
+
 
   nav(id: any) {
 
@@ -285,13 +296,13 @@ export class ShopeComponent implements OnDestroy {
   }
 
   addWish(id: any) {
-    id.like = !id.like;
     if (this.isAuth)
-      this.subscribetion.push(this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish() }));
+      this.subscribetion.push(this.wish.addWish(id._id).subscribe((wish: any) => { console.log(wish); this.wish.checkWish(); this.getWish() }));
     else {
 
       this.guest.addToWish(id)
       this.wish.noOfWish.next(this.guest.getWish().length)
+      this.getWish()
     }
 
     if (id.like) {
@@ -314,24 +325,11 @@ export class ShopeComponent implements OnDestroy {
 
   }
 
-  
+
 
   getFilteredProduct(selected: any) {
     this.subscribetion.push(this.product.limitedProduct(selected).subscribe((products: any) => {
       this.products = products.product;
-      if (this.isAuth) {
-        this.wish.getWishList().subscribe((wishList: any) => {
-          this.wishlist = wishList;
-          this.setLike(this.wishlist.map((wishList: any) => wishList._id));
-        })
-      } else {
-        this.wishlist = this.guest.getWish()
-        this.setLike(this.wishlist.map((wishList: any) => wishList._id));
-      }
-
-
-
-
       this.pageNo = [];
       for (let i = 0; i < products.total; i++) {
         this.pageNo[i] = i + 1;
@@ -343,17 +341,7 @@ export class ShopeComponent implements OnDestroy {
     }));
   }
 
-  setLike(wish: any[]) {
-    this.products.forEach(((product: any) => {
-      if ('_id' in product) {
-        if (wish.includes(product._id.toString())) {
-          product['like'] = true;
-        } else {
-          product['like'] = false;
-        }
-      }
-    }))
-  }
+
 
   ngOnDestroy() {
     this.subscribetion.forEach((s) => {
@@ -362,6 +350,6 @@ export class ShopeComponent implements OnDestroy {
   }
 
 
-  
+
 
 }
