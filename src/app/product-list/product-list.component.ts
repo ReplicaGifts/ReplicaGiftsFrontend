@@ -144,8 +144,8 @@ export class ProductListComponent {
 
   contactAdmin() {
 
-    if (this.contact.name === '' || this.contact.email === '' || this.contact.subject === '' || this.contact.message === '' || this.contact.phone === '') {
-      this.err = "please fill all the fields"
+    if (this.contact.name === '' || this.contact.email === '' || !this.isValidEmail(this.contact.email) || this.contact.subject === '' || this.contact.message === '' || this.contact.phone === '') {
+      this.err = this.isValidEmail(this.contact.email) ? "please fill all the fields" : "Enter valid email address";
       return;
     }
 
@@ -160,6 +160,20 @@ export class ProductListComponent {
       }
     })
 
+  }
+
+  validateNumber(event: KeyboardEvent): void {
+    const charCode = event.which ? event.which : event.keyCode;
+    if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+      event.preventDefault();
+    }
+  }
+
+  isValidEmail(email: string): boolean {
+    // Regular expression for validating email format
+    const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.(com|COM)$/;;
+
+    return emailPattern.test(email);
   }
 
 }

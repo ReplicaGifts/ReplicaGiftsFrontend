@@ -162,7 +162,14 @@
                           class="view__order"
                           >Track</a
                         >
-                        <p *ngIf="!order.tracking_id">Under Processing</p>
+                        <p
+                          *ngIf="
+                            !order.tracking_id &&
+                            order.deliveryStatus === 'Processing'
+                          "
+                        >
+                          Under Processing
+                        </p>
                         <p
                           *ngIf="order.deliveryStatus === 'Delivered'"
                           class="text-success"

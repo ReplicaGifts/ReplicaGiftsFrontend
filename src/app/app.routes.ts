@@ -17,6 +17,10 @@ export const routes: Routes = [
             .then(c => c.LoginComponent)
     },
     {
+        path: 'cart', loadComponent: () => import('./shopping-cart/shopping-cart.component')
+            .then(c => c.ShoppingCartComponent)
+    },
+    {
         path: 'register', loadComponent: () => import('./register/register.component')
             .then(c => c.RegisterComponent)
     },
